@@ -18,9 +18,6 @@
       --purple: #8B5CF6;
       --burgundy: #881337;
       --dark: #0f172a;
-      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-      --ease-out: cubic-bezier(0, 0, 0.2, 1);
-      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     * {
@@ -36,9 +33,7 @@
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background:
-        linear-gradient(180deg, #f8fafc 0%, #eef2ff 40%, #e2e8f0 100%),
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.9) 0%, rgba(246, 247, 251, 0.97) 45%, rgba(232, 237, 247, 0.85) 100%);
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 40%, #e2e8f0 100%);
       color: #0f172a;
       min-height: 100vh;
       min-height: 100dvh;
@@ -58,6 +53,7 @@
       font-weight: 500;
     }
 
+    /* Градиенты - только для десктопа */
     .gradient {
       position: fixed;
       width: 520px;
@@ -65,7 +61,7 @@
       filter: blur(150px);
       z-index: 0;
       pointer-events: none;
-      transition: transform 8s var(--ease-smooth);
+      will-change: auto;
     }
 
     .gradient-indigo {
@@ -73,7 +69,6 @@
       left: -120px;
       background: var(--primary);
       opacity: 0.15;
-      animation: floatGradient 20s ease-in-out infinite;
     }
 
     .gradient-purple {
@@ -81,7 +76,6 @@
       right: -100px;
       background: var(--purple);
       opacity: 0.1;
-      animation: floatGradient 25s ease-in-out infinite reverse;
     }
 
     .gradient-burgundy {
@@ -89,15 +83,34 @@
       left: 50%;
       background: var(--burgundy);
       opacity: 0.08;
-      animation: floatGradient 30s ease-in-out infinite;
     }
 
-    @keyframes floatGradient {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, 30px) scale(1.05); }
-      66% { transform: translate(-20px, -20px) scale(0.95); }
+    /* Анимации градиентов - ТОЛЬКО для десктопа */
+    @media (min-width: 769px) {
+      .gradient {
+        transition: transform 8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .gradient-indigo {
+        animation: floatGradient 20s ease-in-out infinite;
+      }
+
+      .gradient-purple {
+        animation: floatGradient 25s ease-in-out infinite reverse;
+      }
+
+      .gradient-burgundy {
+        animation: floatGradient 30s ease-in-out infinite;
+      }
+
+      @keyframes floatGradient {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(30px, 30px) scale(1.05); }
+        66% { transform: translate(-20px, -20px) scale(0.95); }
+      }
     }
 
+    /* Оверлеи - только для десктопа */
     .grid-overlay {
       position: fixed;
       inset: 0;
@@ -122,66 +135,106 @@
       pointer-events: none;
     }
 
+    /* Мобильная оптимизация - отключаем оверлеи */
+    @media (max-width: 768px) {
+      .grid-overlay,
+      .noise-overlay {
+        display: none !important;
+      }
+      
+      .gradient {
+        filter: blur(100px);
+        opacity: 0.1;
+      }
+    }
+
+    /* Glass эффекты */
     .glass {
-      backdrop-filter: blur(32px) saturate(180%);
-      -webkit-backdrop-filter: blur(32px) saturate(180%);
-      background: rgba(255, 255, 255, 0.78);
+      background: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.65);
-      box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.04),
-        0 25px 80px -35px rgba(99, 102, 241, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
     }
 
     .glass-card {
-      backdrop-filter: blur(48px) saturate(200%);
-      -webkit-backdrop-filter: blur(48px) saturate(200%);
-      background: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 
-        0 8px 40px rgba(0, 0, 0, 0.05),
-        0 35px 90px -70px rgba(99, 102, 241, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-      transition: transform 0.55s cubic-bezier(0.16, 0.67, 0.4, 1), 
-                  box-shadow 0.55s cubic-bezier(0.16, 0.67, 0.4, 1),
-                  border-color 0.45s ease;
-      filter: drop-shadow(0 35px 90px rgba(99,102,241,0.25));
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.05);
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.97);
+    /* Backdrop-filter ТОЛЬКО для десктопа */
+    @media (min-width: 769px) {
+      .glass {
+        backdrop-filter: blur(32px) saturate(180%);
+        -webkit-backdrop-filter: blur(32px) saturate(180%);
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: 
+          0 8px 32px rgba(0, 0, 0, 0.04),
+          0 25px 80px -35px rgba(99, 102, 241, 0.25),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
       }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
 
-    @keyframes fadeInScale {
-      from {
-        opacity: 0;
-        transform: scale(0.92);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
+      .glass-card {
+        backdrop-filter: blur(48px) saturate(200%);
+        -webkit-backdrop-filter: blur(48px) saturate(200%);
+        background: rgba(255, 255, 255, 0.65);
+        box-shadow: 
+          0 8px 40px rgba(0, 0, 0, 0.05),
+          0 35px 90px -70px rgba(99, 102, 241, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        filter: drop-shadow(0 35px 90px rgba(99,102,241,0.25));
+        transition: transform 0.55s cubic-bezier(0.16, 0.67, 0.4, 1), 
+                    box-shadow 0.55s cubic-bezier(0.16, 0.67, 0.4, 1),
+                    border-color 0.45s ease;
       }
     }
 
-    .animate-in {
-      animation: fadeInUp 0.8s cubic-bezier(0.16, 0.67, 0.4, 1) forwards;
+    /* Анимации появления - ТОЛЬКО для десктопа */
+    @media (min-width: 769px) {
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes fadeInScale {
+        from {
+          opacity: 0;
+          transform: scale(0.92);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .animate-in {
+        animation: fadeInUp 0.8s cubic-bezier(0.16, 0.67, 0.4, 1) forwards;
+      }
+
+      .animate-scale-in {
+        animation: fadeInScale 0.7s cubic-bezier(0.16, 0.67, 0.4, 1) forwards;
+      }
+
+      .animate-delay-1 { animation-delay: 0.1s; }
+      .animate-delay-2 { animation-delay: 0.2s; }
+      .animate-delay-3 { animation-delay: 0.3s; }
+      .animate-delay-4 { animation-delay: 0.4s; }
     }
 
-    .animate-scale-in {
-      animation: fadeInScale 0.7s cubic-bezier(0.16, 0.67, 0.4, 1) forwards;
+    /* На мобильных - без анимаций, сразу видимо */
+    @media (max-width: 768px) {
+      .animate-in,
+      .animate-scale-in {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
     }
-
-    .animate-delay-1 { animation-delay: 0.1s; }
-    .animate-delay-2 { animation-delay: 0.2s; }
-    .animate-delay-3 { animation-delay: 0.3s; }
-    .animate-delay-4 { animation-delay: 0.4s; }
 
     .course-card {
       position: relative;
@@ -191,11 +244,6 @@
       min-height: 380px;
       display: flex;
       flex-direction: column;
-      transform: translateY(0) scale(1);
-      transition: transform 0.6s var(--ease-spring), 
-                  box-shadow 0.6s var(--ease-smooth),
-                  border-color 0.45s ease;
-      filter: drop-shadow(0 35px 90px var(--card-glow, rgba(99,102,241,0.25)));
     }
 
     .course-card .btn-info,
@@ -214,13 +262,27 @@
       background: radial-gradient(circle at 30% 20%, var(--card-accent, rgba(99,102,241,0.35)), transparent 70%);
       opacity: 0.45;
       z-index: 0;
-      transition: opacity 0.5s var(--ease-smooth);
     }
 
-    .course-card:hover {
-      transform: translateY(-12px) scale(1.02);
-      border-color: rgba(255, 255, 255, 0.85);
-      filter: drop-shadow(0 70px 150px var(--card-glow, rgba(99,102,241,0.45)));
+    /* Hover эффекты карточек - ТОЛЬКО для десктопа */
+    @media (min-width: 769px) {
+      .course-card {
+        transform: translateY(0) scale(1);
+        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                    box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                    border-color 0.45s ease;
+        filter: drop-shadow(0 35px 90px var(--card-glow, rgba(99,102,241,0.25)));
+      }
+
+      .course-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        border-color: rgba(255, 255, 255, 0.85);
+        filter: drop-shadow(0 70px 150px var(--card-glow, rgba(99,102,241,0.45)));
+      }
+
+      .course-card::before {
+        transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
     }
 
     .course-card > * {
@@ -228,9 +290,10 @@
       z-index: 1;
     }
 
+    /* КНОПКИ - Фиксированные цвета с !important */
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent) 0%, #ea580c 100%);
-      color: white;
+      background: linear-gradient(135deg, var(--accent) 0%, #ea580c 100%) !important;
+      color: white !important;
       font-weight: 600;
       padding: 0.875rem 1.5rem;
       border-radius: 16px;
@@ -238,25 +301,15 @@
       font-size: 0.875rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      box-shadow: 
-        0 8px 32px rgba(245, 158, 11, 0.25),
-        0 20px 60px -15px rgba(245, 158, 11, 0.4);
+      box-shadow: 0 8px 32px rgba(245, 158, 11, 0.25);
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 
-        0 15px 40px rgba(245, 158, 11, 0.35),
-        0 30px 80px -20px rgba(245, 158, 11, 0.6);
     }
 
     .btn-burgundy {
-      background: linear-gradient(135deg, var(--burgundy) 0%, #9f1239 50%, #7f1d1d 100%);
-      color: white;
+      background: linear-gradient(135deg, #881337 0%, #9f1239 50%, #7f1d1d 100%) !important;
+      color: white !important;
       font-weight: 600;
       padding: 0.875rem 1.5rem;
       border-radius: 16px;
@@ -264,23 +317,13 @@
       font-size: 0.875rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      box-shadow: 
-        0 8px 32px rgba(136, 19, 55, 0.25),
-        0 20px 60px -15px rgba(136, 19, 55, 0.4);
+      box-shadow: 0 8px 32px rgba(136, 19, 55, 0.25);
       cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .btn-burgundy:hover {
-      transform: translateY(-2px);
-      box-shadow: 
-        0 15px 40px rgba(136, 19, 55, 0.35),
-        0 30px 80px -20px rgba(136, 19, 55, 0.5);
     }
 
     .btn-deep-blue {
-      background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 50%, #1e3a8a 100%);
-      color: white;
+      background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 50%, #1e3a8a 100%) !important;
+      color: white !important;
       font-weight: 600;
       padding: 0.875rem 1.5rem;
       border-radius: 16px;
@@ -288,23 +331,13 @@
       font-size: 0.875rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      box-shadow: 
-        0 8px 32px rgba(30, 64, 175, 0.25),
-        0 20px 60px -15px rgba(30, 64, 175, 0.4);
+      box-shadow: 0 8px 32px rgba(30, 64, 175, 0.25);
       cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .btn-deep-blue:hover {
-      transform: translateY(-2px);
-      box-shadow: 
-        0 15px 40px rgba(30, 64, 175, 0.35),
-        0 30px 80px -20px rgba(30, 64, 175, 0.5);
     }
 
     .btn-khaki {
-      background: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f97316 100%);
-      color: white;
+      background: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f97316 100%) !important;
+      color: white !important;
       font-weight: 600;
       padding: 0.875rem 1.5rem;
       border-radius: 16px;
@@ -312,23 +345,13 @@
       font-size: 0.875rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      box-shadow: 
-        0 8px 32px rgba(194, 65, 12, 0.25),
-        0 20px 60px -15px rgba(194, 65, 12, 0.4);
+      box-shadow: 0 8px 32px rgba(194, 65, 12, 0.25);
       cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .btn-khaki:hover {
-      transform: translateY(-2px);
-      box-shadow: 
-        0 15px 40px rgba(91, 98, 50, 0.35),
-        0 30px 80px -20px rgba(91, 98, 50, 0.5);
     }
 
     .btn-info {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--purple) 100%);
-      color: white;
+      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%) !important;
+      color: white !important;
       font-weight: 600;
       padding: 0.875rem 1.5rem;
       border-radius: 16px;
@@ -336,45 +359,61 @@
       font-size: 0.875rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      box-shadow: 
-        0 8px 32px rgba(99, 102, 241, 0.25),
-        0 20px 60px -15px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.25);
       cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    .btn-info:hover {
-      transform: translateY(-2px);
-      box-shadow: 
-        0 15px 40px rgba(99, 102, 241, 0.35),
-        0 30px 80px -20px rgba(99, 102, 241, 0.6);
+    /* Hover кнопок - ТОЛЬКО для десктопа */
+    @media (min-width: 769px) {
+      .btn-primary,
+      .btn-burgundy,
+      .btn-deep-blue,
+      .btn-khaki,
+      .btn-info {
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(245, 158, 11, 0.35);
+      }
+
+      .btn-burgundy:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(136, 19, 55, 0.35);
+      }
+
+      .btn-deep-blue:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(30, 64, 175, 0.35);
+      }
+
+      .btn-khaki:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(194, 65, 12, 0.35);
+      }
+
+      .btn-info:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.35);
+      }
     }
 
     .btn-paid {
-      background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%);
-      color: white;
+      background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%) !important;
+      color: white !important;
       font-weight: 600;
       padding: 1rem 1.5rem;
       border-radius: 16px;
       border: none;
       font-size: 0.95rem;
       letter-spacing: 0.03em;
-      box-shadow: 
-        0 8px 32px rgba(16, 185, 129, 0.25),
-        0 20px 60px -15px rgba(16, 185, 129, 0.4);
+      box-shadow: 0 8px 32px rgba(16, 185, 129, 0.25);
       cursor: pointer;
-      transition: all 0.3s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-    }
-
-    .btn-paid:hover {
-      transform: translateY(-2px);
-      box-shadow: 
-        0 15px 40px rgba(16, 185, 129, 0.35),
-        0 30px 80px -20px rgba(16, 185, 129, 0.5);
     }
 
     .btn-send-receipt {
@@ -382,27 +421,25 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      background: linear-gradient(135deg, #0088cc 0%, #0077b5 100%);
-      color: white;
+      background: linear-gradient(135deg, #0088cc 0%, #0077b5 100%) !important;
+      color: white !important;
       font-weight: 600;
       padding: 1rem 2rem;
       border-radius: 16px;
       border: none;
       font-size: 0.9rem;
       text-decoration: none;
-      box-shadow: 
-        0 8px 32px rgba(0, 136, 204, 0.25),
-        0 20px 60px -15px rgba(0, 136, 204, 0.4);
+      box-shadow: 0 8px 32px rgba(0, 136, 204, 0.25);
       cursor: pointer;
-      transition: all 0.3s;
       width: 100%;
     }
 
-    .btn-send-receipt:hover {
-      transform: translateY(-2px);
-      box-shadow: 
-        0 15px 40px rgba(0, 136, 204, 0.35),
-        0 30px 80px -20px rgba(0, 136, 204, 0.5);
+    @media (min-width: 769px) {
+      .btn-paid:hover,
+      .btn-send-receipt:hover {
+        transform: translateY(-2px);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
     }
 
     .paid-success-icon {
@@ -415,12 +452,18 @@
       align-items: center;
       justify-content: center;
       color: var(--emerald);
-      animation: pulseSuccess 2s ease-in-out infinite;
     }
 
-    @keyframes pulseSuccess {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-      50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+    /* Анимация пульса - только для десктопа */
+    @media (min-width: 769px) {
+      .paid-success-icon {
+        animation: pulseSuccess 2s ease-in-out infinite;
+      }
+
+      @keyframes pulseSuccess {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+        50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+      }
     }
 
     .welcome-badge {
@@ -467,8 +510,6 @@
       align-items: flex-start;
       gap: 0.875rem;
       margin-bottom: 0.875rem;
-      transform: translateX(0);
-      transition: transform 0.5s cubic-bezier(0.16, 0.67, 0.4, 1);
       padding: 0.5rem;
       border-radius: 12px;
     }
@@ -483,16 +524,23 @@
       justify-content: center;
       flex-shrink: 0;
       margin-top: 2px;
-      transform: scale(1);
-      transition: transform 0.5s cubic-bezier(0.16, 0.67, 0.4, 1);
       box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
     }
 
+    /* Header */
     .header {
       position: sticky;
       top: 0;
       z-index: 100;
       padding: 1rem;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    /* Скрытие шапки при открытых модалках */
+    .header.hidden-header {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
     }
 
     .header-inner {
@@ -500,13 +548,21 @@
       margin: 0 auto;
       padding: 1rem 1.5rem;
       border-radius: 20px;
-      backdrop-filter: blur(32px) saturate(180%);
-      background: rgba(255, 255, 255, 0.78);
+      background: rgba(255, 255, 255, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.65);
-      box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.04),
-        0 25px 80px -35px rgba(99, 102, 241, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    }
+
+    @media (min-width: 769px) {
+      .header-inner {
+        backdrop-filter: blur(32px) saturate(180%);
+        -webkit-backdrop-filter: blur(32px) saturate(180%);
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: 
+          0 8px 32px rgba(0, 0, 0, 0.04),
+          0 25px 80px -35px rgba(99, 102, 241, 0.25),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      }
     }
 
     .course-actions {
@@ -519,6 +575,7 @@
       flex: 1;
     }
 
+    /* Модальные окна */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -526,9 +583,6 @@
       z-index: 1000;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.5s var(--ease-smooth),
-                  visibility 0.5s var(--ease-smooth),
-                  background 0.5s var(--ease-smooth);
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
@@ -547,20 +601,13 @@
       width: 92vw;
       max-width: 480px;
       margin: 2rem auto;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      background: rgba(255, 255, 255, 0.98);
       border-radius: 32px;
       padding: 1.5rem;
       position: relative;
-      transform: translateY(100px) scale(0.97);
       opacity: 0;
-      transition: transform 0.6s var(--ease-spring),
-                  opacity 0.6s var(--ease-smooth);
-      backdrop-filter: blur(42px);
-      background: rgba(255, 255, 255, 0.98);
       border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 
-        0 70px 200px -80px rgba(15, 23, 42, 0.55),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      box-shadow: 0 70px 200px -80px rgba(15, 23, 42, 0.55);
       max-height: 85vh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
@@ -572,9 +619,41 @@
       display: none;
     }
 
-    .modal-overlay.active .modal-content {
-      transform: translateY(0) scale(1);
-      opacity: 1;
+    /* Анимации модалок - ТОЛЬКО для десктопа */
+    @media (min-width: 769px) {
+      .modal-overlay {
+        transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                    visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                    background 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .modal-content {
+        transform: translateY(100px) scale(0.97);
+        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(42px);
+      }
+
+      .modal-overlay.active .modal-content {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* На мобильных - без анимаций модалок */
+    @media (max-width: 768px) {
+      .modal-overlay {
+        transition: opacity 0.15s ease, visibility 0.15s ease;
+      }
+
+      .modal-content {
+        transform: none !important;
+        transition: opacity 0.15s ease;
+      }
+
+      .modal-overlay.active .modal-content {
+        opacity: 1;
+      }
     }
 
     .close-modal {
@@ -585,28 +664,33 @@
       height: 30px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.3s;
       z-index: 10;
     }
 
-    .close-modal:hover {
-      background: rgba(255, 255, 255, 1);
-      transform: rotate(90deg);
+    @media (min-width: 769px) {
+      .close-modal {
+        backdrop-filter: blur(10px);
+        transition: all 0.3s;
+      }
+
+      .close-modal:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: rotate(90deg);
+      }
     }
 
     .close-modal svg {
-      width: 20px; /* Уменьшили размер иконки */
+      width: 20px;
       height: 20px;
-      color: rgba(100, 116, 139, 0.6); /* Более прозрачный цвет иконки */
+      color: rgba(100, 116, 139, 0.6);
     }
 
-    /* СТИЛИ ИЗ ВТОРОГО КОДА ДЛЯ МОДАЛЬНОГО ОКНА ПРОГРАММЫ */
+    /* Карусель с чёрным фоном для загрузки изображений */
     .carousel-container {
       position: relative;
       width: 100%;
@@ -614,7 +698,7 @@
       border-radius: 16px;
       overflow: hidden;
       margin-bottom: 1.5rem;
-      background: #F3F4F8;
+      background: #0a0a0a;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -627,13 +711,20 @@
       width: 100%;
       height: 100%;
       opacity: 0;
-      transition: opacity 0.6s ease;
       object-fit: cover;
       object-position: center;
+      background: #0a0a0a;
     }
 
     .carousel-slide.active {
       opacity: 1;
+    }
+
+    /* Переход карусели - только для десктопа */
+    @media (min-width: 769px) {
+      .carousel-slide {
+        transition: opacity 0.6s ease;
+      }
     }
 
     .carousel-nav {
@@ -648,7 +739,6 @@
       height: 8px;
       border-radius: 50%;
       background: #E5E7EB;
-      transition: all 0.3s;
       cursor: pointer;
     }
 
@@ -657,7 +747,13 @@
       transform: scale(1.3);
     }
 
-    /* Стили для модулей (как во втором коде) */
+    @media (min-width: 769px) {
+      .carousel-dot {
+        transition: all 0.3s;
+      }
+    }
+
+    /* Модули */
     .module-step {
       position: relative;
       display: flex;
@@ -666,13 +762,18 @@
       background: white;
       border: 1px solid #E5E7EB;
       border-radius: 16px;
-      transition: all 0.3s;
       margin-bottom: 0.5rem;
     }
 
-    .module-step:hover {
-      border-color: #D1D5DB;
-      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    @media (min-width: 769px) {
+      .module-step {
+        transition: all 0.3s;
+      }
+
+      .module-step:hover {
+        border-color: #D1D5DB;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+      }
     }
 
     .module-number {
@@ -700,7 +801,7 @@
       background: #E5E7EB;
     }
 
-    /* Стили для outcomes (что вы получите) */
+    /* Outcomes */
     .outcomes-grid {
       display: grid;
       gap: 1rem;
@@ -743,7 +844,7 @@
       line-height: 1.4;
     }
 
-    /* Payment Methods Styles */
+    /* Payment Methods */
     .payment-section {
       margin-bottom: 1rem;
     }
@@ -767,17 +868,22 @@
       border: 1px solid rgba(0, 0, 0, 0.05);
       border-radius: 14px;
       cursor: pointer;
-      transition: all 0.3s;
       margin-bottom: 0.5rem;
       text-decoration: none;
       color: inherit;
       width: 100%;
     }
 
-    .payment-method:hover {
-      background: rgba(255, 255, 255, 1);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    @media (min-width: 769px) {
+      .payment-method {
+        transition: all 0.3s;
+      }
+
+      .payment-method:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
     }
 
     .payment-method.active {
@@ -815,11 +921,16 @@
 
     .payment-method-arrow {
       color: #94a3b8;
-      transition: transform 0.3s;
     }
 
-    .payment-method.active .payment-method-arrow {
-      transform: rotate(180deg);
+    @media (min-width: 769px) {
+      .payment-method-arrow {
+        transition: transform 0.3s;
+      }
+
+      .payment-method.active .payment-method-arrow {
+        transform: rotate(180deg);
+      }
     }
 
     .payment-details {
@@ -830,7 +941,6 @@
       border-radius: 0 0 14px 14px;
       padding: 1rem;
       margin-bottom: 0.5rem;
-      animation: slideDown 0.3s ease;
     }
 
     .payment-details.active {
@@ -869,13 +979,8 @@
       border: 1px solid rgba(0, 0, 0, 0.05);
       border-radius: 14px;
       cursor: pointer;
-      transition: all 0.3s;
       margin-bottom: 0.5rem;
       width: 100%;
-    }
-
-    .expandable-toggle:hover {
-      background: rgba(255, 255, 255, 1);
     }
 
     .expandable-toggle.active {
@@ -885,12 +990,25 @@
     }
 
     .expandable-toggle .chevron {
-      transition: transform 0.3s;
       color: #94a3b8;
     }
 
-    .expandable-toggle.active .chevron {
-      transform: rotate(180deg);
+    @media (min-width: 769px) {
+      .expandable-toggle {
+        transition: all 0.3s;
+      }
+
+      .expandable-toggle:hover {
+        background: rgba(255, 255, 255, 1);
+      }
+
+      .expandable-toggle .chevron {
+        transition: transform 0.3s;
+      }
+
+      .expandable-toggle.active .chevron {
+        transform: rotate(180deg);
+      }
     }
 
     .expandable-content {
@@ -901,22 +1019,10 @@
       border-radius: 0 0 14px 14px;
       padding: 0.75rem;
       margin-bottom: 0.5rem;
-      animation: slideDown 0.3s ease;
     }
 
     .expandable-content.active {
       display: block;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     /* Crypto coin item */
@@ -933,11 +1039,16 @@
       gap: 0.75rem;
       padding: 0.875rem 1rem;
       cursor: pointer;
-      transition: background 0.3s;
     }
 
-    .crypto-coin-header:hover {
-      background: rgba(255, 255, 255, 1);
+    @media (min-width: 769px) {
+      .crypto-coin-header {
+        transition: background 0.3s;
+      }
+
+      .crypto-coin-header:hover {
+        background: rgba(255, 255, 255, 1);
+      }
     }
 
     .crypto-coin-icon {
@@ -966,17 +1077,21 @@
 
     .crypto-coin-chevron {
       color: #94a3b8;
-      transition: transform 0.3s;
     }
 
-    .crypto-coin.active .crypto-coin-chevron {
-      transform: rotate(180deg);
+    @media (min-width: 769px) {
+      .crypto-coin-chevron {
+        transition: transform 0.3s;
+      }
+
+      .crypto-coin.active .crypto-coin-chevron {
+        transform: rotate(180deg);
+      }
     }
 
     .crypto-coin-details {
       display: none;
       padding: 0 1rem 1rem;
-      animation: slideDown 0.3s ease;
     }
 
     .crypto-coin.active .crypto-coin-details {
@@ -997,30 +1112,39 @@
       gap: 0.5rem;
       padding: 0.75rem;
       cursor: pointer;
-      transition: background 0.3s;
       font-size: 0.85rem;
       font-weight: 500;
       color: var(--dark);
     }
 
-    .network-item-header:hover {
-      background: rgba(255, 255, 255, 0.8);
+    @media (min-width: 769px) {
+      .network-item-header {
+        transition: background 0.3s;
+      }
+
+      .network-item-header:hover {
+        background: rgba(255, 255, 255, 0.8);
+      }
     }
 
     .network-item-chevron {
       margin-left: auto;
       color: #94a3b8;
-      transition: transform 0.3s;
     }
 
-    .network-item.active .network-item-chevron {
-      transform: rotate(180deg);
+    @media (min-width: 769px) {
+      .network-item-chevron {
+        transition: transform 0.3s;
+      }
+
+      .network-item.active .network-item-chevron {
+        transform: rotate(180deg);
+      }
     }
 
     .network-item-details {
       display: none;
       padding: 0 0.75rem 0.75rem;
-      animation: slideDown 0.3s ease;
     }
 
     .network-item.active .network-item-details {
@@ -1068,12 +1192,17 @@
       font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s;
       margin-top: 0.5rem;
     }
 
-    .copy-btn:hover {
-      background: rgba(99, 102, 241, 0.2);
+    @media (min-width: 769px) {
+      .copy-btn {
+        transition: all 0.3s;
+      }
+
+      .copy-btn:hover {
+        background: rgba(99, 102, 241, 0.2);
+      }
     }
 
     .copy-btn.copied {
@@ -1096,10 +1225,9 @@
       }
       
       .carousel-slide {
-        object-fit: contain; /* Гарантируем, что все изображение видно */
+        object-fit: contain;
         object-position: center;
       }
-    }
 
       .content-block {
         padding: 1rem;
@@ -1124,7 +1252,7 @@
       }
       
       .carousel-container {
-        border-radius: 50px; !important;
+        border-radius: 12px;
       }
       
       .content-icon {
@@ -1132,12 +1260,6 @@
         height: 32px;
         font-size: 1rem;
       }
-
-      @media (min-width: 768px) and (max-width: 1024px) {
-        .carousel-container {
-      }
-}
-
     }
   </style>
 </head>
@@ -1150,7 +1272,7 @@
   <div class="noise-overlay"></div>
 
   <!-- Header -->
-  <header class="header">
+  <header class="header" id="main-header">
     <div class="header-inner glass flex items-center justify-between">
       <span class="mono-label text-slate-500">HEIST AI</span>
       <nav class="flex gap-4">
@@ -1176,8 +1298,8 @@
       </p>
       
       <div class="flex flex-wrap justify-center gap-3 mb-8">
-        <span class="mono-label px-4 py-2.5 rounded-full bg-slate-100/60 text-slate-500 backdrop-blur-sm">Realtime Labs</span>
-        <span class="mono-label px-4 py-2.5 rounded-full bg-slate-100/60 text-slate-500 backdrop-blur-sm">AI Revenue Ops</span>
+        <span class="mono-label px-4 py-2.5 rounded-full bg-slate-100/60 text-slate-500">Realtime Labs</span>
+        <span class="mono-label px-4 py-2.5 rounded-full bg-slate-100/60 text-slate-500">AI Revenue Ops</span>
       </div>
     </section>
 
@@ -1294,7 +1416,9 @@
       </div>
     </section>
 
-  <!-- Модальное окно "О курсе" - ТЕПЕРЬ КАК ВО ВТОРОМ КОДЕ -->
+   
+
+  <!-- Модальное окно "О курсе" -->
   <div id="course-info-modal" class="modal-overlay">
     <div class="modal-content">
       <button class="close-modal" id="close-info-btn">
@@ -1322,7 +1446,7 @@
     </div>
   </div>
 
-  <!-- Модальное окно оплаты (ОСТАЛОСЬ БЕЗ ИЗМЕНЕНИЙ) -->
+  <!-- Модальное окно оплаты -->
   <div id="payment-modal" class="modal-overlay">
     <div class="modal-content" style="max-width: 420px;">
       <button class="close-modal" id="close-payment-btn">
@@ -1335,7 +1459,7 @@
         <p class="mono-label text-center mb-2">ПОДТВЕРЖДЕНИЕ ДОСТУПА</p>
         <h3 id="payment-course-title" class="text-xl font-semibold text-slate-900 text-center mb-6"></h3>
         
-        <div class="content-block" style="background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1));">
+        <div class="content-block" style="background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1)); padding: 1rem; border-radius: 16px;">
           <div class="flex items-center justify-between mb-4">
             <span class="text-slate-600">Стоимость:</span>
             <span id="payment-price" class="text-2xl font-bold text-slate-900">7 000 ₽</span>
@@ -1351,6 +1475,40 @@
         <!-- Способы оплаты -->
         <div class="content-block mt-4" style="padding: 1rem;">
           <h4 class="content-title mb-4" style="font-size: 1rem;">Выберите способ</h4>
+          
+          <!-- Международные карты -->
+<div class="payment-section">
+  <div class="payment-section-title">Международные карты</div>
+  
+  <!-- Visa/Mastercard -->
+  <button class="payment-method" data-payment="visa-mc">
+    <div class="payment-method-icon" style="background: white; padding: 6px;">
+      <img src="visa.png" 
+           alt="Visa/Mastercard" 
+           style="width: 70px; height: 70px; object-fit: contain;">
+    </div>
+    <div class="payment-method-info">
+      <div class="payment-method-name">Visa / Mastercard</div>
+      <div class="payment-method-desc">Международные карты</div>
+    </div>
+    <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </button>
+  <div class="payment-details" data-payment="visa-mc">
+    <div class="payment-requisite">
+      <div class="payment-requisite-label">Номер карты</div>
+      <div class="payment-requisite-value" id="visa-card">4441 1110 1656 7632</div>
+    </div>
+    
+    <button class="copy-btn" onclick="copyAddress('visa-card', this)">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+      </svg>
+      Скопировать номер карты
+    </button>
+  </div>
+</div>
 
 <!-- Российские карты -->
 <div class="payment-section">
@@ -1413,40 +1571,6 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
       </svg>
       Скопировать телефон
-    </button>
-  </div>
-</div>
-
-                    <!-- Международные карты -->
-<div class="payment-section">
-  <div class="payment-section-title">Международные карты</div>
-  
-  <!-- Visa/Mastercard -->
-  <button class="payment-method" data-payment="visa-mc">
-    <div class="payment-method-icon" style="background: white; padding: 6px;">
-      <img src="visa.png" 
-           alt="Visa/Mastercard" 
-           style="width: 70px; height: 70px; object-fit: contain;">
-    </div>
-    <div class="payment-method-info">
-      <div class="payment-method-name">Visa / Mastercard</div>
-      <div class="payment-method-desc">Международные карты</div>
-    </div>
-    <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-    </svg>
-  </button>
-  <div class="payment-details" data-payment="visa-mc">
-    <div class="payment-requisite">
-      <div class="payment-requisite-label">Номер карты</div>
-      <div class="payment-requisite-value" id="visa-card">4441 1110 1656 7632</div>
-    </div>
-    
-    <button class="copy-btn" onclick="copyAddress('visa-card', this)">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-      </svg>
-      Скопировать номер карты
     </button>
   </div>
 </div>
@@ -1872,6 +1996,15 @@
         Добро пожаловать в команду
       </div>
 
+      <a href="https://t.me/heist_ai_bot" class="btn-send-receipt">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.057-.693-1.654-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.12.099.153.231.168.327.015.093.034.305.019.471z"/>
+        </svg>
+        Отправить чек в бот
+      </a>
+    </div>
+  </div>
+
   <script>
     // Telegram Web App
     let tg = window.Telegram?.WebApp;
@@ -1881,7 +2014,7 @@
         tg.enableClosingConfirmation();
     }
 
-    // Course data - ОБНОВЛЕНО как во втором коде
+    // Course data
     const courseDetails = {
         'ai-automation': {
             title: 'Система Автопродаж 24/7',
@@ -1905,37 +2038,27 @@
         },
         'ai-founders': {
             title: 'AI Founders Vault',
-            images: [
-                'zn1.png', 'zn2.png', 'zn3.png', 'zn4.png', 'zn5.png', 'zn6.png'
-                
-            ],
+            images: ['zn1.png', 'zn2.png', 'zn3.png', 'zn4.png', 'zn5.png', 'zn6.png'],
             modules: [
-  { num: '01', title: 'Анатомия ИИ — Что внутри чёрного ящика', desc: 'Разбираем архитектуру нейросетей без сложной математики. Поймём, как машина учится и почему иногда галлюцинирует — это знание даст вам контроль над результатом.', result: 'Вы понимаете ИИ глубже, чем 95% пользователей.' },
-  { num: '02', title: 'Арсенал нейросетей — Оружие под каждую задачу', desc: 'GPT-4, Claude, Midjourney, Stable Diffusion: тестируем вживую и сравниваем. Разбираем, когда какой инструмент даёт лучший результат и почему.', result: 'Навык выбора идеальной модели за 10 секунд.' },
-  { num: '03', title: 'Промпт-инжиниринг — Язык, который понимает машина', desc: 'Осваиваем формулы запросов от базовых до chain-of-thought. Учимся получать точный результат с первой попытки, а не с десятой.', result: 'Скорость работы с ИИ вырастает в 5 раз.' },
-  { num: '04', title: 'Копирайтинг + ИИ — Первые деньги на навыке', desc: 'Превращаем ИИ в младшего копирайтера, который делает черновики. Разбираем реальные кейсы монетизации и воронки привлечения клиентов.', result: 'Готовая модель заработка от 50 000 ₽/мес.' },
-  { num: '05', title: 'Визуальный контент — Студия в одном окне', desc: 'Генерируем изображения и видео, которые не отличить от работы дизайнера. Осваиваем стили, настройки и лайфхаки для wow-результата.', result: 'Уникальный визуал для любого проекта за минуты.' },
-  { num: '06', title: 'AI-озвучка — Голос без микрофона', desc: 'Создаём профессиональную озвучку без студии и диктора. Работаем с сервисами, которые генерируют речь неотличимую от человеческой.', result: 'Полный видеопродакшн своими руками.' }
-],
-outcomes: [
-  { icon: '🧠', title: 'Экспертное понимание ИИ', desc: 'Знаете, как работают нейросети и какую выбрать под любую задачу' },
-  { icon: '⚡', title: 'Скорость профессионала', desc: 'Получаете идеальный результат с первого промпта' },
-  { icon: '🎬', title: 'Полный цикл контента', desc: 'Создаёте тексты, картинки, видео и озвучку — всё сами' },
-  { icon: '💰', title: 'Готовая модель заработка', desc: 'Понятный путь к первым деньгам на ИИ-услугах' }
-],
+              { num: '01', title: 'Анатомия ИИ — Что внутри чёрного ящика', desc: 'Разбираем архитектуру нейросетей без сложной математики. Поймём, как машина учится и почему иногда галлюцинирует — это знание даст вам контроль над результатом.', result: 'Вы понимаете ИИ глубже, чем 95% пользователей.' },
+              { num: '02', title: 'Арсенал нейросетей — Оружие под каждую задачу', desc: 'GPT-4, Claude, Midjourney, Stable Diffusion: тестируем вживую и сравниваем. Разбираем, когда какой инструмент даёт лучший результат и почему.', result: 'Навык выбора идеальной модели за 10 секунд.' },
+              { num: '03', title: 'Промпт-инжиниринг — Язык, который понимает машина', desc: 'Осваиваем формулы запросов от базовых до chain-of-thought. Учимся получать точный результат с первой попытки, а не с десятой.', result: 'Скорость работы с ИИ вырастает в 5 раз.' },
+              { num: '04', title: 'Копирайтинг + ИИ — Первые деньги на навыке', desc: 'Превращаем ИИ в младшего копирайтера, который делает черновики. Разбираем реальные кейсы монетизации и воронки привлечения клиентов.', result: 'Готовая модель заработка от 50 000 ₽/мес.' },
+              { num: '05', title: 'Визуальный контент — Студия в одном окне', desc: 'Генерируем изображения и видео, которые не отличить от работы дизайнера. Осваиваем стили, настройки и лайфхаки для wow-результата.', result: 'Уникальный визуал для любого проекта за минуты.' },
+              { num: '06', title: 'AI-озвучка — Голос без микрофона', desc: 'Создаём профессиональную озвучку без студии и диктора. Работаем с сервисами, которые генерируют речь неотличимую от человеческой.', result: 'Полный видеопродакшн своими руками.' }
+            ],
+            outcomes: [
+              { icon: '🧠', title: 'Экспертное понимание ИИ', desc: 'Знаете, как работают нейросети и какую выбрать под любую задачу' },
+              { icon: '⚡', title: 'Скорость профессионала', desc: 'Получаете идеальный результат с первого промпта' },
+              { icon: '🎬', title: 'Полный цикл контента', desc: 'Создаёте тексты, картинки, видео и озвучку — всё сами' },
+              { icon: '💰', title: 'Готовая модель заработка', desc: 'Понятный путь к первым деньгам на ИИ-услугах' }
+            ],
             price: '7 000 ₽',
             color: 'indigo'
         },
         'vibe-coding': {
             title: 'Прототипирование за 48 часов',
-            images: [
-                'vbk1.png',
-                'vbk3.png',
-                'vbk6.png',
-                'vbk5.png',
-                'vbk2.png',
-                'vbk4.png',
-            ],
+            images: ['vbk1.png', 'vbk3.png', 'vbk6.png', 'vbk5.png', 'vbk2.png', 'vbk4.png'],
             modules: [
               { num: '01', title: 'Модуль 1: Rapid Prototyping — Приложение за вечер', desc: 'Учимся управлять ИИ через правильные запросы. Постановка задач нейросети для создания полноценных веб-приложений с первой попытки.', result: 'Ваше первое приложение, собранное за пару часов.' },
               { num: '02', title: 'Модуль 2: Дизайн и Визуал — Дорого без дизайнера', desc: 'Превращаем ИИ в арт-директора, который: сгенерирует современный интерфейс, подберет цвета и шрифты. Создаем визуально «дорогой» продукт, просто управляя процессом. ', result: 'Профессиональный UI/UX уровня топовых студий.' },
@@ -1956,6 +2079,7 @@ outcomes: [
     };
 
     // DOM Elements
+    const mainHeader = document.getElementById('main-header');
     const courseInfoModal = document.getElementById('course-info-modal');
     const carouselContainer = document.getElementById('carousel-container');
     const carouselNav = document.getElementById('carousel-nav');
@@ -1975,6 +2099,19 @@ outcomes: [
     let currentCourse = null;
     let currentSlide = 0;
     let carouselInterval = null;
+
+    // Функция скрытия/показа шапки
+    function hideHeader() {
+        if (mainHeader) {
+            mainHeader.classList.add('hidden-header');
+        }
+    }
+
+    function showHeader() {
+        if (mainHeader) {
+            mainHeader.classList.remove('hidden-header');
+        }
+    }
 
     // Initialize
     function init() {
@@ -2062,13 +2199,6 @@ outcomes: [
                 else if (courseInfoModal.classList.contains('active')) closeCourseInfo();
             });
         }
-
-        // Page load animation
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.5s cubic-bezier(0.16, 0.67, 0.4, 1)';
-            setTimeout(() => { document.body.style.opacity = '1'; }, 100);
-        });
     }
 
     // Event Handlers
@@ -2086,6 +2216,7 @@ outcomes: [
         renderModules(course.modules);
         renderOutcomes(course.outcomes);
 
+        hideHeader();
         courseInfoModal.classList.add('active');
         document.body.style.overflow = 'hidden';
         courseInfoModal.querySelector('.modal-content').scrollTop = 0;
@@ -2095,7 +2226,6 @@ outcomes: [
 
     function handleBuyButtonClick(e) {
         e.stopPropagation();
-        const courseId = e.target.dataset.course;
         const courseTitle = e.target.dataset.title;
         const coursePrice = e.target.dataset.price;
 
@@ -2110,6 +2240,7 @@ outcomes: [
         document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
         document.querySelectorAll('.payment-details').forEach(d => d.classList.remove('active'));
 
+        hideHeader();
         paymentModal.classList.add('active');
         document.body.style.overflow = 'hidden';
         paymentModal.querySelector('.modal-content').scrollTop = 0;
@@ -2139,6 +2270,7 @@ outcomes: [
     function closeCourseInfo() {
         courseInfoModal.classList.remove('active');
         document.body.style.overflow = '';
+        showHeader();
         if (carouselInterval) clearInterval(carouselInterval);
         if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
     }
@@ -2146,6 +2278,7 @@ outcomes: [
     function closePaymentModal() {
         paymentModal.classList.remove('active');
         document.body.style.overflow = '';
+        showHeader();
         if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
     }
 
@@ -2177,7 +2310,7 @@ outcomes: [
         });
     }
 
-    // Carousel - ОБНОВЛЕНО как во втором коде
+    // Carousel
     function renderCarousel(images) {
         if (!images || !Array.isArray(images)) return;
         
@@ -2189,7 +2322,7 @@ outcomes: [
             slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
             slide.src = src;
             slide.alt = `Slide ${index + 1}`;
-            slide.loading = 'lazy';
+            slide.loading = index === 0 ? 'eager' : 'lazy';
             carouselContainer.appendChild(slide);
             
             const dot = document.createElement('div');
@@ -2223,7 +2356,7 @@ outcomes: [
         }, 4000);
     }
 
-    // Modules render - НОВАЯ ФУНКЦИЯ из второго кода
+    // Modules render
     function renderModules(modules) {
         if (!modules || !Array.isArray(modules)) return;
         
@@ -2248,7 +2381,7 @@ outcomes: [
         });
     }
 
-    // Outcomes render - НОВАЯ ФУНКЦИЯ из второго кода
+    // Outcomes render
     function renderOutcomes(outcomes) {
         if (!outcomes || !Array.isArray(outcomes)) return;
         
@@ -2270,9 +2403,6 @@ outcomes: [
 
     // Initialize the app
     document.addEventListener('DOMContentLoaded', init);
-</script>
+  </script>
 </body>
 </html>
-
-
-
