@@ -628,7 +628,8 @@
       height: 100%;
       opacity: 0;
       transition: opacity 0.6s ease;
-      object-fit: contain;
+      object-fit: cover;
+      object-position: center;
     }
 
     .carousel-slide.active {
@@ -1092,12 +1093,11 @@
       
       .carousel-container {
         border-radius: 12px;
-        max-height: 40vh; /* Ограничиваем высоту на мобильных */
       }
       
       .carousel-slide {
         object-fit: contain; /* Гарантируем, что все изображение видно */
-        padding: 10px; /* Добавляем отступы для очень широких изображений */
+        object-position: center;
       }
     }
 
@@ -1124,9 +1124,7 @@
       }
       
       .carousel-container {
-        height: 150px;
         border-radius: 50px; !important;
-        max-height: 35vh;
       }
       
       .content-icon {
@@ -1137,7 +1135,6 @@
 
       @media (min-width: 768px) and (max-width: 1024px) {
         .carousel-container {
-        max-height: 50vh;
       }
 }
 
@@ -1884,7 +1881,7 @@
       </p>
 
       <div class="welcome-badge">
-        <span>🎉</span> Добро пожаловать в команду
+        Добро пожаловать в команду
       </div>
 
       <a href="https://web.telegram.org/a/#8543225909" class="btn-send-receipt">
