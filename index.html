@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#f8fafc">
-  <title>HEIST AI — Fintech Future Courses</title>
+  <title>HEIST AI — Курсы</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -20,23 +20,14 @@
       --dark: #0f172a;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 40%, #e2e8f0 100%);
       color: #0f172a;
-      min-height: 100vh;
-      min-height: 100dvh;
+      min-height: 100vh; min-height: 100dvh;
       overflow-x: hidden;
       padding-bottom: env(safe-area-inset-bottom);
       -webkit-font-smoothing: antialiased;
@@ -46,63 +37,23 @@
 
     .mono-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: #64748b;
-      font-weight: 500;
+      font-size: 0.6rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: #64748b; font-weight: 500;
     }
 
-    /* Градиенты - только для десктопа */
+    /* ===== GRADIENTS — desktop only + prefers-reduced-motion ===== */
     .gradient {
-      position: fixed;
-      width: 520px;
-      height: 520px;
-      filter: blur(150px);
-      z-index: 0;
-      pointer-events: none;
-      will-change: auto;
+      position: fixed; width: 520px; height: 520px;
+      filter: blur(150px); z-index: 0; pointer-events: none; will-change: auto;
     }
+    .gradient-indigo { top: -120px; left: -120px; background: var(--primary); opacity: 0.15; }
+    .gradient-purple { bottom: 20%; right: -100px; background: var(--purple); opacity: 0.1; }
+    .gradient-burgundy { bottom: -120px; left: 50%; background: var(--burgundy); opacity: 0.08; }
 
-    .gradient-indigo {
-      top: -120px;
-      left: -120px;
-      background: var(--primary);
-      opacity: 0.15;
-    }
-
-    .gradient-purple {
-      bottom: 20%;
-      right: -100px;
-      background: var(--purple);
-      opacity: 0.1;
-    }
-
-    .gradient-burgundy {
-      bottom: -120px;
-      left: 50%;
-      background: var(--burgundy);
-      opacity: 0.08;
-    }
-
-    /* Анимации градиентов - ТОЛЬКО для десктопа */
-    @media (min-width: 769px) {
-      .gradient {
-        transition: transform 8s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      
-      .gradient-indigo {
-        animation: floatGradient 20s ease-in-out infinite;
-      }
-
-      .gradient-purple {
-        animation: floatGradient 25s ease-in-out infinite reverse;
-      }
-
-      .gradient-burgundy {
-        animation: floatGradient 30s ease-in-out infinite;
-      }
-
+    @media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+      .gradient-indigo { animation: floatGradient 20s ease-in-out infinite; }
+      .gradient-purple { animation: floatGradient 25s ease-in-out infinite reverse; }
+      .gradient-burgundy { animation: floatGradient 30s ease-in-out infinite; }
       @keyframes floatGradient {
         0%, 100% { transform: translate(0, 0) scale(1); }
         33% { transform: translate(30px, 30px) scale(1.05); }
@@ -110,1315 +61,448 @@
       }
     }
 
-    /* Оверлеи - только для десктопа */
+    @media (max-width: 768px) {
+      .grid-overlay, .noise-overlay { display: none !important; }
+      .gradient { filter: blur(100px); opacity: 0.08; }
+    }
+
     .grid-overlay {
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-      background-size: 120px 120px;
-      opacity: 0.04;
-      mix-blend-mode: soft-light;
-      z-index: 1;
-      pointer-events: none;
+      position: fixed; inset: 0;
+      background-image: linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(0deg, rgba(15,23,42,0.04) 1px, transparent 1px);
+      background-size: 120px 120px; opacity: 0.04; mix-blend-mode: soft-light; z-index: 1; pointer-events: none;
     }
 
-    .noise-overlay {
-      position: fixed;
-      inset: 0;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48ZmlsdGVyIGlkPSJuIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9IjAuNzUiIHN0aXRjaFRpbGVzPSJzdGl0Y2giIHR5cGU9ImZyYWN0YWxOb2lzZSIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoNDAwdjQwMEgweiIgZmlsdGVyPSJ1cmwoI24pIiBmaWxsPSIjRkZGIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=');
-      background-size: 320px 320px;
-      opacity: 0.05;
-      mix-blend-mode: overlay;
-      z-index: 2;
-      pointer-events: none;
+    /* ===== PROGRESS BAR ===== */
+    .progress-bar-wrap {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(248, 250, 252, 0.95);
+      border-bottom: 1px solid rgba(15,23,42,0.07);
+      padding: 0.75rem 1rem;
     }
-
-    /* Мобильная оптимизация - отключаем оверлеи */
-    @media (max-width: 768px) {
-      .grid-overlay,
-      .noise-overlay {
-        display: none !important;
-      }
-      
-      .gradient {
-        filter: blur(100px);
-        opacity: 0.1;
-      }
+    .progress-steps {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; max-width: 320px; margin: 0 auto;
     }
-
-    /* Glass эффекты */
-    .glass {
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.65);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
-    }
-
-    .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.05);
-    }
-
-    /* Backdrop-filter ТОЛЬКО для десктопа */
-    @media (min-width: 769px) {
-      .glass {
-        backdrop-filter: blur(32px) saturate(180%);
-        -webkit-backdrop-filter: blur(32px) saturate(180%);
-        background: rgba(255, 255, 255, 0.78);
-        box-shadow: 
-          0 8px 32px rgba(0, 0, 0, 0.04),
-          0 25px 80px -35px rgba(99, 102, 241, 0.25),
-          inset 0 1px 0 rgba(255, 255, 255, 0.8);
-      }
-
-      .glass-card {
-        backdrop-filter: blur(48px) saturate(200%);
-        -webkit-backdrop-filter: blur(48px) saturate(200%);
-        background: rgba(255, 255, 255, 0.65);
-        box-shadow: 
-          0 8px 40px rgba(0, 0, 0, 0.05),
-          0 35px 90px -70px rgba(99, 102, 241, 0.35),
-          inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        filter: drop-shadow(0 35px 90px rgba(99,102,241,0.25));
-        transition: transform 0.55s cubic-bezier(0.16, 0.67, 0.4, 1), 
-                    box-shadow 0.55s cubic-bezier(0.16, 0.67, 0.4, 1),
-                    border-color 0.45s ease;
-      }
-    }
-
-    /* Анимации появления - ТОЛЬКО для десктопа */
-    @media (min-width: 769px) {
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(40px) scale(0.97);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-
-      @keyframes fadeInScale {
-        from {
-          opacity: 0;
-          transform: scale(0.92);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-
-      .animate-in {
-        animation: fadeInUp 0.8s cubic-bezier(0.16, 0.67, 0.4, 1) forwards;
-      }
-
-      .animate-scale-in {
-        animation: fadeInScale 0.7s cubic-bezier(0.16, 0.67, 0.4, 1) forwards;
-      }
-
-      .animate-delay-1 { animation-delay: 0.1s; }
-      .animate-delay-2 { animation-delay: 0.2s; }
-      .animate-delay-3 { animation-delay: 0.3s; }
-      .animate-delay-4 { animation-delay: 0.4s; }
-    }
-
-    /* На мобильных - без анимаций, сразу видимо */
-    @media (max-width: 768px) {
-      .animate-in,
-      .animate-scale-in {
-        opacity: 1 !important;
-        transform: none !important;
-        animation: none !important;
-      }
-    }
-
-    .course-card {
-      position: relative;
-      border-radius: 28px;
-      padding: 2rem;
-      overflow: hidden;
-      min-height: 380px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .course-card .btn-info,
-    .course-card .btn-burgundy,
-    .course-card .btn-deep-blue,
-    .course-card .btn-khaki {
-      pointer-events: auto !important;
-      z-index: 10;
-      position: relative;
-    }
-
-    .course-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 30% 20%, var(--card-accent, rgba(99,102,241,0.35)), transparent 70%);
-      opacity: 0.45;
-      z-index: 0;
-    }
-
-    /* Hover эффекты карточек - ТОЛЬКО для десктопа */
-    @media (min-width: 769px) {
-      .course-card {
-        transform: translateY(0) scale(1);
-        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                    box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                    border-color 0.45s ease;
-        filter: drop-shadow(0 35px 90px var(--card-glow, rgba(99,102,241,0.25)));
-      }
-
-      .course-card:hover {
-        transform: translateY(-12px) scale(1.02);
-        border-color: rgba(255, 255, 255, 0.85);
-        filter: drop-shadow(0 70px 150px var(--card-glow, rgba(99,102,241,0.45)));
-      }
-
-      .course-card::before {
-        transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-    }
-
-    .course-card > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* КНОПКИ - Фиксированные цвета с !important */
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent) 0%, #ea580c 100%) !important;
-      color: white !important;
-      font-weight: 600;
-      padding: 0.875rem 1.5rem;
-      border-radius: 16px;
-      border: none;
-      font-size: 0.875rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      box-shadow: 0 8px 32px rgba(245, 158, 11, 0.25);
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-burgundy {
-      background: linear-gradient(135deg, #881337 0%, #9f1239 50%, #7f1d1d 100%) !important;
-      color: white !important;
-      font-weight: 600;
-      padding: 0.875rem 1.5rem;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      font-size: 0.875rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      box-shadow: 0 8px 32px rgba(136, 19, 55, 0.25);
-      cursor: pointer;
-    }
-
-    .btn-deep-blue {
-      background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 50%, #1e3a8a 100%) !important;
-      color: white !important;
-      font-weight: 600;
-      padding: 0.875rem 1.5rem;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      font-size: 0.875rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      box-shadow: 0 8px 32px rgba(30, 64, 175, 0.25);
-      cursor: pointer;
-    }
-
-    .btn-khaki {
-      background: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f97316 100%) !important;
-      color: white !important;
-      font-weight: 600;
-      padding: 0.875rem 1.5rem;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      font-size: 0.875rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      box-shadow: 0 8px 32px rgba(194, 65, 12, 0.25);
-      cursor: pointer;
-    }
-
-    .btn-info {
-      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%) !important;
-      color: white !important;
-      font-weight: 600;
-      padding: 0.875rem 1.5rem;
-      border-radius: 16px;
-      border: none;
-      font-size: 0.875rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.25);
-      cursor: pointer;
-    }
-
-    /* Hover кнопок - ТОЛЬКО для десктопа */
-    @media (min-width: 769px) {
-      .btn-primary,
-      .btn-burgundy,
-      .btn-deep-blue,
-      .btn-khaki,
-      .btn-info {
-        transition: transform 0.3s, box-shadow 0.3s;
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 15px 40px rgba(245, 158, 11, 0.35);
-      }
-
-      .btn-burgundy:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 15px 40px rgba(136, 19, 55, 0.35);
-      }
-
-      .btn-deep-blue:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 15px 40px rgba(30, 64, 175, 0.35);
-      }
-
-      .btn-khaki:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 15px 40px rgba(194, 65, 12, 0.35);
-      }
-
-      .btn-info:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.35);
-      }
-    }
-
-    .btn-paid {
-      background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%) !important;
-      color: white !important;
-      font-weight: 600;
-      padding: 1rem 1.5rem;
-      border-radius: 16px;
-      border: none;
-      font-size: 0.95rem;
-      letter-spacing: 0.03em;
-      box-shadow: 0 8px 32px rgba(16, 185, 129, 0.25);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    .btn-send-receipt {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      background: linear-gradient(135deg, #0088cc 0%, #0077b5 100%) !important;
-      color: white !important;
-      font-weight: 600;
-      padding: 1rem 2rem;
-      border-radius: 16px;
-      border: none;
-      font-size: 0.9rem;
-      text-decoration: none;
-      box-shadow: 0 8px 32px rgba(0, 136, 204, 0.25);
-      cursor: pointer;
-      width: 100%;
-    }
-
-    @media (min-width: 769px) {
-      .btn-paid:hover,
-      .btn-send-receipt:hover {
-        transform: translateY(-2px);
-        transition: transform 0.3s, box-shadow 0.3s;
-      }
-    }
-
-    .paid-success-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.1));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--emerald);
-    }
-
-    /* Анимация пульса - только для десктопа */
-    @media (min-width: 769px) {
-      .paid-success-icon {
-        animation: pulseSuccess 2s ease-in-out infinite;
-      }
-
-      @keyframes pulseSuccess {
-        0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-        50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
-      }
-    }
-
-    .welcome-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
-      color: var(--primary);
-      padding: 0.75rem 1.5rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(99, 102, 241, 0.2);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-    }
-
-    .badge-price {
-      background: linear-gradient(135deg, var(--primary), var(--purple));
-      color: white;
-      padding: 0.75rem 1.5rem;
-      font-size: 0.875rem;
-      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.25);
-    }
-
-    .badge-guarantee {
-      background: rgba(16, 185, 129, 0.15);
-      color: #059669;
-      border: 1px solid rgba(16, 185, 129, 0.2);
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.875rem;
-      margin-bottom: 0.875rem;
-      padding: 0.5rem;
-      border-radius: 12px;
-    }
-
-    .feature-check {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: var(--emerald);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-    }
-
-    /* Header */
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 1rem;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    /* Скрытие шапки при открытых модалках */
-    .header.hidden-header {
-      opacity: 0 !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
-    }
-
-    .header-inner {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 1rem 1.5rem;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.65);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
-    }
-
-    @media (min-width: 769px) {
-      .header-inner {
-        backdrop-filter: blur(32px) saturate(180%);
-        -webkit-backdrop-filter: blur(32px) saturate(180%);
-        background: rgba(255, 255, 255, 0.78);
-        box-shadow: 
-          0 8px 32px rgba(0, 0, 0, 0.04),
-          0 25px 80px -35px rgba(99, 102, 241, 0.25),
-          inset 0 1px 0 rgba(255, 255, 255, 0.8);
-      }
-    }
-
-    .course-actions {
-      display: flex;
-      gap: 1rem;
-      margin-top: auto;
-    }
-
-    .course-actions button {
+    .progress-step {
+      display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
       flex: 1;
     }
-
-    /* Модальные окна */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(2, 6, 23, 0);
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+    .progress-step-circle {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2px solid #e2e8f0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: #94a3b8; background: white;
+      transition: all 0.3s ease;
     }
-
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-      background: rgba(2, 6, 23, 0.85);
+    .progress-step.active .progress-step-circle {
+      border-color: var(--primary); background: var(--primary); color: white;
+      box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
     }
-
-    #payment-modal.active {
-      background: rgba(2, 6, 23, 0.425);
+    .progress-step.done .progress-step-circle {
+      border-color: var(--emerald); background: var(--emerald); color: white;
     }
-
-    .modal-content {
-      width: 92vw;
-      max-width: 480px;
-      margin: 2rem auto;
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: 32px;
-      padding: 1.5rem;
-      position: relative;
-      opacity: 0;
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 70px 200px -80px rgba(15, 23, 42, 0.55);
-      max-height: 85vh;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    .progress-step-label {
+      font-size: 0.55rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #94a3b8; text-align: center;
+      transition: color 0.3s;
     }
-
-    .modal-content::-webkit-scrollbar {
-      display: none;
+    .progress-step.active .progress-step-label { color: var(--primary); }
+    .progress-step.done .progress-step-label { color: var(--emerald); }
+    .progress-connector {
+      flex: 1; height: 2px; background: #e2e8f0; margin-top: -14px;
+      transition: background 0.3s;
     }
+    .progress-connector.done { background: var(--emerald); }
 
-    /* Анимации модалок - ТОЛЬКО для десктопа */
+    /* ===== GLASS ===== */
+    .glass { background: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.65); box-shadow: 0 8px 32px rgba(0,0,0,0.04); }
+    .glass-card { background: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 8px 40px rgba(0,0,0,0.05); }
+
     @media (min-width: 769px) {
-      .modal-overlay {
-        transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                    visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                    background 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .modal-content {
-        transform: translateY(100px) scale(0.97);
-        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
-                    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        backdrop-filter: blur(42px);
-      }
-
-      .modal-overlay.active .modal-content {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
+      .glass { backdrop-filter: blur(32px) saturate(180%); background: rgba(255,255,255,0.78); box-shadow: 0 8px 32px rgba(0,0,0,0.04), 0 25px 80px -35px rgba(99,102,241,0.25), inset 0 1px 0 rgba(255,255,255,0.8); }
+      .glass-card { backdrop-filter: blur(48px) saturate(200%); background: rgba(255,255,255,0.65); box-shadow: 0 8px 40px rgba(0,0,0,0.05), 0 35px 90px -70px rgba(99,102,241,0.35), inset 0 1px 0 rgba(255,255,255,0.3); filter: drop-shadow(0 35px 90px rgba(99,102,241,0.25)); transition: transform 0.55s cubic-bezier(0.16,0.67,0.4,1), box-shadow 0.55s, border-color 0.45s; }
+      .glass-card:hover { transform: translateY(-8px) scale(1.01); }
     }
 
-    /* На мобильных - без анимаций модалок */
-    @media (max-width: 768px) {
-      .modal-overlay {
-        transition: opacity 0.15s ease, visibility 0.15s ease;
-      }
+    /* ===== COURSE CARD ===== */
+    .course-card {
+      position: relative; border-radius: 24px; padding: 1.5rem;
+      overflow: hidden; display: flex; flex-direction: column; gap: 1rem;
+    }
+    .course-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 20%, var(--card-accent, rgba(99,102,241,0.35)), transparent 70%);
+      opacity: 0.45; z-index: 0;
+    }
+    .course-card > * { position: relative; z-index: 1; }
 
-      .modal-content {
-        transform: none !important;
-        transition: opacity 0.15s ease;
-      }
+    /* ===== PRICE DISPLAY on cards ===== */
+    .card-price-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: auto;
+    }
+    .card-price {
+      font-size: 1.5rem; font-weight: 700; color: #0f172a;
+      letter-spacing: -0.04em; line-height: 1;
+    }
+    .card-price-old {
+      font-size: 0.8rem; color: #94a3b8; text-decoration: line-through;
+      font-weight: 500;
+    }
+    .card-select-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.7rem 1.25rem; border-radius: 12px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em;
+      color: white; border: none; cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card-select-btn:active { transform: scale(0.96); }
 
-      .modal-overlay.active .modal-content {
-        opacity: 1;
-      }
+    /* ===== BUTTONS ===== */
+    .btn-primary { background: linear-gradient(135deg, var(--accent) 0%, #ea580c 100%) !important; color: white !important; font-weight: 600; padding: 0.875rem 1.5rem; border-radius: 16px; border: none; font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
+    .btn-burgundy { background: linear-gradient(135deg, #881337 0%, #9f1239 50%, #7f1d1d 100%) !important; color: white !important; font-weight: 600; padding: 0.875rem 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.25); font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
+    .btn-deep-blue { background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 50%, #1e3a8a 100%) !important; color: white !important; font-weight: 600; padding: 0.875rem 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.25); font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
+    .btn-khaki { background: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f97316 100%) !important; color: white !important; font-weight: 600; padding: 0.875rem 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.25); font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
+    .btn-info { background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%) !important; color: white !important; font-weight: 600; padding: 0.875rem 1.5rem; border-radius: 16px; border: none; font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
+
+    .buy-inside-btn {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 1rem 1.5rem; border-radius: 16px;
+      font-size: 0.9rem; font-weight: 700; letter-spacing: 0.03em;
+      color: white; border: none; cursor: pointer;
+      background: linear-gradient(135deg, #881337, #9f1239);
+      box-shadow: 0 8px 24px rgba(136,19,55,0.3);
+    }
+    .buy-inside-btn:active { transform: scale(0.98); }
+
+    /* ===== PAYMENT TIMER ===== */
+    .payment-timer {
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+      padding: 0.75rem 1rem; border-radius: 12px;
+      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
+      margin-bottom: 1rem;
+    }
+    .payment-timer-icon { font-size: 1.1rem; }
+    .payment-timer-text { font-size: 0.8rem; color: #92400e; font-weight: 600; }
+    .payment-timer-count {
+      font-family: 'JetBrains Mono', monospace; font-size: 1rem;
+      font-weight: 700; color: #b45309; letter-spacing: 0.05em;
+    }
+
+    .badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.03em; }
+    .badge-guarantee { background: rgba(16,185,129,0.15); color: #059669; border: 1px solid rgba(16,185,129,0.2); }
+
+    .feature-item { display: flex; align-items: flex-start; gap: 0.875rem; margin-bottom: 0.875rem; padding: 0.5rem; border-radius: 12px; }
+    .feature-check { width: 22px; height: 22px; border-radius: 50%; background: var(--emerald); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(2,6,23,0);
+      z-index: 1000; opacity: 0; visibility: hidden;
+      overflow-y: auto; -webkit-overflow-scrolling: touch;
+      transition: opacity 0.2s ease, visibility 0.2s ease, background 0.2s ease;
+    }
+    .modal-overlay.active { opacity: 1; visibility: visible; background: rgba(2,6,23,0.85); }
+    #payment-modal.active { background: rgba(2,6,23,0.6); }
+    .modal-content {
+      width: 92vw; max-width: 480px; margin: 2rem auto;
+      background: rgba(255,255,255,0.98); border-radius: 28px; padding: 1.5rem;
+      position: relative; border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: 0 70px 200px -80px rgba(15,23,42,0.55);
+      max-height: 88vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none; scrollbar-width: none;
+    }
+    .modal-content::-webkit-scrollbar { display: none; }
+
+    @media (max-width: 480px) {
+      .modal-content { width: 95vw; margin: 1rem auto; padding: 1.25rem; border-radius: 24px; max-height: 92vh; }
     }
 
     .close-modal {
-      position: absolute;
-      top: 1rem;
-      right: 0.8rem;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 10;
+      position: absolute; top: 1rem; right: 0.8rem;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10;
     }
+    .close-modal svg { width: 20px; height: 20px; color: rgba(100,116,139,0.6); }
 
-    @media (min-width: 769px) {
-      .close-modal {
-        backdrop-filter: blur(10px);
-        transition: all 0.3s;
-      }
-
-      .close-modal:hover {
-        background: rgba(255, 255, 255, 1);
-        transform: rotate(90deg);
-      }
-    }
-
-    .close-modal svg {
-      width: 20px;
-      height: 20px;
-      color: rgba(100, 116, 139, 0.6);
-    }
-
-    /* Карусель с чёрным фоном для загрузки изображений */
+    /* ===== CAROUSEL & SKELETON ===== */
     .carousel-container {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 1.5rem;
-      background: #0a0a0a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative; width: 100%; aspect-ratio: 16/9;
+      border-radius: 16px; overflow: hidden; margin-bottom: 1.5rem;
+      background: #e2e8f0;
     }
-
+    .carousel-skeleton {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+      background-size: 200% 100%;
+      animation: skeletonShimmer 1.5s infinite;
+    }
+    @keyframes skeletonShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-skeleton { animation: none; background: #e2e8f0; }
+    }
     .carousel-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      object-fit: cover;
-      object-position: center;
-      background: #0a0a0a;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0; object-fit: cover; object-position: center;
+      background: transparent;
     }
+    .carousel-slide.active { opacity: 1; }
+    .carousel-slide.loaded { transition: opacity 0.4s ease; }
+    .carousel-nav { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: #E5E7EB; cursor: pointer; transition: all 0.3s; }
+    .carousel-dot.active { background: #4F46E5; transform: scale(1.3); }
 
-    .carousel-slide.active {
-      opacity: 1;
-    }
+    /* ===== MODULE STEPS ===== */
+    .module-step { position: relative; display: flex; gap: 1rem; padding: 1.25rem; background: white; border: 1px solid #E5E7EB; border-radius: 16px; margin-bottom: 0.5rem; }
+    .module-number { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #EEF2FF; border: 1px solid #E0E7FF; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 500; color: #4F46E5; flex-shrink: 0; }
+    .stepper-line { position: absolute; left: 2.375rem; top: 100%; width: 2px; height: 1rem; background: #E5E7EB; }
 
-    /* Переход карусели - только для десктопа */
-    @media (min-width: 769px) {
-      .carousel-slide {
-        transition: opacity 0.6s ease;
-      }
-    }
+    /* ===== OUTCOME ===== */
+    .outcome-item { display: flex; gap: 0.75rem; align-items: flex-start; }
+    .outcome-icon { width: 40px; height: 40px; border-radius: 50%; background: #EEF2FF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.25rem; }
+    .outcome-title { font-weight: 600; color: #0F172A; font-size: 0.9rem; margin-bottom: 0.25rem; }
+    .outcome-desc { font-size: 0.75rem; color: #6B7280; line-height: 1.4; }
 
-    .carousel-nav {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .carousel-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #E5E7EB;
-      cursor: pointer;
-    }
-
-    .carousel-dot.active {
-      background: #4F46E5;
-      transform: scale(1.3);
-    }
-
-    @media (min-width: 769px) {
-      .carousel-dot {
-        transition: all 0.3s;
-      }
-    }
-
-    /* Модули */
-    .module-step {
-      position: relative;
-      display: flex;
-      gap: 1rem;
-      padding: 1.25rem;
-      background: white;
-      border: 1px solid #E5E7EB;
-      border-radius: 16px;
-      margin-bottom: 0.5rem;
-    }
-
-    @media (min-width: 769px) {
-      .module-step {
-        transition: all 0.3s;
-      }
-
-      .module-step:hover {
-        border-color: #D1D5DB;
-        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
-      }
-    }
-
-    .module-number {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #EEF2FF;
-      border: 1px solid #E0E7FF;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: #4F46E5;
-      flex-shrink: 0;
-    }
-
-    .stepper-line {
-      position: absolute;
-      left: 2.375rem;
-      top: 100%;
-      width: 2px;
-      height: 1rem;
-      background: #E5E7EB;
-    }
-
-    /* Outcomes */
-    .outcomes-grid {
-      display: grid;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .outcome-item {
-      display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
-    }
-
-    .outcome-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #EEF2FF;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 1.25rem;
-    }
-
-    .outcome-content {
-      flex: 1;
-    }
-
-    .outcome-title {
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      color: #0F172A;
-      font-size: 0.9rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .outcome-desc {
-      font-size: 0.75rem;
-      color: #6B7280;
-      line-height: 1.4;
-    }
-
-    /* Payment Methods */
-    .payment-section {
-      margin-bottom: 1rem;
-    }
-
-    .payment-section-title {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
-      padding-left: 0.5rem;
-    }
+    /* ===== PAYMENT METHODS ===== */
+    .payment-section { margin-bottom: 0.75rem; }
+    .payment-section-title { font-size: 0.7rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; padding-left: 0.25rem; }
 
     .payment-method {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      border-radius: 14px;
-      cursor: pointer;
-      margin-bottom: 0.5rem;
-      text-decoration: none;
-      color: inherit;
-      width: 100%;
-    }
-
-    @media (min-width: 769px) {
-      .payment-method {
-        transition: all 0.3s;
-      }
-
-      .payment-method:hover {
-        background: rgba(255, 255, 255, 1);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-      }
-    }
-
-    .payment-method.active {
-      border-radius: 14px 14px 0 0;
-      margin-bottom: 0;
-      border-bottom: none;
-    }
-
-    .payment-method-icon {
-      width: 70px;
-      height: 70px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      flex-shrink: 0;
-    }
-
-    .payment-method-info {
-      flex: 1;
-      text-align: left;
-    }
-
-    .payment-method-name {
-      font-weight: 600;
-      color: var(--dark);
-      font-size: 0.95rem;
-    }
-
-    .payment-method-desc {
-      font-size: 0.75rem;
-      color: #64748b;
-    }
-
-    .payment-method-arrow {
-      color: #94a3b8;
-    }
-
-    @media (min-width: 769px) {
-      .payment-method-arrow {
-        transition: transform 0.3s;
-      }
-
-      .payment-method.active .payment-method-arrow {
-        transform: rotate(180deg);
-      }
-    }
-
-    .payment-details {
-      display: none;
-      background: rgba(248, 250, 252, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      border-top: none;
-      border-radius: 0 0 14px 14px;
-      padding: 1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .payment-details.active {
-      display: block;
-    }
-
-    .payment-requisite {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      padding: 0.75rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .payment-requisite-label {
-      font-size: 0.7rem;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.25rem;
-    }
-
-    .payment-requisite-value {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      word-break: break-all;
-      color: var(--dark);
-    }
-
-    /* Expandable sections */
-    .expandable-toggle {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      border-radius: 14px;
-      cursor: pointer;
-      margin-bottom: 0.5rem;
-      width: 100%;
-    }
-
-    .expandable-toggle.active {
-      border-radius: 14px 14px 0 0;
-      margin-bottom: 0;
-      border-bottom: none;
-    }
-
-    .expandable-toggle .chevron {
-      color: #94a3b8;
-    }
-
-    @media (min-width: 769px) {
-      .expandable-toggle {
-        transition: all 0.3s;
-      }
-
-      .expandable-toggle:hover {
-        background: rgba(255, 255, 255, 1);
-      }
-
-      .expandable-toggle .chevron {
-        transition: transform 0.3s;
-      }
-
-      .expandable-toggle.active .chevron {
-        transform: rotate(180deg);
-      }
-    }
-
-    .expandable-content {
-      display: none;
-      background: rgba(248, 250, 252, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      border-top: none;
-      border-radius: 0 0 14px 14px;
-      padding: 0.75rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .expandable-content.active {
-      display: block;
-    }
-
-    /* Crypto coin item */
-    .crypto-coin {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      margin-bottom: 0.5rem;
-      overflow: hidden;
-    }
-
-    .crypto-coin-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      display: flex; align-items: center; gap: 0.75rem;
       padding: 0.875rem 1rem;
-      cursor: pointer;
-    }
-
-    @media (min-width: 769px) {
-      .crypto-coin-header {
-        transition: background 0.3s;
-      }
-
-      .crypto-coin-header:hover {
-        background: rgba(255, 255, 255, 1);
-      }
-    }
-
-    .crypto-coin-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    .crypto-coin-name {
-      flex: 1;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--dark);
-    }
-
-    .crypto-coin-symbol {
-      font-size: 0.75rem;
-      color: #64748b;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .crypto-coin-chevron {
-      color: #94a3b8;
-    }
-
-    @media (min-width: 769px) {
-      .crypto-coin-chevron {
-        transition: transform 0.3s;
-      }
-
-      .crypto-coin.active .crypto-coin-chevron {
-        transform: rotate(180deg);
-      }
-    }
-
-    .crypto-coin-details {
-      display: none;
-      padding: 0 1rem 1rem;
-    }
-
-    .crypto-coin.active .crypto-coin-details {
-      display: block;
-    }
-
-    /* Network addresses */
-    .network-item {
-      background: rgba(248, 250, 252, 0.9);
-      border-radius: 10px;
-      margin-bottom: 0.5rem;
-      overflow: hidden;
-    }
-
-    .network-item-header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--dark);
-    }
-
-    @media (min-width: 769px) {
-      .network-item-header {
-        transition: background 0.3s;
-      }
-
-      .network-item-header:hover {
-        background: rgba(255, 255, 255, 0.8);
-      }
-    }
-
-    .network-item-chevron {
-      margin-left: auto;
-      color: #94a3b8;
-    }
-
-    @media (min-width: 769px) {
-      .network-item-chevron {
-        transition: transform 0.3s;
-      }
-
-      .network-item.active .network-item-chevron {
-        transform: rotate(180deg);
-      }
-    }
-
-    .network-item-details {
-      display: none;
-      padding: 0 0.75rem 0.75rem;
-    }
-
-    .network-item.active .network-item-details {
-      display: block;
-    }
-
-    .network-address {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      word-break: break-all;
-      background: rgba(0, 0, 0, 0.03);
-      padding: 0.75rem;
-      border-radius: 8px;
-      margin-bottom: 0.75rem;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .network-qr {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto;
-      padding: 0.5rem;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .network-qr img {
+      background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.05);
+      border-radius: 14px; cursor: pointer; margin-bottom: 0.5rem;
       width: 100%;
-      height: 100%;
-      object-fit: contain;
+      /* #13: 44px min tap zone */
+      min-height: 60px;
     }
+    .payment-method.active { border-radius: 14px 14px 0 0; margin-bottom: 0; border-bottom: none; }
+    .payment-method-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    .payment-method-info { flex: 1; text-align: left; }
+    .payment-method-name { font-weight: 600; color: var(--dark); font-size: 0.9rem; }
+    .payment-method-desc { font-size: 0.72rem; color: #64748b; }
+    .payment-method-arrow { color: #94a3b8; transition: transform 0.3s; }
+    .payment-method.active .payment-method-arrow { transform: rotate(180deg); }
+    .payment-details { display: none; background: rgba(248,250,252,0.9); border: 1px solid rgba(0,0,0,0.05); border-top: none; border-radius: 0 0 14px 14px; padding: 1rem; margin-bottom: 0.5rem; }
+    .payment-details.active { display: block; }
+    .payment-requisite { background: rgba(255,255,255,0.9); border-radius: 10px; padding: 0.75rem; margin-bottom: 0.5rem; }
+    .payment-requisite-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+    .payment-requisite-value { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; word-break: break-all; color: var(--dark); }
 
+    /* copy button — min 44×44 tap zone */
     .copy-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      width: 100%;
-      padding: 0.5rem;
-      background: rgba(99, 102, 241, 0.1);
-      color: var(--primary);
-      border: none;
-      border-radius: 8px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 0.5rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      width: 100%; padding: 0.75rem 0.5rem; min-height: 44px;
+      background: rgba(99,102,241,0.1); color: var(--primary);
+      border: none; border-radius: 10px; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; margin-top: 0.5rem; transition: background 0.2s;
     }
+    .copy-btn:active { background: rgba(99,102,241,0.2); }
+    .copy-btn.copied { background: rgba(16,185,129,0.2); color: var(--emerald); }
 
-    @media (min-width: 769px) {
-      .copy-btn {
-        transition: all 0.3s;
-      }
+    /* ===== CRYPTO ===== */
+    .expandable-toggle { display: flex; align-items: center; gap: 0.75rem; padding: 0.875rem 1rem; background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.05); border-radius: 14px; cursor: pointer; margin-bottom: 0.5rem; width: 100%; min-height: 60px; }
+    .expandable-toggle.active { border-radius: 14px 14px 0 0; margin-bottom: 0; border-bottom: none; }
+    .expandable-toggle .chevron { color: #94a3b8; transition: transform 0.3s; margin-left: auto; }
+    .expandable-toggle.active .chevron { transform: rotate(180deg); }
+    .expandable-content { display: none; background: rgba(248,250,252,0.9); border: 1px solid rgba(0,0,0,0.05); border-top: none; border-radius: 0 0 14px 14px; padding: 0.75rem; margin-bottom: 0.5rem; }
+    .expandable-content.active { display: block; }
 
-      .copy-btn:hover {
-        background: rgba(99, 102, 241, 0.2);
-      }
-    }
+    .crypto-coin { background: rgba(255,255,255,0.9); border-radius: 12px; margin-bottom: 0.5rem; overflow: hidden; }
+    .crypto-coin-header { display: flex; align-items: center; gap: 0.75rem; padding: 0.875rem 1rem; cursor: pointer; min-height: 52px; }
+    .crypto-coin-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .crypto-coin-name { flex: 1; font-weight: 600; font-size: 0.9rem; color: var(--dark); }
+    .crypto-coin-symbol { font-size: 0.75rem; color: #64748b; font-family: 'JetBrains Mono', monospace; }
+    .crypto-coin-chevron { color: #94a3b8; transition: transform 0.3s; }
+    .crypto-coin.active .crypto-coin-chevron { transform: rotate(180deg); }
+    .crypto-coin-details { display: none; padding: 0 1rem 1rem; }
+    .crypto-coin.active .crypto-coin-details { display: block; }
 
-    .copy-btn.copied {
-      background: rgba(16, 185, 129, 0.2);
-      color: var(--emerald);
-    }
+    .network-item { background: rgba(248,250,252,0.9); border-radius: 10px; margin-bottom: 0.5rem; overflow: hidden; }
+    .network-item-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; cursor: pointer; font-size: 0.85rem; font-weight: 500; color: var(--dark); min-height: 44px; }
+    .network-item-chevron { margin-left: auto; color: #94a3b8; transition: transform 0.3s; }
+    .network-item.active .network-item-chevron { transform: rotate(180deg); }
+    .network-item-details { display: none; padding: 0 0.75rem 0.75rem; }
+    .network-item.active .network-item-details { display: block; }
+    .network-address { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; word-break: break-all; background: rgba(0,0,0,0.03); padding: 0.75rem; border-radius: 8px; margin-bottom: 0.75rem; border: 1px solid rgba(0,0,0,0.05); }
+    .network-qr { width: 120px; height: 120px; margin: 0 auto; padding: 0.5rem; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .network-qr img { width: 100%; height: 100%; object-fit: contain; }
 
-    /* Responsive */
-    @media (max-width: 480px) {
-      .modal-content {
-        width: 95vw;
-        margin: 1rem auto;
-        padding: 1.25rem;
-        border-radius: 24px; 
-        max-height: 90vh;
-      }
-      
-      .carousel-container {
-        border-radius: 12px;
-      }
-      
-      .carousel-slide {
-        object-fit: contain;
-        object-position: center;
-      }
+    /* ===== SUCCESS SCREEN ===== */
+    .paid-success-icon { width: 80px; height: 80px; margin: 0 auto; background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(5,150,105,0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--emerald); }
 
-      .content-block {
-        padding: 1rem;
-        border-radius: 16px;
-      }
-      
-      .content-title {
-        font-size: 1rem;
-      }
-      
-      .content-description {
-        font-size: 0.875rem;
+    @media (prefers-reduced-motion: no-preference) {
+      .paid-success-icon { animation: pulseSuccess 2s ease-in-out infinite; }
+      @keyframes pulseSuccess {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+        50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(16,185,129,0); }
       }
     }
 
-    @media (max-width: 380px) {
-      .modal-content {
-        width: 98vw;
-        margin: 0.5rem auto;
-        padding: 1rem;
-        border-radius: 20px;
-      }
-      
-      .carousel-container {
-        border-radius: 12px;
-      }
-      
-      .content-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
-      }
+    /* 3-step instructions */
+    .success-steps { text-align: left; margin: 1.25rem 0; display: flex; flex-direction: column; gap: 0.75rem; }
+    .success-step { display: flex; align-items: flex-start; gap: 0.875rem; padding: 0.875rem; background: rgba(248,250,252,0.8); border-radius: 14px; border: 1px solid rgba(15,23,42,0.06); }
+    .success-step-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .success-step-num { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.15rem; }
+    .success-step-text { font-size: 0.85rem; font-weight: 600; color: #0f172a; line-height: 1.4; }
+
+    .btn-open-bot {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      width: 100%; padding: 1rem 1.5rem; border-radius: 16px;
+      font-size: 0.9rem; font-weight: 700;
+      background: linear-gradient(135deg, #0088cc, #0077b5);
+      color: white; border: none; cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,136,204,0.3); margin-top: 1rem;
     }
+    .btn-open-bot:active { transform: scale(0.98); }
   </style>
 </head>
 <body>
-  <!-- Градиенты фона -->
   <div class="gradient gradient-indigo"></div>
   <div class="gradient gradient-purple"></div>
   <div class="gradient gradient-burgundy"></div>
   <div class="grid-overlay"></div>
-  <div class="noise-overlay"></div>
 
-  <!-- Header -->
-  <header class="header" id="main-header">
-    <div class="header-inner glass flex items-center justify-between">
-      <span class="mono-label text-slate-500">HEIST AI</span>
-      <nav class="flex gap-4">
-        <a href="#courses" class="text-xs font-semibold uppercase tracking-widest text-slate-500 hover:text-slate-900">Курсы</a>
-        <a href="#faq" class="text-xs font-semibold uppercase tracking-widest text-slate-500 hover:text-slate-900">FAQ</a>
-      </nav>
+  <!-- #7: Progress bar -->
+  <div class="progress-bar-wrap" id="progress-bar-wrap">
+    <div class="progress-steps">
+      <div class="progress-step active" id="step-1">
+        <div class="progress-step-circle">1</div>
+        <div class="progress-step-label">Курс</div>
+      </div>
+      <div class="progress-connector" id="conn-1"></div>
+      <div class="progress-step" id="step-2">
+        <div class="progress-step-circle">2</div>
+        <div class="progress-step-label">Оплата</div>
+      </div>
+      <div class="progress-connector" id="conn-2"></div>
+      <div class="progress-step" id="step-3">
+        <div class="progress-step-circle">3</div>
+        <div class="progress-step-label">Готово</div>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <main class="relative z-10 px-4 pb-8 max-w-[480px] mx-auto">
-    
-    <!-- Hero Section -->
-    <section class="pt-8 pb-12 text-center animate-in" style="opacity: 0;">
-      <p class="mono-label text-slate-500 tracking-widest mb-6">Fintech Intelligence Studio</p>
-      
-      <h1 class="text-6xl sm:text-5xl font-bold tracking-tight text-slate-900 mb-4">
-        HEIST <span class="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">AI</span>
-      </h1>
-      
-      <p class="text-slate-600 text-base leading-relaxed mb-8 max-w-sm mx-auto font-light">
-        Закрытая экосистема для архитекторов автономного дохода. 
-Превращаем экспертизу в работающие активы
-      </p>
-      
-      <div class="flex flex-wrap justify-center gap-3 mb-8">
-        <span class="mono-label px-4 py-2.5 rounded-full bg-slate-100/60 text-slate-500">Realtime Labs</span>
-        <span class="mono-label px-4 py-2.5 rounded-full bg-slate-100/60 text-slate-500">AI Revenue Ops</span>
-      </div>
-    </section>
+  <!-- Main content — ONLY courses list (#6 no hero) -->
+  <main class="relative z-10 px-4 pb-24 max-w-[480px] mx-auto pt-4">
 
-    <!-- Courses Section -->
-    <section id="courses" class="space-y-6 mb-12">
-      <div class="animate-in animate-delay-1 text-center" style="opacity: 0;">
-        <p class="mono-label text-slate-500 tracking-widest mb-3">Ваш следующий уровень</p>
-        <h2 class="text-2xl font-semibold tracking-tight text-slate-900">Три вектора мастерства</h2>
-      </div>
+    <div class="mb-5">
+      <p class="mono-label text-slate-500 tracking-widest mb-1">HEIST AI</p>
+      <h2 class="text-xl font-semibold tracking-tight text-slate-900">Выбери курс</h2>
+    </div>
+
+    <!-- Course Cards -->
+    <div class="space-y-4">
 
       <!-- Course 1 -->
-      <div class="course-card glass-card animate-in animate-delay-2" style="opacity: 0; --card-accent: rgba(139, 92, 246, 0.35); --card-glow: rgba(139, 92, 246, 0.45);" data-course="ai-automation">
+      <div class="course-card glass-card" style="--card-accent: rgba(139,92,246,0.35); --card-glow: rgba(139,92,246,0.45);">
         <span class="mono-label text-purple-600 tracking-widest">AI AUTOMATION</span>
-        <h3 class="text-xl font-semibold text-slate-900 mt-3 mb-2">Система Автопродаж 24/7</h3>
-        <p class="text-slate-500 text-sm font-light italic mb-6">Создайте AI-агента, который продаёт, пока вы спите. Закрытая когорта · Персональный менторинг · Пожизненный доступ</p>
-        
-        <div class="space-y-3 mb-6">
+        <h3 class="text-lg font-semibold text-slate-900">N8N: Архитектура AI-Агентов</h3>
+        <p class="text-slate-500 text-sm font-light leading-relaxed">AI-агент на n8n — обрабатывает заявки, пишет клиентам, работает без тебя. С нуля за 2 недели.</p>
+        <div class="space-y-2">
           <div class="feature-item">
             <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-              </svg>
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
-            <span class="text-sm text-slate-600">Персональные AI-агенты на базе GPT-4 и ваших данных</span>
+            <span class="text-sm text-slate-600">Настроишь n8n-агента, который сам пишет клиентам в WhatsApp</span>
           </div>
           <div class="feature-item">
             <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-              </svg>
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
-            <span class="text-sm text-slate-600">Бесшовная интеграция: CRM, Notion, Telegram, любые API</span>
+            <span class="text-sm text-slate-600">Интеграция CRM, Telegram, Google, 100+ сервисов без кода</span>
           </div>
         </div>
-
-        <div class="flex items-center justify-between flex-wrap gap-3 mb-6">
-          <span class="badge badge-price">Инвестиция 7 000 ₽ → доступ навсегда</span>
-        </div>
-
-        <div class="course-actions">
-          <button class="btn-info info-btn" data-course="ai-automation">Программа</button>
-          <button class="btn-burgundy buy-btn" data-course="ai-automation" data-title="Система Автопродаж 24/7" data-price="7000">Получить доступ</button>
+        <!-- #18: One "Выбрать →" button + #19: large price -->
+        <div class="card-price-row">
+          <div>
+            <div class="card-price">7 000 ₽</div>
+            <div class="card-price-old">12 000 ₽</div>
+          </div>
+          <button class="card-select-btn btn-burgundy select-btn"
+            data-course="ai-automation"
+            data-title="N8N: Архитектура AI-Агентов"
+            data-price="7000">
+            Выбрать →
+          </button>
         </div>
       </div>
 
       <!-- Course 2 -->
-      <div class="course-card glass-card animate-in animate-delay-3" style="opacity: 0; --card-accent: rgba(99, 102, 241, 0.35); --card-glow: rgba(99, 102, 241, 0.45);" data-course="ai-founders">
+      <div class="course-card glass-card" style="--card-accent: rgba(99,102,241,0.35); --card-glow: rgba(99,102,241,0.45);">
         <span class="mono-label text-indigo-600 tracking-widest">AI FOUNDERS</span>
-        <h3 class="text-xl font-semibold text-slate-900 mt-3 mb-2">AI Founders Vault</h3>
-        <p class="text-slate-500 text-sm font-light italic mb-6">Структурированная база знаний для тех, кто монетизирует искусственный интеллект. Модели · Промпты · GTM-стратегии · Инвестиционные кейсы</p>
-        
-        <div class="space-y-3 mb-6">
+        <h3 class="text-lg font-semibold text-slate-900">AI Foundation: Мастерство Нейросетей</h3>
+        <p class="text-slate-500 text-sm font-light leading-relaxed">GPT-4, Claude, Llama — разберёшься во всех. Поймёшь как монетизировать AI в своей нише.</p>
+        <div class="space-y-2">
           <div class="feature-item">
             <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-              </svg>
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
-            <span class="text-sm text-slate-600">Глубокий разбор: GPT-4, Claude 3, Llama 3, Mistral — когда и какую использовать</span>
+            <span class="text-sm text-slate-600">Разбираешься в моделях за 10 секунд — и выбираешь нужную</span>
           </div>
           <div class="feature-item">
             <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-              </svg>
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
-            <span class="text-sm text-slate-600">Продвинутый Prompt Engineering: от базы до production-grade систем</span>
+            <span class="text-sm text-slate-600">Prompt engineering до production-grade уровня</span>
           </div>
         </div>
-
-        <div class="flex items-center justify-between flex-wrap gap-3 mb-6">
-          <span class="badge badge-price">7 000 ₽ → доступ навсегда</span>
-        </div>
-
-        <div class="course-actions">
-          <button class="btn-info info-btn" data-course="ai-founders">Программа</button>
-          <button class="btn-deep-blue buy-btn" data-course="ai-founders" data-title="AI Founders Vault" data-price="7000">Получить доступ</button>
+        <div class="card-price-row">
+          <div>
+            <div class="card-price">7 000 ₽</div>
+            <div class="card-price-old">12 000 ₽</div>
+          </div>
+          <button class="card-select-btn btn-deep-blue select-btn"
+            data-course="ai-founders"
+            data-title="AI Foundation: Мастерство Нейросетей"
+            data-price="7000">
+            Выбрать →
+          </button>
         </div>
       </div>
 
       <!-- Course 3 -->
-      <div class="course-card glass-card animate-in animate-delay-4" style="opacity: 0; --card-accent: rgba(245, 158, 11, 0.35); --card-glow: rgba(245, 158, 11, 0.45);" data-course="vibe-coding">
+      <div class="course-card glass-card" style="--card-accent: rgba(245,158,11,0.35); --card-glow: rgba(245,158,11,0.45);">
         <span class="mono-label text-amber-600 tracking-widest">VIBE CODING</span>
-        <h3 class="text-xl font-semibold text-slate-900 mt-3 mb-2">От идеи до продукта за 48 часов</h3>
-        <p class="text-slate-500 text-sm font-light italic mb-6">Production-ready решения без команды разработки. Вы + AI = полноценный tech-продукт. Прототипирование · Дизайн-системы · Деплой</p>
-        
-        <div class="space-y-3 mb-6">
+        <h3 class="text-lg font-semibold text-slate-900">VibeCoding: Код Без Программистов</h3>
+        <p class="text-slate-500 text-sm font-light leading-relaxed">Делаешь веб-приложения без команды разработчиков. AI пишет код — ты управляешь.</p>
+        <div class="space-y-2">
           <div class="feature-item">
             <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-              </svg>
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
-            <span class="text-sm text-slate-600">Rapid prototyping: от скетча до работающего продукта за выходные</span>
+            <span class="text-sm text-slate-600">SaaS с базой данных и оплатой — за один вечер</span>
           </div>
           <div class="feature-item">
             <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-              </svg>
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
             </div>
-            <span class="text-sm text-slate-600">Продвинутые интеграции: API, WebGL, кинетические анимации</span>
+            <span class="text-sm text-slate-600">Деплой в продакшн, Telegram Mini Apps, монетизация</span>
           </div>
         </div>
-
-        <div class="flex items-center justify-between flex-wrap gap-3 mb-6">
-          <span class="badge badge-price">Ранний доступ: 7 000 ₽ → навсегда</span>
-        </div>
-
-        <div class="course-actions">
-          <button class="btn-info info-btn" data-course="vibe-coding">Программа</button>
-          <button class="btn-khaki buy-btn" data-course="vibe-coding" data-title="Прототипирование за 48 часов" data-price="7000">Получить доступ</button>
+        <div class="card-price-row">
+          <div>
+            <div class="card-price">7 000 ₽</div>
+            <div class="card-price-old">12 000 ₽</div>
+          </div>
+          <button class="card-select-btn btn-khaki select-btn"
+            data-course="vibe-coding"
+            data-title="VibeCoding: Код Без Программистов"
+            data-price="7000">
+            Выбрать →
+          </button>
         </div>
       </div>
-    </section>
+    </div>
+  </main>
 
-   
-
-  <!-- Модальное окно "О курсе" -->
+  <!-- Modal: Course Details (#18: buy button inside details) -->
   <div id="course-info-modal" class="modal-overlay">
     <div class="modal-content">
       <button class="close-modal" id="close-info-btn">
@@ -1426,27 +510,33 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
-
-      <div class="carousel-container" id="carousel-container"></div>
+      <div class="carousel-container" id="carousel-container">
+        <div class="carousel-skeleton" id="carousel-skeleton"></div>
+      </div>
       <div class="carousel-nav" id="carousel-nav"></div>
-      
+
       <div id="program-section">
         <div class="mb-4">
           <p class="font-mono text-[11px] uppercase tracking-[0.15em] text-slate-500 mb-1">Программа курса</p>
-          <h3 id="modal-course-title" class="font-display text-lg font-bold text-slate-900"></h3>
+          <h3 id="modal-course-title" class="text-lg font-bold text-slate-900"></h3>
         </div>
-        
         <div id="course-modules" class="space-y-3"></div>
-        
         <div id="what-you-get" class="mt-6 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-indigo-50 border border-slate-200">
-          <h4 class="font-display text-base font-bold text-slate-900 mb-3">Что вы получите после прохождения</h4>
+          <h4 class="text-base font-bold text-slate-900 mb-3">Что ты умеешь делать после курса</h4>
           <div id="outcomes-list" class="grid gap-3"></div>
         </div>
+        <!-- #18: buy button inside details modal -->
+        <button id="modal-buy-btn" class="buy-inside-btn mt-6" data-title="" data-price="7000">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          Купить за 7 000 ₽
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Модальное окно оплаты -->
+  <!-- Modal: Payment -->
   <div id="payment-modal" class="modal-overlay">
     <div class="modal-content" style="max-width: 420px;">
       <button class="close-modal" id="close-payment-btn">
@@ -1457,951 +547,817 @@
 
       <div style="padding-top: 1rem;">
         <p class="mono-label text-center mb-2">ПОДТВЕРЖДЕНИЕ ДОСТУПА</p>
-        <h3 id="payment-course-title" class="text-xl font-semibold text-slate-900 text-center mb-6"></h3>
-        
-        <div class="content-block" style="background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1)); padding: 1rem; border-radius: 16px;">
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-slate-600">Стоимость:</span>
+        <h3 id="payment-course-title" class="text-xl font-semibold text-slate-900 text-center mb-4"></h3>
+
+        <!-- #11: 15-min timer -->
+        <div class="payment-timer">
+          <div class="payment-timer-icon">⏱</div>
+          <div class="payment-timer-text">Место забронировано на</div>
+          <div class="payment-timer-count" id="payment-countdown">15:00</div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(139,92,246,0.08)); padding: 1rem; border-radius: 16px; margin-bottom: 1rem;">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-slate-600">К оплате:</span>
             <span id="payment-price" class="text-2xl font-bold text-slate-900">7 000 ₽</span>
           </div>
           <div class="badge badge-guarantee" style="width: 100%; justify-content: center;">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
             </svg>
-            Пожизненный доступ к программе
+            Пожизненный доступ · 7 дней возврат
           </div>
         </div>
 
-        <!-- Способы оплаты -->
-        <div class="content-block mt-4" style="padding: 1rem;">
-          <h4 class="content-title mb-4" style="font-size: 1rem;">Выберите способ</h4>
+        <!-- Payment methods — #8 СБП first, #9 no PayPal, #10 only USDT TRC-20 + TON -->
+        <h4 style="font-size: 1rem; font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">Выбери способ оплаты</h4>
 
-<!-- Российские карты -->
-<div class="payment-section">
-  <div class="payment-section-title">🇷🇺 Российские карты</div>
-  
-  <!-- Альфа Банк -->
-  <button class="payment-method" data-payment="alfa">
-    <div class="payment-method-icon" style="background: white; padding: 10px;">
-      <img src="alfa.png" 
-           alt="Альфа Банк" 
-           style="width: 70px; height: 70px; object-fit: contain;">
-    </div>
-    <div class="payment-method-info">
-      <div class="payment-method-name">Альфа Банк</div>
-      <div class="payment-method-desc">Перевод по номеру карты</div>
-    </div>
-    <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-    </svg>
-  </button>
-  <div class="payment-details" data-payment="alfa">
-    <div class="payment-requisite">
-      <div class="payment-requisite-label">Номер карты</div>
-      <div class="payment-requisite-value" id="alfa-card">2200 1545 3615 8834</div>
-    </div>
-    <button class="copy-btn" onclick="copyAddress('alfa-card', this)">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-      </svg>
-      Скопировать номер карты
-    </button>
-  </div>
+        <!-- 🇷🇺 Российские карты -->
+        <div class="payment-section">
+          <div class="payment-section-title">🇷🇺 Российские карты</div>
 
-  <!-- СБП -->
-  <button class="payment-method" data-payment="sbp">
-    <div class="payment-method-icon" style="background: white; padding: 10px;">
-      <img src="sbp.png" 
-           alt="СБП" 
-           style="width: 70px; height: 70px; object-fit: contain;">
-    </div>
-    <div class="payment-method-info">
-      <div class="payment-method-name">СБП (Система быстрых платежей)</div>
-      <div class="payment-method-desc">Мгновенный перевод без комиссии</div>
-    </div>
-    <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-    </svg>
-  </button>
-  <div class="payment-details" data-payment="sbp">
-    <div class="payment-requisite">
-      <div class="payment-requisite-label">Телефон для СБП</div>
-      <div class="payment-requisite-value" id="sbp-phone">+7 901 788 7835</div>
-    </div>
-    <div class="payment-requisite">
-      <div class="payment-requisite-label">Банк получателя</div>
-      <div class="payment-requisite-value">Т Банк</div>
-    </div>
-    <button class="copy-btn" onclick="copyAddress('sbp-phone', this)">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-      </svg>
-      Скопировать телефон
-    </button>
-  </div>
-</div>
-
-<!-- Электронные платежи -->
-<div class="payment-section">
-  <div class="payment-section-title">📱 Электронные платежи</div>
-  
-  <!-- PayPal -->
-  <button class="payment-method" data-payment="paypal">
-    <div class="payment-method-icon" style="background: white; padding: 10px;">
-      <img src="paypal.png" 
-           alt="PayPal" 
-           style="width: 70px; height: 70px; object-fit: contain;">
-    </div>
-    <div class="payment-method-info">
-      <div class="payment-method-name">PayPal</div>
-      <div class="payment-method-desc">Международные переводы</div>
-    </div>
-    <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-    </svg>
-  </button>
-  <div class="payment-details" data-payment="paypal">
-    <div class="payment-requisite">
-      <div class="payment-requisite-label">Email для PayPal</div>
-      <div class="payment-requisite-value" id="paypal-email">norulescash@gmail.com</div>
-    </div>
-    <button class="copy-btn" onclick="copyAddress('paypal-email', this)">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-      </svg>
-      Скопировать email
-    </button>
-  </div>
-</div>
-
-   <!-- Международные карты -->
-<div class="payment-section">
-  <div class="payment-section-title">Международные карты</div>
-  
-  <!-- Visa/Mastercard -->
-  <button class="payment-method" data-payment="visa-mc">
-    <div class="payment-method-icon" style="background: white; padding: 6px;">
-      <img src="visa.png" 
-           alt="Visa/Mastercard" 
-           style="width: 70px; height: 70px; object-fit: contain;">
-    </div>
-    <div class="payment-method-info">
-      <div class="payment-method-name">Visa / Mastercard</div>
-      <div class="payment-method-desc">Международные карты</div>
-    </div>
-    <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-    </svg>
-  </button>
-  <div class="payment-details" data-payment="visa-mc">
-    <div class="payment-requisite">
-      <div class="payment-requisite-label">Номер карты</div>
-      <div class="payment-requisite-value" id="visa-card">4441 1110 1656 7632</div>
-    </div>
-    
-    <button class="copy-btn" onclick="copyAddress('visa-card', this)">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-      </svg>
-      Скопировать номер карты
-    </button>
-  </div>
-</div>
-
-<!-- Криптовалюта -->
-<div class="payment-section">
-  <div class="payment-section-title">🪙 Криптовалюта</div>
-  
-  <button class="expandable-toggle" id="crypto-main-toggle">
-    <div class="payment-method-icon" style="background: white; padding: 10px;">
-      <img src="usdt.png" 
-           alt="Криптовалюта" 
-           style="width: 70px; height: 70px; object-fit: contain;">
-    </div>
-    <div class="payment-method-info" style="text-align: left;">
-      <div class="payment-method-name">Криптовалюта</div>
-      <div class="payment-method-desc">BTC, ETH, USDT, BNB, DASH и др.</div>
-    </div>
-    <svg class="w-5 h-5 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-    </svg>
-  </button>
-
-  <div class="expandable-content" id="crypto-coins-list">
-    
-    <!-- Bitcoin -->
-    <div class="crypto-coin" data-coin="btc">
-      <div class="crypto-coin-header">
-        <div class="crypto-coin-icon" style="background: white; padding: 8px; border-radius: 50%;">
-          <img src="btc.png" 
-               alt="Bitcoin" 
-               style="width: 24px; height: 24px; object-fit: contain;">
-        </div>
-        <div class="crypto-coin-name">Bitcoin</div>
-        <div class="crypto-coin-symbol">BTC</div>
-        <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </div>
-      <div class="crypto-coin-details">
-        <div class="network-address" id="btc-address">1Motjp4tCnBCLKqaKEW9osSuT7Jw7tDaE4</div>
-        <button class="copy-btn" onclick="copyAddress('btc-address', this)">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-          </svg>
-          Скопировать адрес
-        </button>
-        <div class="network-qr" style="margin-top: 0.75rem;">
-          <img src="btc.jpg" alt="BTC QR">
-        </div>
-      </div>
-    </div>
-
-    <!-- Ethereum -->
-    <div class="crypto-coin" data-coin="eth">
-      <div class="crypto-coin-header">
-        <div class="crypto-coin-icon" style="background: white; padding: 8px; border-radius: 50%;">
-          <img src="eth.png" 
-               alt="Ethereum" 
-               style="width: 24px; height: 24px; object-fit: contain;">
-        </div>
-        <div class="crypto-coin-name">Ethereum</div>
-        <div class="crypto-coin-symbol">ETH</div>
-        <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </div>
-      <div class="crypto-coin-details">
-        <div class="network-address" id="eth-address">0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68</div>
-        <button class="copy-btn" onclick="copyAddress('eth-address', this)">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-          </svg>
-          Скопировать адрес
-        </button>
-        <div class="network-qr" style="margin-top: 0.75rem;">
-          <img src="eth.jpg" alt="ETH QR">
-        </div>
-      </div>
-    </div>
-
-    <!-- BNB (Binance Coin) -->
-    <div class="crypto-coin" data-coin="bnb">
-      <div class="crypto-coin-header">
-        <div class="crypto-coin-icon" style="background: white; padding: 8px; border-radius: 50%;">
-          <img src="bnb.png" 
-               alt="BNB" 
-               style="width: 24px; height: 24px; object-fit: contain;">
-        </div>
-        <div class="crypto-coin-name">BNB</div>
-        <div class="crypto-coin-symbol">BNB</div>
-        <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </div>
-      <div class="crypto-coin-details">
-        <div class="network-address" id="bnb-address">0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68</div>
-        <button class="copy-btn" onclick="copyAddress('bnb-address', this)">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-          </svg>
-          Скопировать адрес
-        </button>
-        <div class="network-qr" style="margin-top: 0.75rem;">
-          <img src="bnb.jpg" alt="BNB QR">
-        </div>
-      </div>
-    </div>
-
-    <!-- USDT с сетями -->
-    <div class="crypto-coin" data-coin="usdt">
-      <div class="crypto-coin-header">
-        <div class="crypto-coin-icon" style="background: white; padding: 8px; border-radius: 50%;">
-          <img src="usdt.png" 
-               alt="Tether" 
-               style="width: 24px; height: 24px; object-fit: contain;">
-        </div>
-        <div class="crypto-coin-name">Tether</div>
-        <div class="crypto-coin-symbol">USDT</div>
-        <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </div>
-      <div class="crypto-coin-details">
-        
-        <!-- TRC-20 -->
-        <div class="network-item" data-network="trc20">
-          <div class="network-item-header">
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <img src="trx.png" 
-                   alt="TRC-20" 
-                   style="width: 20px; height: 20px; object-fit: contain;">
-              <span>TRC-20 (Tron)</span>
+          <!-- СБП — first -->
+          <button class="payment-method" data-payment="sbp" id="pm-sbp">
+            <div class="payment-method-icon" style="background: linear-gradient(135deg, #6EC72D, #47A01F); color: white; font-size: 1.3rem;">⚡</div>
+            <div class="payment-method-info">
+              <div class="payment-method-name">СБП</div>
+              <div class="payment-method-desc">Мгновенно · без комиссии · рекомендуем</div>
             </div>
-            <svg class="w-4 h-4 network-item-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
-          </div>
-          <div class="network-item-details">
-            <div class="network-address" id="usdt-trc20">TB5wc7of2D285aUhmWcEW4PAZHrssapb7A</div>
-            <button class="copy-btn" onclick="copyAddress('usdt-trc20', this)">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-              </svg>
-              Скопировать
+          </button>
+          <div class="payment-details" data-payment="sbp" id="details-sbp">
+            <div class="payment-requisite">
+              <div class="payment-requisite-label">Телефон для СБП</div>
+              <div class="payment-requisite-value" id="sbp-phone">+7 901 788 7835</div>
+            </div>
+            <div class="payment-requisite">
+              <div class="payment-requisite-label">Банк получателя</div>
+              <div class="payment-requisite-value">Т Банк</div>
+            </div>
+            <button class="copy-btn" onclick="copyAddress('sbp-phone', this)">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Скопировать телефон
             </button>
-            <div class="network-qr" style="margin-top: 0.75rem;">
-              <img src="usdt.jpg" alt="TRC-20 QR">
-            </div>
           </div>
-        </div>
 
-        <!-- ERC-20 -->
-        <div class="network-item" data-network="erc20">
-          <div class="network-item-header">
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <img src="eth.png" 
-                   alt="ERC-20" 
-                   style="width: 20px; height: 20px; object-fit: contain;">
-              <span>ERC-20 (Ethereum)</span>
+          <!-- Альфа Банк -->
+          <button class="payment-method" data-payment="alfa" id="pm-alfa">
+            <div class="payment-method-icon" style="background: white; padding: 8px;">
+              <img src="alfa.png" alt="Альфа Банк" style="width: 30px; height: 30px; object-fit: contain;">
             </div>
-            <svg class="w-4 h-4 network-item-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="payment-method-info">
+              <div class="payment-method-name">Альфа Банк</div>
+              <div class="payment-method-desc">Перевод по номеру карты</div>
+            </div>
+            <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
-          </div>
-          <div class="network-item-details">
-            <div class="network-address" id="usdt-erc20">0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68</div>
-            <button class="copy-btn" onclick="copyAddress('usdt-erc20', this)">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-              </svg>
-              Скопировать
-            </button>
-            <div class="network-qr" style="margin-top: 0.75rem;">
-              <img src="usdterc.jpg" alt="ERC-20 QR">
+          </button>
+          <div class="payment-details" data-payment="alfa" id="details-alfa">
+            <div class="payment-requisite">
+              <div class="payment-requisite-label">Номер карты</div>
+              <div class="payment-requisite-value" id="alfa-card">2200 1545 3615 8834</div>
             </div>
+            <button class="copy-btn" onclick="copyAddress('alfa-card', this)">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Скопировать номер карты
+            </button>
           </div>
         </div>
 
-        <!-- BEP-20 -->
-        <div class="network-item" data-network="bep20">
-          <div class="network-item-header">
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <img src="bnb.png" 
-                   alt="BEP-20" 
-                   style="width: 20px; height: 20px; object-fit: contain;">
-              <span>BEP-20 (BSC)</span>
+        <!-- Международные карты -->
+        <div class="payment-section">
+          <div class="payment-section-title">🌍 Международные карты</div>
+          <button class="payment-method" data-payment="visa-mc" id="pm-visa">
+            <div class="payment-method-icon" style="background: white; padding: 8px;">
+              <img src="visa.png" alt="Visa/MC" style="width: 30px; height: 30px; object-fit: contain;">
             </div>
-            <svg class="w-4 h-4 network-item-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="payment-method-info">
+              <div class="payment-method-name">Visa / Mastercard</div>
+              <div class="payment-method-desc">Карты Молдова, Беларусь, Казахстан</div>
+            </div>
+            <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
-          </div>
-          <div class="network-item-details">
-            <div class="network-address" id="usdt-bep20">0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68</div>
-            <button class="copy-btn" onclick="copyAddress('usdt-bep20', this)">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-              </svg>
-              Скопировать
-            </button>
-            <div class="network-qr" style="margin-top: 0.75rem;">
-              <img src="usdtbep.jpg" alt="BEP-20 QR">
+          </button>
+          <div class="payment-details" data-payment="visa-mc" id="details-visa">
+            <div class="payment-requisite">
+              <div class="payment-requisite-label">Номер карты</div>
+              <div class="payment-requisite-value" id="visa-card">4441 1110 1656 7632</div>
             </div>
+            <button class="copy-btn" onclick="copyAddress('visa-card', this)">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Скопировать номер карты
+            </button>
           </div>
         </div>
 
-        <!-- Polygon -->
-        <div class="network-item" data-network="polygon">
-          <div class="network-item-header">
-            <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <img src="matic.png" 
-                   alt="Polygon" 
-                   style="width: 20px; height: 20px; object-fit: contain;">
-              <span>Polygon (MATIC)</span>
+        <!-- Крипта: только USDT TRC-20 и TON -->
+        <div class="payment-section">
+          <div class="payment-section-title">🪙 Криптовалюта</div>
+
+          <button class="expandable-toggle" id="crypto-main-toggle">
+            <div class="payment-method-icon" style="background: rgba(38,161,123,0.1); font-size: 1.3rem;">₮</div>
+            <div class="payment-method-info" style="text-align: left;">
+              <div class="payment-method-name">Криптовалюта</div>
+              <div class="payment-method-desc">USDT TRC-20 · TON</div>
             </div>
-            <svg class="w-4 h-4 network-item-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
             </svg>
-          </div>
-          <div class="network-item-details">
-            <div class="network-address" id="usdt-polygon">0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68</div>
-            <button class="copy-btn" onclick="copyAddress('usdt-polygon', this)">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-              </svg>
-              Скопировать
-            </button>
-            <div class="network-qr" style="margin-top: 0.75rem;">
-              <img src="usdtpol.jpg" alt="Polygon QR">
+          </button>
+          <div class="expandable-content" id="crypto-coins-list">
+            <!-- USDT TRC-20 only -->
+            <div class="crypto-coin" data-coin="usdt">
+              <div class="crypto-coin-header">
+                <div class="crypto-coin-icon" style="background: rgba(38,161,123,0.1);">₮</div>
+                <div class="crypto-coin-name">USDT TRC-20</div>
+                <div class="crypto-coin-symbol">TRON</div>
+                <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </div>
+              <div class="crypto-coin-details">
+                <p style="font-size: 0.7rem; color: #64748b; margin-bottom: 0.5rem;">⚠️ Отправляй только по сети Tron (TRC-20)</p>
+                <div class="network-address" id="usdt-trc20">TB5wc7of2D285aUhmWcEW4PAZHrssapb7A</div>
+                <button class="copy-btn" onclick="copyAddress('usdt-trc20', this)">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Скопировать адрес
+                </button>
+                <div class="network-qr" style="margin-top: 0.75rem;"><img src="usdt.jpg" alt="USDT TRC-20 QR"></div>
+              </div>
+            </div>
+            <!-- TON -->
+            <div class="crypto-coin" data-coin="ton">
+              <div class="crypto-coin-header">
+                <div class="crypto-coin-icon" style="background: rgba(59,130,246,0.1);">💎</div>
+                <div class="crypto-coin-name">Toncoin</div>
+                <div class="crypto-coin-symbol">TON</div>
+                <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </div>
+              <div class="crypto-coin-details">
+                <div class="network-address" id="ton-address">UQAcdcKz4BXZ5MtIMbAnMKahBiiH6yaC4wT-qRPOZKi0mbah</div>
+                <button class="copy-btn" onclick="copyAddress('ton-address', this)">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  Скопировать адрес
+                </button>
+                <div class="network-qr" style="margin-top: 0.75rem;"><img src="ton.jpg" alt="TON QR"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Solana -->
-    <div class="crypto-coin" data-coin="sol">
-      <div class="crypto-coin-header">
-        <div class="crypto-coin-icon" style="background: white; padding: 8px; border-radius: 50%;">
-          <img src="sol.png" 
-               alt="Solana" 
-               style="width: 24px; height: 24px; object-fit: contain;">
-        </div>
-        <div class="crypto-coin-name">Solana</div>
-        <div class="crypto-coin-symbol">SOL</div>
-        <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </div>
-      <div class="crypto-coin-details">
-        <div class="network-address" id="sol-address">BHcaxUsu3p2jUyWGiKyMfyK9xym48FGp9EQbcGbPK2hB</div>
-        <button class="copy-btn" onclick="copyAddress('sol-address', this)">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-          </svg>
-          Скопировать адрес
-        </button>
-        <div class="network-qr" style="margin-top: 0.75rem;">
-          <img src="sol.jpg" alt="SOL QR">
-        </div>
-      </div>
-    </div>
-
-    <!-- Litecoin -->
-    <div class="crypto-coin" data-coin="ltc">
-      <div class="crypto-coin-header">
-        <div class="crypto-coin-icon" style="background: white; padding: 8px; border-radius: 50%;">
-          <img src="ltc.png" 
-               alt="Litecoin" 
-               style="width: 24px; height: 24px; object-fit: contain;">
-        </div>
-        <div class="crypto-coin-name">Litecoin</div>
-        <div class="crypto-coin-symbol">LTC</div>
-        <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </div>
-      <div class="crypto-coin-details">
-        <div class="network-address" id="ltc-address">ltc1q754nddflyk8tsjd4y3gvy4gk8w3s74g44whkds</div>
-        <button class="copy-btn" onclick="copyAddress('ltc-address', this)">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-          </svg>
-          Скопировать адрес
-        </button>
-        <div class="network-qr" style="margin-top: 0.75rem;">
-          <img src="ltc.jpg" alt="LTC QR">
-        </div>
-      </div>
-    </div>
-
-    <!-- Dash -->
-    <div class="crypto-coin" data-coin="dash">
-      <div class="crypto-coin-header">
-        <div class="crypto-coin-icon" style="background: white; padding: 8px; border-radius: 50%;">
-          <img src="dash.png" 
-               alt="Dash" 
-               style="width: 24px; height: 24px; object-fit: contain;">
-        </div>
-        <div class="crypto-coin-name">Dash</div>
-        <div class="crypto-coin-symbol">DASH</div>
-        <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </div>
-      <div class="crypto-coin-details">
-        <div class="network-address" id="dash-address">Xe1eeMsLzXBBaGWRM1gyco3ohZHaEp7iBT</div>
-        <button class="copy-btn" onclick="copyAddress('dash-address', this)">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-          </svg>
-          Скопировать адрес
-        </button>
-        <div class="network-qr" style="margin-top: 0.75rem;">
-          <img src="dash.jpg" alt="DASH QR">
-        </div>
-      </div>
-    </div>
-
-    <!-- TON -->
-    <div class="crypto-coin" data-coin="ton">
-      <div class="crypto-coin-header">
-        <div class="crypto-coin-icon" style="background: white; padding: 8px; border-radius: 50%;">
-          <img src="ton.png" 
-               alt="Toncoin" 
-               style="width: 24px; height: 24px; object-fit: contain;">
-        </div>
-        <div class="crypto-coin-name">Toncoin</div>
-        <div class="crypto-coin-symbol">TON</div>
-        <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
-      </div>
-      <div class="crypto-coin-details">
-        <div class="network-address" id="ton-address">UQAcdcKz4BXZ5MtIMbAnMKahBiiH6yaC4wT-qRPOZKi0mbah</div>
-        <button class="copy-btn" onclick="copyAddress('ton-address', this)">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-          </svg>
-          Скопировать адрес
-        </button>
-        <div class="network-qr" style="margin-top: 0.75rem;">
-          <img src="ton.jpg" alt="TON QR">
-        </div>
-      </div>
-    </div>
-
-     </div>
-</div>
-
-        <p class="text-xs text-slate-500 text-center mt-4" style="padding: 0 0.5rem;">
-          После оплаты отправьте скриншот/чек в 
-          <a href="https://t.me/heist_ai_bot" class="text-indigo-600 font-medium">@heist_ai_bot</a>
-          для активации доступа
+        <p class="text-xs text-slate-400 text-center mt-4 px-2">
+          Нет нужного способа? Напиши нам в <a href="https://t.me/heist_ai_bot" style="color: #6366f1;">@heist_ai_bot</a>
         </p>
-
-          <p class="text-xs text-slate-500 text-center mt-4" style="padding: 0 0.5rem;">
-          Нет нужного сервиса для оплаты? Напишите нам
-        </p>
-
-        <!-- Кнопка "Я оплатил" -->
-        <button id="paid-btn" class="btn-paid" style="width: 100%; margin-top: 1.5rem;">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-          </svg>
-          Я оплатил
-        </button>
       </div>
     </div>
   </div>
 
-  <!-- Модальное окно подтверждения оплаты -->
+  <!-- Modal: Success (#16 specific instructions + open bot button) -->
   <div id="paid-confirmation-modal" class="modal-overlay">
     <div class="modal-content" style="max-width: 380px; text-align: center; padding: 2rem;">
-      <button class="close-modal" id="close-paid-btn">
-        <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
-
       <div class="paid-success-icon">
         <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
       </div>
+      <h3 class="text-xl font-bold text-slate-900 mt-4 mb-1">Заявка отправлена!</h3>
+      <p class="text-slate-500 text-sm mb-1">Бот уже получил уведомление. Осталось три шага:</p>
 
-      <h3 class="text-xl font-bold text-slate-900 mt-4 mb-3">Отлично!</h3>
-      
-      <p class="text-slate-600 leading-relaxed mb-6">
-        Для подтверждения оплаты, пожалуйста, отправьте чек через бот, в течение 15 минут вы будете приглашены в наше закрытое сообщество.
-      </p>
-
-      <div class="welcome-badge">
-        Добро пожаловать в команду
+      <!-- #16: specific 3-step instructions -->
+      <div class="success-steps">
+        <div class="success-step">
+          <div class="success-step-icon">📸</div>
+          <div>
+            <div class="success-step-num">Шаг 1</div>
+            <div class="success-step-text">Сделай скриншот подтверждения оплаты в приложении банка</div>
+          </div>
+        </div>
+        <div class="success-step">
+          <div class="success-step-icon">🤖</div>
+          <div>
+            <div class="success-step-num">Шаг 2</div>
+            <div class="success-step-text">Открой <strong>@heist_ai_bot</strong> — он уже ждёт твой чек</div>
+          </div>
+        </div>
+        <div class="success-step">
+          <div class="success-step-icon">✅</div>
+          <div>
+            <div class="success-step-num">Шаг 3</div>
+            <div class="success-step-text">Отправь скриншот боту — доступ активируют в течение 30 минут</div>
+          </div>
+        </div>
       </div>
 
+      <!-- #17: open bot button -->
+      <button class="btn-open-bot" id="open-bot-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.07-.19c-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.67-.52.36-.99.53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.75 4-1.74 6.68-2.88 8.03-3.43 3.82-1.59 4.61-1.87 5.13-1.87.11 0 .37.03.53.16.14.11.18.26.2.37.01.06.03.24.01.38z"/>
+        </svg>
+        Открыть @heist_ai_bot
+      </button>
+    </div>
+  </div>
+
   <script>
-    // Telegram Web App
-    let tg = window.Telegram?.WebApp;
-    if (tg) {
-        tg.ready();
-        tg.expand();
-        tg.enableClosingConfirmation();
+  // =============================================
+  // #22: Fallback if Telegram WebApp is not available
+  // #21: tg.ready() called first
+  // =============================================
+  const tg = window.Telegram?.WebApp || {
+    ready: () => {},
+    expand: () => {},
+    enableClosingConfirmation: () => {},
+    sendData: (d) => console.log('sendData (browser mode):', d),
+    close: () => console.log('tg.close()'),
+    showPopup: (opts, cb) => {
+      const ok = confirm(opts.message);
+      if (cb) cb(ok ? opts.buttons[0].id : opts.buttons[1].id);
+    },
+    openTelegramLink: (url) => window.open(url, '_blank'),
+    MainButton: {
+      setText: () => {}, setParams: () => {}, show: () => {}, hide: () => {},
+      onClick: () => {}, offClick: () => {},
+      isVisible: false
+    },
+    BackButton: {
+      show: () => {}, hide: () => {},
+      onClick: () => {}, offClick: () => {}
+    },
+    HapticFeedback: {
+      impactOccurred: () => {},
+      notificationOccurred: () => {}
+    }
+  };
+
+  // #21: All init inside tg.ready()
+  tg.ready();
+
+  // =============================================
+  // #23: PAYMENT_CONFIG — all requisites in one place
+  // =============================================
+  const PAYMENT_CONFIG = {
+    sbp: {
+      phone: '+7 901 788 7835',
+      bank: 'Т Банк',
+      label: 'СБП'
+    },
+    alfa: {
+      card: '2200 1545 3615 8834',
+      label: 'Альфа Банк'
+    },
+    visaMc: {
+      card: '4441 1110 1656 7632',
+      label: 'Visa / Mastercard'
+    },
+    usdtTrc20: {
+      address: 'TB5wc7of2D285aUhmWcEW4PAZHrssapb7A',
+      network: 'TRC-20',
+      label: 'USDT TRC-20'
+    },
+    ton: {
+      address: 'UQAcdcKz4BXZ5MtIMbAnMKahBiiH6yaC4wT-qRPOZKi0mbah',
+      label: 'TON'
+    }
+  };
+
+  // Inject config values into DOM
+  document.getElementById('sbp-phone').textContent = PAYMENT_CONFIG.sbp.phone;
+  document.getElementById('alfa-card').textContent = PAYMENT_CONFIG.alfa.card;
+  document.getElementById('visa-card').textContent = PAYMENT_CONFIG.visaMc.card;
+  document.getElementById('usdt-trc20').textContent = PAYMENT_CONFIG.usdtTrc20.address;
+  document.getElementById('ton-address').textContent = PAYMENT_CONFIG.ton.address;
+
+  tg.expand();
+  tg.enableClosingConfirmation();
+
+  // =============================================
+  // COURSE DATA — синхронизировано с ботом (COURSE_NAMES)
+  // КурсA = ai-automation, КурсB = ai-founders, КурсC = vibe-coding
+  // =============================================
+  const COURSE_KEY_MAP = {
+    'ai-automation': 'КурсA',
+    'ai-founders':   'КурсB',
+    'vibe-coding':   'КурсC'
+  };
+
+  const courseDetails = {
+    'ai-automation': {
+      title: 'N8N: Архитектура AI-Агентов',
+      images: ['n8n1.png','n8n4.png','n8n5.png','n8n6.png','n8n2.png','n8n7.png','n8n3.png'],
+      modules: [
+        { num:'01', title:'n8n — автоматизация без кода', desc:'Первый рабочий сценарий. Разбираем интерфейс, соединяем блоки, запускаем.', result:'Твоя первая работающая автоматизация.' },
+        { num:'02', title:'AI-агенты с памятью', desc:'Агент читает почту, сортирует заявки, отвечает клиентам. Настраиваем базу знаний.', result:'Агент который понимает контекст.' },
+        { num:'03', title:'API и Webhooks', desc:'Связываем любые приложения. Никакого кода — только логика конструктора.', result:'Умеешь интегрировать любой сервис.' },
+        { num:'04', title:'CRM, Telegram, Google', desc:'AmoCRM, Bitrix, Google Sheets, мессенджеры — всё в одном пайплайне.', result:'Полная связка твоего бизнеса.' },
+        { num:'05', title:'Продажа автоматизации', desc:'Стратегии ценообразования, упаковка продукта. Как продавать от 50 000₽.', result:'Готовый прайс-лист и офферы.' },
+        { num:'06', title:'Деплой на свой сервер', desc:'Переход от эксперимента к production-архитектуре.', result:'Ты — инженер по автоматизации.' }
+      ],
+      outcomes: [
+        { icon:'🤖', title:'Готовый AI-агент', desc:'Работает 24/7 без твоего участия' },
+        { icon:'💰', title:'Навык монетизации', desc:'Готовые офферы и прайс для продажи' },
+        { icon:'🔗', title:'Любые интеграции', desc:'CRM, мессенджеры, API в одной связке' },
+        { icon:'📈', title:'5+ кейсов в портфолио', desc:'Реальные проекты для клиентов' }
+      ]
+    },
+    'ai-founders': {
+      title: 'AI Foundation: Мастерство Нейросетей',
+      images: ['zn1.png','zn2.png','zn3.png','zn4.png','zn5.png','zn6.png'],
+      modules: [
+        { num:'01', title:'Как работают LLM', desc:'Разбираем архитектуру без математики. Понимаем почему галлюцинируют.', result:'Понимаешь ИИ глубже 95% пользователей.' },
+        { num:'02', title:'GPT-4, Claude, Llama, Mistral', desc:'Тестируем вживую. Когда какую модель выбирать.', result:'Навык выбора за 10 секунд.' },
+        { num:'03', title:'Prompt Engineering', desc:'От базовых запросов до chain-of-thought. Точный результат с первой попытки.', result:'Скорость работы растёт в 5 раз.' },
+        { num:'04', title:'Генерация контента', desc:'Текст, изображения (Midjourney), видео (Runway), озвучка.', result:'Полный контент-продакшн.' },
+        { num:'05', title:'Аналитика данных', desc:'Code Interpreter для анализа бизнес-показателей без Excel.', result:'Отчёты за минуты, не часы.' },
+        { num:'06', title:'Монетизация', desc:'Консалтинг, внедрение, AI-агентство. Готовая модель заработка.', result:'Путь к 50 000+₽/мес на ИИ.' }
+      ],
+      outcomes: [
+        { icon:'🧠', title:'Экспертное понимание ИИ', desc:'Знаешь какую модель выбрать и почему' },
+        { icon:'⚡', title:'Скорость профессионала', desc:'Идеальный результат с первого промпта' },
+        { icon:'🎬', title:'Полный цикл контента', desc:'Текст, картинки, видео — всё сам' },
+        { icon:'💰', title:'Готовая модель заработка', desc:'Понятный путь к первым деньгам на ИИ' }
+      ]
+    },
+    'vibe-coding': {
+      title: 'VibeCoding: Код Без Программистов',
+      images: ['vbk1.png','vbk3.png','vbk6.png','vbk5.png','vbk2.png','vbk4.png'],
+      modules: [
+        { num:'01', title:'Rapid Prototyping', desc:'Cursor, Windsurf, Replit. Как AI пишет чистый код по твоим запросам.', result:'Первое приложение за несколько часов.' },
+        { num:'02', title:'Дизайн без дизайнера', desc:'Современный UI/UX. AI подбирает цвета, шрифты, компоненты.', result:'Профессиональный визуал без студии.' },
+        { num:'03', title:'База данных, оплата, AI', desc:'Подключаем Supabase, Stripe, OpenAI API. Сервис который принимает оплаты.', result:'Полноценный SaaS, работающий вживую.' },
+        { num:'04', title:'Работа с ошибками', desc:'AI как старший разработчик — находим баги, оптимизируем код.', result:'Стабильный, чистый код.' },
+        { num:'05', title:'Деплой и домен', desc:'Vercel, Netlify. Свой домен. Защита и стабильность.', result:'Ссылка на твой живой продукт.' },
+        { num:'06', title:'Монетизация — SaaS или заказы', desc:'Два трека: свой стартап или быстрые MVP для клиентов за высокий чек.', result:'Запуск AI-агентства или стартапа.' }
+      ],
+      outcomes: [
+        { icon:'🚀', title:'MVP за 48 часов', desc:'От идеи до работающего продукта' },
+        { icon:'💻', title:'Без разработчиков', desc:'Создаёшь продукты с помощью AI' },
+        { icon:'🎯', title:'Rapid prototyping', desc:'Быстро тестируешь гипотезы' },
+        { icon:'☁️', title:'Full-cycle деплой', desc:'От кода до production' }
+      ]
+    }
+  };
+
+  // =============================================
+  // STATE
+  // =============================================
+  let currentCourse = null;
+  let currentCourseTitle = '';
+  let currentCoursePrice = '7000';
+  let selectedPaymentMethod = '';
+  let currentSlide = 0;
+  let carouselInterval = null;
+  let paymentTimerInterval = null;
+  let paymentSeconds = 900; // 15 min
+
+  // =============================================
+  // PROGRESS BAR
+  // =============================================
+  function setStep(step) {
+    // step: 1 = курсы, 2 = оплата, 3 = готово
+    const steps = [document.getElementById('step-1'), document.getElementById('step-2'), document.getElementById('step-3')];
+    const conns = [document.getElementById('conn-1'), document.getElementById('conn-2')];
+    steps.forEach((s, i) => {
+      s.classList.remove('active','done');
+      if (i + 1 < step) s.classList.add('done');
+      else if (i + 1 === step) s.classList.add('active');
+    });
+    conns.forEach((c, i) => {
+      c.classList.toggle('done', i + 1 < step);
+    });
+  }
+
+  // =============================================
+  // PAYMENT TIMER (#11)
+  // =============================================
+  function startPaymentTimer() {
+    paymentSeconds = 900;
+    updateTimerDisplay();
+    clearInterval(paymentTimerInterval);
+    paymentTimerInterval = setInterval(() => {
+      paymentSeconds--;
+      if (paymentSeconds < 0) { clearInterval(paymentTimerInterval); return; }
+      updateTimerDisplay();
+    }, 1000);
+  }
+
+  function updateTimerDisplay() {
+    const el = document.getElementById('payment-countdown');
+    if (!el) return;
+    const m = Math.floor(paymentSeconds / 60);
+    const s = paymentSeconds % 60;
+    el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
+
+  // =============================================
+  // MODALS
+  // =============================================
+  const courseInfoModal = document.getElementById('course-info-modal');
+  const paymentModal = document.getElementById('payment-modal');
+  const paidConfirmationModal = document.getElementById('paid-confirmation-modal');
+
+  function openCourseModal(courseId) {
+    const course = courseDetails[courseId];
+    if (!course) return;
+    currentCourse = courseId;
+    currentCourseTitle = course.title;
+
+    document.getElementById('modal-course-title').textContent = course.title;
+    document.getElementById('modal-buy-btn').dataset.title = course.title;
+
+    renderCarousel(course.images);
+    renderModules(course.modules);
+    renderOutcomes(course.outcomes);
+
+    courseInfoModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    courseInfoModal.querySelector('.modal-content').scrollTop = 0;
+    setStep(1);
+
+    // #24: BackButton
+    if (tg.BackButton) { tg.BackButton.show(); }
+
+    // #4: MainButton — hide on info modal (not payment)
+    if (tg.MainButton) tg.MainButton.hide();
+
+    tg.HapticFeedback.impactOccurred('medium');
+  }
+
+  function closeCourseModal() {
+    courseInfoModal.classList.remove('active');
+    document.body.style.overflow = '';
+    if (carouselInterval) clearInterval(carouselInterval);
+    if (tg.BackButton) tg.BackButton.hide();
+    if (tg.MainButton) tg.MainButton.hide();
+    setStep(1);
+    tg.HapticFeedback.impactOccurred('light');
+  }
+
+  function openPaymentModal(title, price) {
+    currentCourseTitle = title || currentCourseTitle;
+    currentCoursePrice = price || '7000';
+    selectedPaymentMethod = '';
+
+    document.getElementById('payment-course-title').textContent = currentCourseTitle;
+    document.getElementById('payment-price').textContent = Number(currentCoursePrice).toLocaleString('ru-RU') + ' ₽';
+
+    // Reset
+    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+    document.querySelectorAll('.payment-details').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.expandable-toggle').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.expandable-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.crypto-coin').forEach(c => c.classList.remove('active'));
+
+    // Close info modal if open
+    if (courseInfoModal.classList.contains('active')) {
+      courseInfoModal.classList.remove('active');
+      if (carouselInterval) clearInterval(carouselInterval);
     }
 
-    // Course data
-    const courseDetails = {
-        'ai-automation': {
-            title: 'Система Автопродаж 24/7',
-            images: ['n8n1.png', 'n8n4.png', 'n8n5.png', 'n8n6.png', 'n8n2.png', 'n8n7.png', 'n8n3.png'],
-            modules: [
-              { num: '01', title: 'Основы n8n — Автоматизация без кода', desc: 'Освоим интерфейс n8n и соберём свой первый сценарий. Разберём как настроить рабочий процесс, передав рутинную задачу алгоритму.', result: 'Ваша первая работающая автоматизация.' },
-              { num: '02', title: 'AI-интеграции — Мозги для ваших агентов', desc: 'Превращаем алгоритмы в умных помощников. Вы научитесь создавать AI-агентов, которые сами читают почту, сортируют заявки и отвечают клиентам.', result: 'Автоматизация, которая понимает контекст.' },
-              { num: '03', title: 'API и Webhooks — Ключи от всех дверей', desc: 'Учимся работать с HTTP Request и Webhooks, чтобы связать любые приложения вместе. Никакого программирования — только логика конструктора.', result: 'Навык интеграции любого современного сервиса.' },
-              { num: '04', title: 'Мониторинг и аналитика — Система 24/7', desc: 'Настраиваем систему уведомлений об ошибках и аналитику эффективности.', result: 'Стабильные сценарии, которые не падают.' },
-              { num: '05', title: 'Монетизация навыка — Деньги на автомате', desc: 'Превращаем навыки n8n в востребованную услугу. Разбираем стратегии ценообразования, упаковка продукта.', result: 'Готовый прайс-лист и офферы для старта продаж.' },
-              { num: '06', title: 'Оптимизация и масштабирование', desc: 'Переход от экспериментов к серьёзной архитектуре. Развёртывание n8n на собственных серверах, оптимизация скорости.', result: 'Вы — полноценный инженер по автоматизации.' }
-            ],
-            outcomes: [
-              { icon: '🤖', title: 'Готовая AI-система автопродаж', desc: 'Персональный агент, который работает 24/7 без вашего участия' },
-              { icon: '💰', title: 'Навык монетизации автоматизаций', desc: 'Готовые офферы и прайс-лист для продажи услуг' },
-              { icon: '🔗', title: 'Умение интегрировать любые сервисы', desc: 'API, Webhooks, CRM, мессенджеры — всё в одной связке' },
-              { icon: '📈', title: 'Портфолио из 5+ проектов', desc: 'Реальные кейсы для демонстрации клиентам' }
-            ],
-            price: '7 000 ₽',
-            color: 'purple'
-        },
-        'ai-founders': {
-            title: 'AI Founders Vault',
-            images: ['zn1.png', 'zn2.png', 'zn3.png', 'zn4.png', 'zn5.png', 'zn6.png'],
-            modules: [
-              { num: '01', title: 'Анатомия ИИ — Что внутри чёрного ящика', desc: 'Разбираем архитектуру нейросетей без сложной математики. Поймём, как машина учится и почему иногда галлюцинирует — это знание даст вам контроль над результатом.', result: 'Вы понимаете ИИ глубже, чем 95% пользователей.' },
-              { num: '02', title: 'Арсенал нейросетей — Оружие под каждую задачу', desc: 'GPT-4, Claude, Midjourney, Stable Diffusion: тестируем вживую и сравниваем. Разбираем, когда какой инструмент даёт лучший результат и почему.', result: 'Навык выбора идеальной модели за 10 секунд.' },
-              { num: '03', title: 'Промпт-инжиниринг — Язык, который понимает машина', desc: 'Осваиваем формулы запросов от базовых до chain-of-thought. Учимся получать точный результат с первой попытки, а не с десятой.', result: 'Скорость работы с ИИ вырастает в 5 раз.' },
-              { num: '04', title: 'Копирайтинг + ИИ — Первые деньги на навыке', desc: 'Превращаем ИИ в младшего копирайтера, который делает черновики. Разбираем реальные кейсы монетизации и воронки привлечения клиентов.', result: 'Готовая модель заработка от 50 000 ₽/мес.' },
-              { num: '05', title: 'Визуальный контент — Студия в одном окне', desc: 'Генерируем изображения и видео, которые не отличить от работы дизайнера. Осваиваем стили, настройки и лайфхаки для wow-результата.', result: 'Уникальный визуал для любого проекта за минуты.' },
-              { num: '06', title: 'AI-озвучка — Голос без микрофона', desc: 'Создаём профессиональную озвучку без студии и диктора. Работаем с сервисами, которые генерируют речь неотличимую от человеческой.', result: 'Полный видеопродакшн своими руками.' }
-            ],
-            outcomes: [
-              { icon: '🧠', title: 'Экспертное понимание ИИ', desc: 'Знаете, как работают нейросети и какую выбрать под любую задачу' },
-              { icon: '⚡', title: 'Скорость профессионала', desc: 'Получаете идеальный результат с первого промпта' },
-              { icon: '🎬', title: 'Полный цикл контента', desc: 'Создаёте тексты, картинки, видео и озвучку — всё сами' },
-              { icon: '💰', title: 'Готовая модель заработка', desc: 'Понятный путь к первым деньгам на ИИ-услугах' }
-            ],
-            price: '7 000 ₽',
-            color: 'indigo'
-        },
-        'vibe-coding': {
-            title: 'Прототипирование за 48 часов',
-            images: ['vbk1.png', 'vbk3.png', 'vbk6.png', 'vbk5.png', 'vbk2.png', 'vbk4.png'],
-            modules: [
-              { num: '01', title: 'Модуль 1: Rapid Prototyping — Приложение за вечер', desc: 'Учимся управлять ИИ через правильные запросы. Постановка задач нейросети для создания полноценных веб-приложений с первой попытки.', result: 'Ваше первое приложение, собранное за пару часов.' },
-              { num: '02', title: 'Модуль 2: Дизайн и Визуал — Дорого без дизайнера', desc: 'Превращаем ИИ в арт-директора, который: сгенерирует современный интерфейс, подберет цвета и шрифты. Создаем визуально «дорогой» продукт, просто управляя процессом. ', result: 'Профессиональный UI/UX уровня топовых студий.' },
-              { num: '03', title: 'Модуль 3: Подключение мощностей — Базы, Платежи, AI', desc: 'Оживляем картинку. Учимся подключать к приложению внешние силы: базы данных для памяти, платежные системы для денег и AI-модели для интеллекта. ', result: 'Полноценный сервис, который принимает оплаты и выполняет функции.' },
-              { num: '04', title: 'Модуль 4: Работа с ошибками', desc: 'Что делать, если код сломался? Учимся использовать ИИ как старшего разработчика: находить баги, оптимизировать скорость работы и чистить код. ', result: 'Чистый, стабильный код, который легко поддерживать.' },
-              { num: '05', title: 'Модуль 5: Продакшн и Публикация — Выход в свет', desc: 'Выводим проект в глобальную сеть. Настраиваем домен, защиту и стабильность работы.', result: 'Ваша ссылка на готовый проект, доступный для любого пользователя.' },
-              { num: '06', title: 'Модуль 6: Монетизация — SaaS или Заказы', desc: 'Превращаем навык в деньги. Разбираем два трека: упаковка и продажа своих собственных микро-сервисов (SaaS) или быстрая сборка MVP для заказчиков за высокий чек.', result: 'Результат: Стратегия заработка: запуск своего стартапа или открытие AI-агентства.' }
-            ],
-            outcomes: [
-              { icon: '🚀', title: 'Скорость запуска продуктов', desc: 'От идеи до работающего MVP за 48 часов' },
-              { icon: '💻', title: 'Независимость от разработчиков', desc: 'Создаёте продукты самостоятельно с помощью AI' },
-              { icon: '🎯', title: 'Навыки rapid prototyping', desc: 'Быстро тестируете гипотезы и валидируете идеи' },
-              { icon: '☁️', title: 'Умение деплоить в облако', desc: 'Полный цикл: от кода до production' }
-            ],
-            price: '7 000 ₽',
-            color: 'amber'
+    paymentModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    paymentModal.querySelector('.modal-content').scrollTop = 0;
+    setStep(2);
+    startPaymentTimer();
+
+    // #4: MainButton setup
+    if (tg.MainButton) {
+      tg.MainButton.setParams({ text: 'Я оплатил ✓', color: '#6366F1', text_color: '#ffffff' });
+      tg.MainButton.show();
+    }
+
+    // #24: BackButton
+    if (tg.BackButton) tg.BackButton.show();
+
+    tg.HapticFeedback.impactOccurred('medium');
+  }
+
+  function closePaymentModal() {
+    paymentModal.classList.remove('active');
+    document.body.style.overflow = '';
+    clearInterval(paymentTimerInterval);
+    if (tg.MainButton) tg.MainButton.hide();
+    if (tg.BackButton) tg.BackButton.hide();
+    setStep(1);
+    tg.HapticFeedback.impactOccurred('light');
+  }
+
+  function openSuccessModal() {
+    paidConfirmationModal.classList.add('active');
+    if (tg.MainButton) tg.MainButton.hide();
+    setStep(3);
+    tg.HapticFeedback.notificationOccurred('success');
+  }
+
+  function closeSuccessModal() {
+    paidConfirmationModal.classList.remove('active');
+    if (tg.BackButton) tg.BackButton.hide();
+    tg.HapticFeedback.impactOccurred('light');
+  }
+
+  // =============================================
+  // CONFIRM AND SEND (#1 sendData, #3 close, #5 popup)
+  // =============================================
+  function confirmPayment() {
+    // #14: haptic on button tap
+    tg.HapticFeedback.notificationOccurred('success');
+
+    const methodLabel = selectedPaymentMethod || 'не выбран';
+
+    // #5: tg.showPopup confirmation
+    tg.showPopup({
+      title: 'Подтвердите оплату',
+      message: `Вы оплатили «${currentCourseTitle}»\nСпособ: ${methodLabel}\n\nПосле подтверждения бот попросит скриншот оплаты.`,
+      buttons: [
+        { id: 'confirm', type: 'default', text: 'Да, отправить чек' },
+        { id: 'cancel', type: 'cancel', text: 'Нет, вернуться' }
+      ]
+    }, (buttonId) => {
+      if (buttonId === 'confirm') {
+        // #1: sendData to bot — используем коды курсов как в боте
+        const botCourseKey = COURSE_KEY_MAP[currentCourse] || currentCourse;
+        tg.sendData(JSON.stringify({
+          course: botCourseKey,
+          courseTitle: currentCourseTitle,
+          price: currentCoursePrice,
+          paymentMethod: selectedPaymentMethod
+        }));
+
+        closePaymentModal();
+        openSuccessModal();
+
+        // #3: close mini-app after 2 seconds
+        setTimeout(() => {
+          tg.close();
+        }, 2000);
+      }
+    });
+  }
+
+  // #4: MainButton click handler
+  if (tg.MainButton) {
+    tg.MainButton.onClick(confirmPayment);
+  }
+
+  // =============================================
+  // BACK BUTTON (#24)
+  // =============================================
+  if (tg.BackButton) {
+    tg.BackButton.onClick(() => {
+      if (paidConfirmationModal.classList.contains('active')) closeSuccessModal();
+      else if (paymentModal.classList.contains('active')) closePaymentModal();
+      else if (courseInfoModal.classList.contains('active')) closeCourseModal();
+    });
+  }
+
+  // =============================================
+  // CAROUSEL with SKELETON (#20)
+  // =============================================
+  function renderCarousel(images) {
+    const container = document.getElementById('carousel-container');
+    const nav = document.getElementById('carousel-nav');
+    const skeleton = document.getElementById('carousel-skeleton');
+    if (!container || !nav) return;
+
+    // Remove old slides (keep skeleton)
+    container.querySelectorAll('.carousel-slide').forEach(s => s.remove());
+    nav.innerHTML = '';
+    currentSlide = 0;
+
+    // Show skeleton while loading
+    if (skeleton) skeleton.style.display = 'block';
+
+    let loadedCount = 0;
+    const total = images.length;
+
+    images.forEach((src, index) => {
+      const slide = document.createElement('img');
+      slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
+      slide.alt = `Слайд ${index + 1}`;
+      slide.loading = index === 0 ? 'eager' : 'lazy';
+
+      slide.onload = () => {
+        slide.classList.add('loaded');
+        loadedCount++;
+        if (loadedCount === 1 && skeleton) {
+          skeleton.style.display = 'none'; // hide skeleton after first image loads
         }
+      };
+      slide.onerror = () => {
+        loadedCount++;
+        if (loadedCount === 1 && skeleton) skeleton.style.display = 'none';
+      };
+      slide.src = src;
+      container.appendChild(slide);
+
+      const dot = document.createElement('div');
+      dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+      dot.addEventListener('click', () => goToSlide(index));
+      nav.appendChild(dot);
+    });
+
+    startAutoCarousel();
+  }
+
+  function goToSlide(index) {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    if (slides[index]) slides[index].classList.add('active');
+    if (dots[index]) dots[index].classList.add('active');
+    currentSlide = index;
+  }
+
+  function startAutoCarousel() {
+    if (carouselInterval) clearInterval(carouselInterval);
+    const slides = document.querySelectorAll('.carousel-slide');
+    if (!slides.length) return;
+    carouselInterval = setInterval(() => goToSlide((currentSlide + 1) % slides.length), 4000);
+  }
+
+  // =============================================
+  // RENDER MODULES & OUTCOMES
+  // =============================================
+  function renderModules(modules) {
+    const container = document.getElementById('course-modules');
+    if (!container || !modules) return;
+    container.innerHTML = '';
+    modules.forEach((mod, i) => {
+      const isLast = i === modules.length - 1;
+      const el = document.createElement('div');
+      el.className = 'module-step';
+      el.innerHTML = `
+        ${!isLast ? '<div class="stepper-line"></div>' : ''}
+        <div class="module-number">${mod.num}</div>
+        <div class="flex-1">
+          <h4 style="font-size:0.875rem;font-weight:600;color:#0f172a;margin-bottom:0.25rem;">${mod.title}</h4>
+          <p style="font-size:0.8rem;color:#64748b;line-height:1.5;margin-bottom:0.25rem;">${mod.desc}</p>
+          <p style="font-size:0.75rem;color:#6b7280;">
+            <span style="font-weight:600;color:#4f46e5;">Результат:</span> ${mod.result}
+          </p>
+        </div>`;
+      container.appendChild(el);
+    });
+  }
+
+  function renderOutcomes(outcomes) {
+    const container = document.getElementById('outcomes-list');
+    if (!container || !outcomes) return;
+    container.innerHTML = '';
+    outcomes.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'outcome-item';
+      el.innerHTML = `
+        <div class="outcome-icon">${item.icon}</div>
+        <div>
+          <div class="outcome-title">${item.title}</div>
+          <p class="outcome-desc">${item.desc}</p>
+        </div>`;
+      container.appendChild(el);
+    });
+  }
+
+  // =============================================
+  // PAYMENT METHOD SELECTION (#2 track, #12 auto-scroll)
+  // =============================================
+  function handlePaymentMethodClick(event) {
+    const btn = event.currentTarget;
+    const type = btn.dataset.payment;
+    const details = document.querySelector(`.payment-details[data-payment="${type}"]`);
+
+    const wasActive = btn.classList.contains('active');
+
+    // Close others
+    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+    document.querySelectorAll('.payment-details').forEach(d => d.classList.remove('active'));
+
+    if (!wasActive) {
+      btn.classList.add('active');
+      if (details) {
+        details.classList.add('active');
+        // #2: track selected method
+        selectedPaymentMethod = getMethodLabel(type);
+        // #12: auto-scroll to requisites
+        setTimeout(() => {
+          details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    } else {
+      selectedPaymentMethod = '';
+    }
+
+    tg.HapticFeedback.impactOccurred('light');
+  }
+
+  function getMethodLabel(type) {
+    const labels = {
+      'sbp': 'СБП',
+      'alfa': 'Альфа Банк',
+      'visa-mc': 'Visa / Mastercard',
+      'crypto': 'Криптовалюта'
     };
+    return labels[type] || type;
+  }
 
-    // DOM Elements
-    const mainHeader = document.getElementById('main-header');
-    const courseInfoModal = document.getElementById('course-info-modal');
-    const carouselContainer = document.getElementById('carousel-container');
-    const carouselNav = document.getElementById('carousel-nav');
-    const courseModules = document.getElementById('course-modules');
-    const modalCourseTitle = document.getElementById('modal-course-title');
-    const outcomesList = document.getElementById('outcomes-list');
-    const closeInfoBtn = document.getElementById('close-info-btn');
-    const paymentModal = document.getElementById('payment-modal');
-    const paymentTitle = document.getElementById('payment-course-title');
-    const paymentPrice = document.getElementById('payment-price');
-    const closePaymentBtn = document.getElementById('close-payment-btn');
-    const paidConfirmationModal = document.getElementById('paid-confirmation-modal');
-    const paidBtn = document.getElementById('paid-btn');
-    const closePaidBtn = document.getElementById('close-paid-btn');
-    const cryptoMainToggle = document.getElementById('crypto-main-toggle');
+  // =============================================
+  // COPY ADDRESS
+  // =============================================
+  window.copyAddress = function(elementId, btn) {
+    const text = document.getElementById(elementId)?.textContent?.trim();
+    if (!text) return;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      const original = btn.innerHTML;
+      btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Скопировано!`;
+      tg.HapticFeedback.notificationOccurred('success');
+      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = original; }, 2000);
+    }).catch(() => {
+      // Fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      tg.HapticFeedback.notificationOccurred('success');
+    });
+  };
 
-    let currentCourse = null;
-    let currentSlide = 0;
-    let carouselInterval = null;
+  // =============================================
+  // INIT EVENT LISTENERS
+  // =============================================
+  // Select buttons on cards
+  document.querySelectorAll('.select-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openCourseModal(btn.dataset.course);
+    });
+  });
 
-    // Функция скрытия/показа шапки
-    function hideHeader() {
-        if (mainHeader) {
-            mainHeader.classList.add('hidden-header');
-        }
-    }
+  // Buy button inside course details modal
+  document.getElementById('modal-buy-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const title = e.currentTarget.dataset.title || currentCourseTitle;
+    openPaymentModal(title, '7000');
+  });
 
-    function showHeader() {
-        if (mainHeader) {
-            mainHeader.classList.remove('hidden-header');
-        }
-    }
+  // Close buttons
+  document.getElementById('close-info-btn').addEventListener('click', closeCourseModal);
+  document.getElementById('close-payment-btn').addEventListener('click', closePaymentModal);
 
-    // Initialize
-    function init() {
-        // Info buttons
-        document.querySelectorAll('.info-btn').forEach(btn => {
-            btn.addEventListener('click', handleInfoButtonClick);
-        });
+  // Overlay clicks
+  courseInfoModal.addEventListener('click', (e) => { if (e.target === courseInfoModal) closeCourseModal(); });
+  paymentModal.addEventListener('click', (e) => { if (e.target === paymentModal) closePaymentModal(); });
+  paidConfirmationModal.addEventListener('click', (e) => { if (e.target === paidConfirmationModal) closeSuccessModal(); });
 
-        // Buy buttons
-        document.querySelectorAll('.buy-btn').forEach(btn => {
-            btn.addEventListener('click', handleBuyButtonClick);
-        });
+  // Payment methods
+  document.querySelectorAll('.payment-method[data-payment]').forEach(m => {
+    m.addEventListener('click', handlePaymentMethodClick);
+  });
 
-        // Close buttons
-        closeInfoBtn.addEventListener('click', closeCourseInfo);
-        closePaymentBtn.addEventListener('click', closePaymentModal);
-        closePaidBtn.addEventListener('click', closePaidConfirmation);
+  // Crypto toggle
+  document.getElementById('crypto-main-toggle').addEventListener('click', () => {
+    const toggle = document.getElementById('crypto-main-toggle');
+    const list = document.getElementById('crypto-coins-list');
+    toggle.classList.toggle('active');
+    list.classList.toggle('active');
+    selectedPaymentMethod = toggle.classList.contains('active') ? 'Криптовалюта' : '';
+    tg.HapticFeedback.impactOccurred('light');
+  });
 
-        // Modal overlays
-        courseInfoModal.addEventListener('click', (e) => {
-            if (e.target === courseInfoModal) closeCourseInfo();
-        });
-        
-        paymentModal.addEventListener('click', (e) => {
-            if (e.target === paymentModal) closePaymentModal();
-        });
-        
-        paidConfirmationModal.addEventListener('click', (e) => {
-            if (e.target === paidConfirmationModal) closePaidConfirmation();
-        });
+  // Crypto coin toggles
+  document.querySelectorAll('.crypto-coin-header').forEach(h => {
+    h.addEventListener('click', function() {
+      const coin = this.closest('.crypto-coin');
+      const wasActive = coin.classList.contains('active');
+      document.querySelectorAll('.crypto-coin').forEach(c => c.classList.remove('active'));
+      if (!wasActive) {
+        coin.classList.add('active');
+        const symbol = coin.dataset.coin?.toUpperCase() || 'Крипта';
+        selectedPaymentMethod = `Криптовалюта (${symbol})`;
+        setTimeout(() => coin.querySelector('.crypto-coin-details')?.scrollIntoView({ behavior:'smooth', block:'nearest' }), 100);
+      }
+      tg.HapticFeedback.impactOccurred('light');
+    });
+  });
 
-        // Payment method toggles
-        document.querySelectorAll('.payment-method[data-payment]').forEach(method => {
-            method.addEventListener('click', handlePaymentMethodClick);
-        });
+  // #17: Open bot button
+  document.getElementById('open-bot-btn').addEventListener('click', () => {
+    tg.openTelegramLink('https://t.me/heist_ai_bot');
+  });
 
-        // Crypto toggles
-        if (cryptoMainToggle) {
-            cryptoMainToggle.addEventListener('click', () => {
-                const coinsList = document.getElementById('crypto-coins-list');
-                cryptoMainToggle.classList.toggle('active');
-                coinsList.classList.toggle('active');
-                if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-            });
-        }
-
-        // Crypto coin toggles
-        document.querySelectorAll('.crypto-coin-header').forEach(header => {
-            header.addEventListener('click', function() {
-                const coin = this.closest('.crypto-coin');
-                coin.classList.toggle('active');
-                if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-            });
-        });
-
-        // Network item toggles
-        document.querySelectorAll('.network-item-header').forEach(header => {
-            header.addEventListener('click', function() {
-                const item = this.closest('.network-item');
-                item.classList.toggle('active');
-                if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-            });
-        });
-
-        // "Я оплатил" button
-        paidBtn.addEventListener('click', () => {
-            paidConfirmationModal.classList.add('active');
-            if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-        });
-
-        // ESC key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (paidConfirmationModal.classList.contains('active')) closePaidConfirmation();
-                else if (paymentModal.classList.contains('active')) closePaymentModal();
-                else if (courseInfoModal.classList.contains('active')) closeCourseInfo();
-            }
-        });
-
-        // Telegram Back Button
-        if (tg?.BackButton) {
-            tg.BackButton.onClick(() => {
-                if (paidConfirmationModal.classList.contains('active')) closePaidConfirmation();
-                else if (paymentModal.classList.contains('active')) closePaymentModal();
-                else if (courseInfoModal.classList.contains('active')) closeCourseInfo();
-            });
-        }
-    }
-
-    // Event Handlers
-    function handleInfoButtonClick(e) {
-        e.stopPropagation();
-        const courseId = e.target.dataset.course;
-        currentCourse = courseId;
-        currentSlide = 0;
-
-        const course = courseDetails[courseId];
-        if (!course) return;
-
-        modalCourseTitle.textContent = course.title;
-        renderCarousel(course.images);
-        renderModules(course.modules);
-        renderOutcomes(course.outcomes);
-
-        hideHeader();
-        courseInfoModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        courseInfoModal.querySelector('.modal-content').scrollTop = 0;
-
-        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-    }
-
-    function handleBuyButtonClick(e) {
-        e.stopPropagation();
-        const courseTitle = e.target.dataset.title;
-        const coursePrice = e.target.dataset.price;
-
-        paymentTitle.textContent = courseTitle;
-        paymentPrice.textContent = Number(coursePrice).toLocaleString('ru-RU') + ' ₽';
-
-        // Reset all expandables
-        document.querySelectorAll('.expandable-toggle').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.expandable-content').forEach(c => c.classList.remove('active'));
-        document.querySelectorAll('.crypto-coin').forEach(c => c.classList.remove('active'));
-        document.querySelectorAll('.network-item').forEach(n => n.classList.remove('active'));
-        document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
-        document.querySelectorAll('.payment-details').forEach(d => d.classList.remove('active'));
-
-        hideHeader();
-        paymentModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        paymentModal.querySelector('.modal-content').scrollTop = 0;
-
-        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-    }
-
-    function handlePaymentMethodClick() {
-        const paymentType = this.dataset.payment;
-        const details = document.querySelector(`.payment-details[data-payment="${paymentType}"]`);
-        
-        // Close other payment methods
-        document.querySelectorAll('.payment-method[data-payment]').forEach(m => {
-            if (m !== this) m.classList.remove('active');
-        });
-        document.querySelectorAll('.payment-details').forEach(d => {
-            if (d !== details) d.classList.remove('active');
-        });
-        
-        this.classList.toggle('active');
-        if (details) details.classList.toggle('active');
-        
-        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-    }
-
-    // Functions
-    function closeCourseInfo() {
-        courseInfoModal.classList.remove('active');
-        document.body.style.overflow = '';
-        showHeader();
-        if (carouselInterval) clearInterval(carouselInterval);
-        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-    }
-
-    function closePaymentModal() {
-        paymentModal.classList.remove('active');
-        document.body.style.overflow = '';
-        showHeader();
-        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-    }
-
-    function closePaidConfirmation() {
-        paidConfirmationModal.classList.remove('active');
-        if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
-    }
-
-    // Copy address function
-    window.copyAddress = function(elementId, btn) {
-        const address = document.getElementById(elementId)?.textContent;
-        if (!address) return;
-        
-        navigator.clipboard.writeText(address).then(() => {
-            btn.classList.add('copied');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = `
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                </svg>
-                Скопировано!
-            `;
-            if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-            
-            setTimeout(() => {
-                btn.classList.remove('copied');
-                btn.innerHTML = originalText;
-            }, 2000);
-        });
-    }
-
-    // Carousel
-    function renderCarousel(images) {
-        if (!images || !Array.isArray(images)) return;
-        
-        carouselContainer.innerHTML = '';
-        carouselNav.innerHTML = '';
-        
-        images.forEach((src, index) => {
-            const slide = document.createElement('img');
-            slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
-            slide.src = src;
-            slide.alt = `Slide ${index + 1}`;
-            slide.loading = index === 0 ? 'eager' : 'lazy';
-            carouselContainer.appendChild(slide);
-            
-            const dot = document.createElement('div');
-            dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
-            dot.addEventListener('click', () => goToSlide(index));
-            carouselNav.appendChild(dot);
-        });
-        
-        startAutoCarousel();
-    }
-
-    function goToSlide(index) {
-        const slides = document.querySelectorAll('.carousel-slide');
-        const dots = document.querySelectorAll('.carousel-dot');
-        
-        slides.forEach(s => s.classList.remove('active'));
-        dots.forEach(d => d.classList.remove('active'));
-        
-        if (slides[index]) slides[index].classList.add('active');
-        if (dots[index]) dots[index].classList.add('active');
-        currentSlide = index;
-    }
-
-    function startAutoCarousel() {
-        if (carouselInterval) clearInterval(carouselInterval);
-        const slides = document.querySelectorAll('.carousel-slide');
-        if (slides.length === 0) return;
-        
-        carouselInterval = setInterval(() => {
-            goToSlide((currentSlide + 1) % slides.length);
-        }, 4000);
-    }
-
-    // Modules render
-    function renderModules(modules) {
-        if (!modules || !Array.isArray(modules)) return;
-        
-        courseModules.innerHTML = '';
-        
-        modules.forEach((mod, index) => {
-            const isLast = index === modules.length - 1;
-            const el = document.createElement('div');
-            el.className = 'module-step';
-            el.innerHTML = `
-                ${!isLast ? '<div class="stepper-line"></div>' : ''}
-                <div class="module-number">${mod.num}</div>
-                <div class="flex-1">
-                    <h4 class="font-display text-[14px] font-semibold text-slate-900 mb-1">${mod.title}</h4>
-                    <p class="text-[13px] text-slate-600 leading-relaxed mb-1">${mod.desc}</p>
-                    <p class="text-[12px] text-slate-500">
-                        <span class="font-semibold text-indigo-600">Результат:</span> ${mod.result}
-                    </p>
-                </div>
-            `;
-            courseModules.appendChild(el);
-        });
-    }
-
-    // Outcomes render
-    function renderOutcomes(outcomes) {
-        if (!outcomes || !Array.isArray(outcomes)) return;
-        
-        outcomesList.innerHTML = '';
-        
-        outcomes.forEach(item => {
-            const el = document.createElement('div');
-            el.className = 'outcome-item';
-            el.innerHTML = `
-                <div class="outcome-icon">${item.icon}</div>
-                <div class="outcome-content">
-                    <div class="outcome-title">${item.title}</div>
-                    <p class="outcome-desc">${item.desc}</p>
-                </div>
-            `;
-            outcomesList.appendChild(el);
-        });
-    }
-
-    // Initialize the app
-    document.addEventListener('DOMContentLoaded', init);
+  // ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (paidConfirmationModal.classList.contains('active')) closeSuccessModal();
+    else if (paymentModal.classList.contains('active')) closePaymentModal();
+    else if (courseInfoModal.classList.contains('active')) closeCourseModal();
+  });
   </script>
 </body>
 </html>
-
-
-
-
