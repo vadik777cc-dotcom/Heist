@@ -437,8 +437,8 @@
       <!-- Course 2 -->
       <div class="course-card glass-card" style="--card-accent: rgba(99,102,241,0.35); --card-glow: rgba(99,102,241,0.45);">
         <span class="mono-label text-indigo-600 tracking-widest">AI FOUNDERS</span>
-        <h3 class="text-lg font-semibold text-slate-900">AI Foundation: Мастерство Нейросетей</h3>
-        <p class="text-slate-500 text-sm font-light leading-relaxed">GPT-4, Claude, Llama — разберёшься во всех. Поймёшь как монетизировать AI в своей нише.</p>
+        <h3 class="text-lg font-semibold text-slate-900">AI Foundation: База ИИ</h3>
+        <p class="text-slate-500 text-sm font-light leading-relaxed">GPT-4, Claude, Llama, Mistral. От prompt engineering до первых платящих клиентов — за 4 недели.</p>
         <div class="space-y-2">
           <div class="feature-item">
             <div class="feature-check">
@@ -460,7 +460,7 @@
           </div>
           <button class="card-select-btn btn-deep-blue select-btn"
             data-course="ai-founders"
-            data-title="AI Foundation: Мастерство Нейросетей"
+            data-title="AI Foundation: База ИИ"
             data-price="7000">
             Выбрать →
           </button>
@@ -519,11 +519,17 @@
         <div class="mb-4">
           <p class="font-mono text-[11px] uppercase tracking-[0.15em] text-slate-500 mb-1">Программа курса</p>
           <h3 id="modal-course-title" class="text-lg font-bold text-slate-900"></h3>
+          <p id="modal-course-duration" class="text-xs text-slate-400 mt-1"></p>
+          <p id="modal-course-description" class="text-sm text-slate-500 mt-2 leading-relaxed"></p>
         </div>
         <div id="course-modules" class="space-y-3"></div>
         <div id="what-you-get" class="mt-6 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-indigo-50 border border-slate-200">
           <h4 class="text-base font-bold text-slate-900 mb-3">Что ты умеешь делать после курса</h4>
           <div id="outcomes-list" class="grid gap-3"></div>
+        </div>
+        <div id="modal-features-block" class="mt-3" style="display:none; padding: 1rem; background: rgba(255,255,255,0.8); border: 1px solid rgba(99,102,241,0.12); border-radius: 16px;">
+          <p class="mono-label mb-2" style="color: #6366f1;">В КОМПЛЕКТЕ</p>
+          <div id="modal-features-list"></div>
         </div>
         <!-- #18: buy button inside details modal -->
         <button id="modal-buy-btn" class="buy-inside-btn mt-6" data-title="" data-price="7000">
@@ -569,147 +575,9 @@
           </div>
         </div>
 
-        <!-- Payment methods — #8 СБП first, #9 no PayPal, #10 only USDT TRC-20 + TON -->
+        <!-- Payment methods — динамически из PAYMENT_CONFIG -->
         <h4 style="font-size: 1rem; font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">Выбери способ оплаты</h4>
-
-        <!-- 🇷🇺 Российские карты -->
-        <div class="payment-section">
-          <div class="payment-section-title">🇷🇺 Российские карты</div>
-
-          <!-- СБП — first -->
-          <button class="payment-method" data-payment="sbp" id="pm-sbp">
-            <div class="payment-method-icon" style="background: linear-gradient(135deg, #6EC72D, #47A01F); color: white; font-size: 1.3rem;">⚡</div>
-            <div class="payment-method-info">
-              <div class="payment-method-name">СБП</div>
-              <div class="payment-method-desc">Мгновенно · без комиссии · рекомендуем</div>
-            </div>
-            <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
-          <div class="payment-details" data-payment="sbp" id="details-sbp">
-            <div class="payment-requisite">
-              <div class="payment-requisite-label">Телефон для СБП</div>
-              <div class="payment-requisite-value" id="sbp-phone">+7 901 788 7835</div>
-            </div>
-            <div class="payment-requisite">
-              <div class="payment-requisite-label">Банк получателя</div>
-              <div class="payment-requisite-value">Т Банк</div>
-            </div>
-            <button class="copy-btn" onclick="copyAddress('sbp-phone', this)">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-              Скопировать телефон
-            </button>
-          </div>
-
-          <!-- Альфа Банк -->
-          <button class="payment-method" data-payment="alfa" id="pm-alfa">
-            <div class="payment-method-icon" style="background: white; padding: 8px;">
-              <img src="alfa.png" alt="Альфа Банк" style="width: 30px; height: 30px; object-fit: contain;">
-            </div>
-            <div class="payment-method-info">
-              <div class="payment-method-name">Альфа Банк</div>
-              <div class="payment-method-desc">Перевод по номеру карты</div>
-            </div>
-            <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
-          <div class="payment-details" data-payment="alfa" id="details-alfa">
-            <div class="payment-requisite">
-              <div class="payment-requisite-label">Номер карты</div>
-              <div class="payment-requisite-value" id="alfa-card">2200 1545 3615 8834</div>
-            </div>
-            <button class="copy-btn" onclick="copyAddress('alfa-card', this)">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-              Скопировать номер карты
-            </button>
-          </div>
-        </div>
-
-        <!-- Международные карты -->
-        <div class="payment-section">
-          <div class="payment-section-title">🌍 Международные карты</div>
-          <button class="payment-method" data-payment="visa-mc" id="pm-visa">
-            <div class="payment-method-icon" style="background: white; padding: 8px;">
-              <img src="visa.png" alt="Visa/MC" style="width: 30px; height: 30px; object-fit: contain;">
-            </div>
-            <div class="payment-method-info">
-              <div class="payment-method-name">Visa / Mastercard</div>
-              <div class="payment-method-desc">Карты Молдова, Беларусь, Казахстан</div>
-            </div>
-            <svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
-          <div class="payment-details" data-payment="visa-mc" id="details-visa">
-            <div class="payment-requisite">
-              <div class="payment-requisite-label">Номер карты</div>
-              <div class="payment-requisite-value" id="visa-card">4441 1110 1656 7632</div>
-            </div>
-            <button class="copy-btn" onclick="copyAddress('visa-card', this)">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-              Скопировать номер карты
-            </button>
-          </div>
-        </div>
-
-        <!-- Крипта: только USDT TRC-20 и TON -->
-        <div class="payment-section">
-          <div class="payment-section-title">🪙 Криптовалюта</div>
-
-          <button class="expandable-toggle" id="crypto-main-toggle">
-            <div class="payment-method-icon" style="background: rgba(38,161,123,0.1); font-size: 1.3rem;">₮</div>
-            <div class="payment-method-info" style="text-align: left;">
-              <div class="payment-method-name">Криптовалюта</div>
-              <div class="payment-method-desc">USDT TRC-20 · TON</div>
-            </div>
-            <svg class="w-5 h-5 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </button>
-          <div class="expandable-content" id="crypto-coins-list">
-            <!-- USDT TRC-20 only -->
-            <div class="crypto-coin" data-coin="usdt">
-              <div class="crypto-coin-header">
-                <div class="crypto-coin-icon" style="background: rgba(38,161,123,0.1);">₮</div>
-                <div class="crypto-coin-name">USDT TRC-20</div>
-                <div class="crypto-coin-symbol">TRON</div>
-                <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-              </div>
-              <div class="crypto-coin-details">
-                <p style="font-size: 0.7rem; color: #64748b; margin-bottom: 0.5rem;">⚠️ Отправляй только по сети Tron (TRC-20)</p>
-                <div class="network-address" id="usdt-trc20">TB5wc7of2D285aUhmWcEW4PAZHrssapb7A</div>
-                <button class="copy-btn" onclick="copyAddress('usdt-trc20', this)">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                  Скопировать адрес
-                </button>
-                <div class="network-qr" style="margin-top: 0.75rem;"><img src="usdt.jpg" alt="USDT TRC-20 QR"></div>
-              </div>
-            </div>
-            <!-- TON -->
-            <div class="crypto-coin" data-coin="ton">
-              <div class="crypto-coin-header">
-                <div class="crypto-coin-icon" style="background: rgba(59,130,246,0.1);">💎</div>
-                <div class="crypto-coin-name">Toncoin</div>
-                <div class="crypto-coin-symbol">TON</div>
-                <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-              </div>
-              <div class="crypto-coin-details">
-                <div class="network-address" id="ton-address">UQAcdcKz4BXZ5MtIMbAnMKahBiiH6yaC4wT-qRPOZKi0mbah</div>
-                <button class="copy-btn" onclick="copyAddress('ton-address', this)">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                  Скопировать адрес
-                </button>
-                <div class="network-qr" style="margin-top: 0.75rem;"><img src="ton.jpg" alt="TON QR"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div id="payment-methods-container"></div>
 
         <p class="text-xs text-slate-400 text-center mt-4 px-2">
           Нет нужного способа? Напиши нам в <a href="https://t.me/heist_ai_bot" style="color: #6366f1;">@heist_ai_bot</a>
@@ -799,39 +667,28 @@
   tg.ready();
 
   // =============================================
-  // #23: PAYMENT_CONFIG — all requisites in one place
+  // =============================================
+  // PAYMENT_CONFIG — единый источник реквизитов
   // =============================================
   const PAYMENT_CONFIG = {
-    sbp: {
-      phone: '+7 901 788 7835',
-      bank: 'Т Банк',
-      label: 'СБП'
-    },
-    alfa: {
-      card: '2200 1545 3615 8834',
-      label: 'Альфа Банк'
-    },
-    visaMc: {
-      card: '4441 1110 1656 7632',
-      label: 'Visa / Mastercard'
-    },
-    usdtTrc20: {
-      address: 'TB5wc7of2D285aUhmWcEW4PAZHrssapb7A',
-      network: 'TRC-20',
-      label: 'USDT TRC-20'
-    },
-    ton: {
-      address: 'UQAcdcKz4BXZ5MtIMbAnMKahBiiH6yaC4wT-qRPOZKi0mbah',
-      label: 'TON'
+    sbp:    { phone: '+7 901 788 7835', bank: 'Т Банк' },
+    alfa:   { card: '2200 1545 3615 8834' },
+    visa:   { card: '4441 1110 1656 7632' },
+    paypal: { email: 'heist.ai.courses@gmail.com' },
+    crypto: {
+      usdt_trc20: { label:'USDT TRC-20', symbol:'₮', note:'⚠️ Только сеть Tron (TRC-20)', address:'TB5wc7of2D285aUhmWcEW4PAZHrssapb7A', qr:'usdt.jpg', bg:'rgba(38,161,123,0.1)' },
+      ton:        { label:'TON',          symbol:'💎', address:'UQAcdcKz4BXZ5MtIMbAnMKahBiiH6yaC4wT-qRPOZKi0mbah', qr:'ton.jpg', bg:'rgba(59,130,246,0.1)' },
+      usdt_erc20: { label:'USDT ERC-20',  symbol:'₮', note:'⚠️ Только сеть Ethereum (ERC-20)', address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'usdterc.jpg', bg:'rgba(38,161,123,0.08)' },
+      usdt_bep20: { label:'USDT BEP-20',  symbol:'₮', note:'⚠️ Только сеть BSC (BEP-20)', address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'usdtbep.jpg', bg:'rgba(243,186,47,0.1)' },
+      eth:        { label:'ETH',          symbol:'Ξ',  address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'eth.jpg', bg:'rgba(98,126,234,0.1)' },
+      bnb:        { label:'BNB',          symbol:'B',  address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'bnb.jpg', bg:'rgba(243,186,47,0.15)' },
+      btc:        { label:'Bitcoin',      symbol:'₿',  address:'1Motjp4tCnBCLKqaKEW9osSuT7Jw7tDaE4', qr:'btc.jpg', bg:'rgba(247,147,26,0.1)' },
+      sol:        { label:'Solana',       symbol:'◎',  address:'BHcaxUsu3p2jUyWGiKyMfyK9xym48FGp9EQbcGbPK2hB', qr:'sol.jpg', bg:'rgba(153,69,255,0.1)' },
+      ltc:        { label:'Litecoin',     symbol:'Ł',  address:'ltc1q754nddflyk8tsjd4y3gvy4gk8w3s74g44whkds', qr:'ltc.jpg', bg:'rgba(52,93,157,0.1)' },
+      dash:       { label:'Dash',         symbol:'D',  address:'Xe1eeMsLzXBBaGWRM1gyco3ohZHaEp7iBT', qr:'dash.jpg', bg:'rgba(0,141,228,0.1)' },
+      polygon:    { label:'USDT Polygon', symbol:'⬡',  note:'⚠️ Только сеть Polygon (MATIC)', address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'usdtpol.jpg', bg:'rgba(130,71,229,0.1)' },
     }
   };
-
-  // Inject config values into DOM
-  document.getElementById('sbp-phone').textContent = PAYMENT_CONFIG.sbp.phone;
-  document.getElementById('alfa-card').textContent = PAYMENT_CONFIG.alfa.card;
-  document.getElementById('visa-card').textContent = PAYMENT_CONFIG.visaMc.card;
-  document.getElementById('usdt-trc20').textContent = PAYMENT_CONFIG.usdtTrc20.address;
-  document.getElementById('ton-address').textContent = PAYMENT_CONFIG.ton.address;
 
   tg.expand();
   tg.enableClosingConfirmation();
@@ -849,60 +706,62 @@
   const courseDetails = {
     'ai-automation': {
       title: 'N8N: Архитектура AI-Агентов',
-      images: ['n8n1.png','n8n4.png','n8n5.png','n8n6.png','n8n2.png','n8n7.png','n8n3.png'],
+      description: 'Настраиваешь n8n-агентов которые сами обрабатывают входящие заявки, квалифицируют клиентов и пишут в WhatsApp — без выходных. 2 недели практики. После курса знаешь как продавать автоматизацию от 50 000₽.',
+      duration: '2 недели | Интенсив',
       modules: [
-        { num:'01', title:'n8n — автоматизация без кода', desc:'Первый рабочий сценарий. Разбираем интерфейс, соединяем блоки, запускаем.', result:'Твоя первая работающая автоматизация.' },
-        { num:'02', title:'AI-агенты с памятью', desc:'Агент читает почту, сортирует заявки, отвечает клиентам. Настраиваем базу знаний.', result:'Агент который понимает контекст.' },
-        { num:'03', title:'API и Webhooks', desc:'Связываем любые приложения. Никакого кода — только логика конструктора.', result:'Умеешь интегрировать любой сервис.' },
-        { num:'04', title:'CRM, Telegram, Google', desc:'AmoCRM, Bitrix, Google Sheets, мессенджеры — всё в одном пайплайне.', result:'Полная связка твоего бизнеса.' },
-        { num:'05', title:'Продажа автоматизации', desc:'Стратегии ценообразования, упаковка продукта. Как продавать от 50 000₽.', result:'Готовый прайс-лист и офферы.' },
-        { num:'06', title:'Деплой на свой сервер', desc:'Переход от эксперимента к production-архитектуре.', result:'Ты — инженер по автоматизации.' }
+        { num:'01', title:'Архитектура n8n', desc:'Установка на сервер, работа с API и Webhooks. Первый рабочий сценарий с нуля.', result:'Твоя первая работающая автоматизация на боевом сервере.' },
+        { num:'02', title:'AI-агенты с памятью', desc:'Цепочки рассуждений, память агентов, база знаний компании. Агент читает почту, сортирует заявки, отвечает клиентам.', result:'Агент который понимает контекст и не забывает клиентов.' },
+        { num:'03', title:'Интеграции CRM', desc:'AmoCRM, Bitrix, Telegram, Google Services, приём оплат — всё в одном пайплайне без кода.', result:'Полная связка твоего бизнеса в одном сценарии.' },
+        { num:'04', title:'Упаковка и продажа', desc:'Как продавать автоматизацию чеком от 100 000₽. Коммерческие предложения, скрипты продаж, работа с возражениями.', result:'Готовый прайс-лист и первые офферы клиентам.' }
       ],
       outcomes: [
-        { icon:'🤖', title:'Готовый AI-агент', desc:'Работает 24/7 без твоего участия' },
-        { icon:'💰', title:'Навык монетизации', desc:'Готовые офферы и прайс для продажи' },
-        { icon:'🔗', title:'Любые интеграции', desc:'CRM, мессенджеры, API в одной связке' },
-        { icon:'📈', title:'5+ кейсов в портфолио', desc:'Реальные проекты для клиентов' }
-      ]
+        { icon:'⚙️', title:'Low-code автоматизация', desc:'Без программирования — только логика конструктора' },
+        { icon:'🎯', title:'Агент 24/7', desc:'Сам обрабатывает заявки и пишет клиентам' },
+        { icon:'🔗', title:'100+ интеграций', desc:'CRM, мессенджеры, Google, оплаты в одной связке' },
+        { icon:'💰', title:'Чек от 50 000₽', desc:'Знаешь как продавать автоматизацию бизнесу' }
+      ],
+      features: ['📄 КП на автоматизацию юридического отдела', '📋 ТЗ для CRM-агента в клинику', '💰 Скрипт продажи чат-бота для входящих лидов'],
+      images: ['n8n1.png','n8n4.png','n8n5.png','n8n6.png','n8n2.png','n8n7.png','n8n3.png'],
     },
     'ai-founders': {
-      title: 'AI Foundation: Мастерство Нейросетей',
-      images: ['zn1.png','zn2.png','zn3.png','zn4.png','zn5.png','zn6.png'],
+      title: 'AI Foundation: База ИИ',
+      description: 'Разбираешься в GPT-4, Claude, Llama, Mistral. Понимаешь как проектировать AI-решения и монетизировать их. От prompt engineering до первых платящих клиентов за 4 недели.',
+      duration: '4 недели | Foundation',
       modules: [
-        { num:'01', title:'Как работают LLM', desc:'Разбираем архитектуру без математики. Понимаем почему галлюцинируют.', result:'Понимаешь ИИ глубже 95% пользователей.' },
-        { num:'02', title:'GPT-4, Claude, Llama, Mistral', desc:'Тестируем вживую. Когда какую модель выбирать.', result:'Навык выбора за 10 секунд.' },
-        { num:'03', title:'Prompt Engineering', desc:'От базовых запросов до chain-of-thought. Точный результат с первой попытки.', result:'Скорость работы растёт в 5 раз.' },
-        { num:'04', title:'Генерация контента', desc:'Текст, изображения (Midjourney), видео (Runway), озвучка.', result:'Полный контент-продакшн.' },
-        { num:'05', title:'Аналитика данных', desc:'Code Interpreter для анализа бизнес-показателей без Excel.', result:'Отчёты за минуты, не часы.' },
-        { num:'06', title:'Монетизация', desc:'Консалтинг, внедрение, AI-агентство. Готовая модель заработка.', result:'Путь к 50 000+₽/мес на ИИ.' }
+        { num:'01', title:'Фундамент LLM', desc:'Как работают языковые модели, их ограничения, почему галлюцинируют. Промпт-инжиниринг с нуля до chain-of-thought.', result:'Понимаешь ИИ глубже 95% пользователей.' },
+        { num:'02', title:'Генерация контента', desc:'Текст, изображения (Midjourney), видео (Runway), озвучка. Полный контент-продакшн без студии и дизайнера.', result:'Любой контент за минуты — сам.' },
+        { num:'03', title:'Аналитика данных', desc:'Code Interpreter для анализа бизнес-показателей. Отчёты, графики, выводы — без Excel и аналитика.', result:'Данные в решения за минуты, не часы.' },
+        { num:'04', title:'Монетизация', desc:'Консалтинг, внедрение в найме, своё AI-агентство. Готовая модель заработка с первым клиентом.', result:'Путь к 50 000+₽/мес на ИИ-услугах.' }
       ],
       outcomes: [
-        { icon:'🧠', title:'Экспертное понимание ИИ', desc:'Знаешь какую модель выбрать и почему' },
-        { icon:'⚡', title:'Скорость профессионала', desc:'Идеальный результат с первого промпта' },
-        { icon:'🎬', title:'Полный цикл контента', desc:'Текст, картинки, видео — всё сам' },
-        { icon:'💰', title:'Готовая модель заработка', desc:'Понятный путь к первым деньгам на ИИ' }
-      ]
+        { icon:'🧠', title:'GPT-4, Claude, Llama', desc:'Знаешь какую модель выбрать под любую задачу' },
+        { icon:'✍️', title:'Prompt Engineering', desc:'Точный результат с первого запроса' },
+        { icon:'🎬', title:'Полный цикл контента', desc:'Текст, картинки, видео, звук — всё сам' },
+        { icon:'🚀', title:'Выход на рынок', desc:'Консалтинг, агентство или найм — три трека' }
+      ],
+      features: ['📊 Шаблон аудита бизнес-процессов для внедрения AI', '📝 Промпт-пак для SMM — экономия 20 часов в неделю', '💼 Калькулятор ROI нейросетей для защиты бюджета'],
+      images: ['zn1.png','zn2.png','zn3.png','zn4.png','zn5.png','zn6.png'],
     },
     'vibe-coding': {
       title: 'VibeCoding: Код Без Программистов',
-      images: ['vbk1.png','vbk3.png','vbk6.png','vbk5.png','vbk2.png','vbk4.png'],
+      description: 'Создаёшь сложные веб-приложения используя AI как команду разработчиков. От идеи до работающего продукта за выходные — без технического образования.',
+      duration: 'Creator Mode',
       modules: [
-        { num:'01', title:'Rapid Prototyping', desc:'Cursor, Windsurf, Replit. Как AI пишет чистый код по твоим запросам.', result:'Первое приложение за несколько часов.' },
-        { num:'02', title:'Дизайн без дизайнера', desc:'Современный UI/UX. AI подбирает цвета, шрифты, компоненты.', result:'Профессиональный визуал без студии.' },
-        { num:'03', title:'База данных, оплата, AI', desc:'Подключаем Supabase, Stripe, OpenAI API. Сервис который принимает оплаты.', result:'Полноценный SaaS, работающий вживую.' },
-        { num:'04', title:'Работа с ошибками', desc:'AI как старший разработчик — находим баги, оптимизируем код.', result:'Стабильный, чистый код.' },
-        { num:'05', title:'Деплой и домен', desc:'Vercel, Netlify. Свой домен. Защита и стабильность.', result:'Ссылка на твой живой продукт.' },
-        { num:'06', title:'Монетизация — SaaS или заказы', desc:'Два трека: свой стартап или быстрые MVP для клиентов за высокий чек.', result:'Запуск AI-агентства или стартапа.' }
+        { num:'01', title:'Инструментарий AI', desc:'Cursor, Windsurf, Replit — выбираешь среду и пишешь первое приложение. AI пишет чистый код по твоим запросам.', result:'Первое рабочее приложение за несколько часов.' },
+        { num:'02', title:'Web-App за 4 часа', desc:'SaaS с базой данных, авторизацией и оплатой Stripe. Полноценный сервис без единой строки кода вручную.', result:'Живой SaaS который принимает оплаты.' },
+        { num:'03', title:'Telegram Mini Apps', desc:'Приложения внутри мессенджера. Мини-аппы, боты, автоматизация — всё в экосистеме Telegram.', result:'Свой мини-апп в Telegram за день.' },
+        { num:'04', title:'Запуск и продажа', desc:'Упаковка микро-сервисов, выход на Product Hunt, Reddit, Telegram. Desktop-приложения в .EXE для продажи.', result:'Запущенный продукт и первые продажи.' }
       ],
       outcomes: [
-        { icon:'🚀', title:'MVP за 48 часов', desc:'От идеи до работающего продукта' },
-        { icon:'💻', title:'Без разработчиков', desc:'Создаёшь продукты с помощью AI' },
-        { icon:'🎯', title:'Rapid prototyping', desc:'Быстро тестируешь гипотезы' },
-        { icon:'☁️', title:'Full-cycle деплой', desc:'От кода до production' }
-      ]
+        { icon:'⚡', title:'MVP за выходные', desc:'От идеи до работающего продукта за 48 часов' },
+        { icon:'🎨', title:'SaaS без кода', desc:'Cursor, Windsurf, Replit — AI пишет за тебя' },
+        { icon:'🛠️', title:'Desktop + Web + Telegram', desc:'Три формата продуктов которые можно продавать' },
+        { icon:'☁️', title:'Деплой и монетизация', desc:'Product Hunt, Stripe, .EXE — готов к запуску' }
+      ],
+      features: ['🚀 Запуск MVP за выходные — от идеи до Stripe', '📦 Упаковка Python-скрипта в .EXE для продажи', '📈 Площадки запуска: Product Hunt, Reddit, Telegram'],
+      images: ['vbk7.png','vbk8.png','vbk1.png','vbk3.png','vbk6.png','vbk5.png','vbk2.png','vbk4.png'],
     }
   };
-
   // =============================================
   // STATE
   // =============================================
@@ -968,11 +827,14 @@
     currentCourseTitle = course.title;
 
     document.getElementById('modal-course-title').textContent = course.title;
+    document.getElementById('modal-course-duration').textContent = course.duration || '';
+    document.getElementById('modal-course-description').textContent = course.description || '';
     document.getElementById('modal-buy-btn').dataset.title = course.title;
 
     renderCarousel(course.images);
     renderModules(course.modules);
     renderOutcomes(course.outcomes);
+    renderFeatures(course.features);
 
     courseInfoModal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -1006,12 +868,8 @@
     document.getElementById('payment-course-title').textContent = currentCourseTitle;
     document.getElementById('payment-price').textContent = Number(currentCoursePrice).toLocaleString('ru-RU') + ' ₽';
 
-    // Reset
-    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
-    document.querySelectorAll('.payment-details').forEach(d => d.classList.remove('active'));
-    document.querySelectorAll('.expandable-toggle').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.expandable-content').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.crypto-coin').forEach(c => c.classList.remove('active'));
+    // Build payment UI fresh each open
+    renderPaymentMethods();
 
     // Close info modal if open
     if (courseInfoModal.classList.contains('active')) {
@@ -1224,6 +1082,175 @@
   }
 
   // =============================================
+  // RENDER FEATURES
+  // =============================================
+  function renderFeatures(features) {
+    const block = document.getElementById('modal-features-block');
+    const list = document.getElementById('modal-features-list');
+    if (!block || !list) return;
+    if (!features || !features.length) { block.style.display = 'none'; return; }
+    block.style.display = 'block';
+    list.innerHTML = features.map(f => `
+      <div style="display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0;font-size:0.82rem;color:#0f172a;line-height:1.4;">
+        <span>${f}</span>
+      </div>`).join('');
+  }
+
+  // =============================================
+  // RENDER PAYMENT METHODS (dynamic from PAYMENT_CONFIG)
+  // =============================================
+  function copyIcon() {
+    return `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>`;
+  }
+
+  function chevronSvg() {
+    return `<svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>`;
+  }
+
+  function requisiteHtml(id, label, value, copyLabel) {
+    return `<div class="payment-requisite">
+      <div class="payment-requisite-label">${label}</div>
+      <div class="payment-requisite-value" id="${id}">${value}</div>
+    </div>
+    <button class="copy-btn" onclick="copyAddress('${id}', this)">${copyIcon()} ${copyLabel}</button>`;
+  }
+
+  function cryptoCoinHtml(key, coin, isOpen) {
+    const id = `crypto-addr-${key}`;
+    return `<div class="crypto-coin${isOpen ? ' active' : ''}" data-coin="${key}" style="margin-bottom:0.5rem;">
+      <div class="crypto-coin-header">
+        <div class="crypto-coin-icon" style="background:${coin.bg};font-size:1rem;">${coin.symbol}</div>
+        <div class="crypto-coin-name">${coin.label}</div>
+        <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </div>
+      <div class="crypto-coin-details">
+        ${coin.note ? `<p style="font-size:0.7rem;color:#64748b;margin-bottom:0.5rem;">${coin.note}</p>` : ''}
+        <div class="network-address" id="${id}">${coin.address}</div>
+        <button class="copy-btn" onclick="copyAddress('${id}', this)">${copyIcon()} Скопировать адрес</button>
+        ${coin.qr ? `<div class="network-qr" style="margin-top:0.75rem;"><img src="${coin.qr}" alt="${coin.label} QR" loading="lazy"></div>` : ''}
+      </div>
+    </div>`;
+  }
+
+  function renderPaymentMethods() {
+    const container = document.getElementById('payment-methods-container');
+    if (!container) return;
+
+    const c = PAYMENT_CONFIG;
+    const cryptoKeys = Object.keys(c.crypto);
+
+    container.innerHTML = `
+      <!-- 🇷🇺 Российские карты -->
+      <div class="payment-section">
+        <div class="payment-section-title">🇷🇺 Российские карты</div>
+        <!-- СБП -->
+        <button class="payment-method" data-payment="sbp">
+          <div class="payment-method-icon" style="background:linear-gradient(135deg,#6EC72D,#47A01F);color:white;font-size:1.3rem;">⚡</div>
+          <div class="payment-method-info">
+            <div class="payment-method-name">СБП</div>
+            <div class="payment-method-desc">Мгновенно · без комиссии · рекомендуем</div>
+          </div>${chevronSvg()}
+        </button>
+        <div class="payment-details" data-payment="sbp">
+          ${requisiteHtml('sbp-phone','Телефон для СБП', c.sbp.phone,'Скопировать телефон')}
+          <div class="payment-requisite"><div class="payment-requisite-label">Банк получателя</div><div class="payment-requisite-value">${c.sbp.bank}</div></div>
+        </div>
+        <!-- Альфа Банк -->
+        <button class="payment-method" data-payment="alfa">
+          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="alfa.png" alt="Альфа" style="width:30px;height:30px;object-fit:contain;"></div>
+          <div class="payment-method-info">
+            <div class="payment-method-name">Альфа Банк</div>
+            <div class="payment-method-desc">Перевод по номеру карты</div>
+          </div>${chevronSvg()}
+        </button>
+        <div class="payment-details" data-payment="alfa">
+          ${requisiteHtml('alfa-card','Номер карты', c.alfa.card,'Скопировать номер карты')}
+        </div>
+      </div>
+
+      <!-- 🌍 Международные карты -->
+      <div class="payment-section">
+        <div class="payment-section-title">🌍 Международные карты</div>
+        <button class="payment-method" data-payment="visa-mc">
+          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="visa.png" alt="Visa/MC" style="width:30px;height:30px;object-fit:contain;"></div>
+          <div class="payment-method-info">
+            <div class="payment-method-name">Visa / Mastercard</div>
+            <div class="payment-method-desc">Карты Молдова, Беларусь, Казахстан</div>
+          </div>${chevronSvg()}
+        </button>
+        <div class="payment-details" data-payment="visa-mc">
+          ${requisiteHtml('visa-card','Номер карты', c.visa.card,'Скопировать номер карты')}
+        </div>
+      </div>
+
+      <!-- 📱 Электронные переводы -->
+      <div class="payment-section">
+        <div class="payment-section-title">📱 Электронные переводы</div>
+        <button class="payment-method" data-payment="paypal">
+          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="paypal.png" alt="PayPal" style="width:30px;height:30px;object-fit:contain;" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-size:1.1rem;\'>🅿️</span>'"></div>
+          <div class="payment-method-info">
+            <div class="payment-method-name">PayPal</div>
+            <div class="payment-method-desc">Международные переводы</div>
+          </div>${chevronSvg()}
+        </button>
+        <div class="payment-details" data-payment="paypal">
+          ${requisiteHtml('paypal-email','Email для PayPal', c.paypal.email,'Скопировать email')}
+        </div>
+      </div>
+
+      <!-- 🪙 Криптовалюта -->
+      <div class="payment-section">
+        <div class="payment-section-title">🪙 Криптовалюта</div>
+        <button class="expandable-toggle active" id="crypto-main-toggle">
+          <div class="payment-method-icon" style="background:rgba(38,161,123,0.1);font-size:1.3rem;">₮</div>
+          <div class="payment-method-info" style="text-align:left;">
+            <div class="payment-method-name">Криптовалюта</div>
+            <div class="payment-method-desc">USDT · TON · ETH · BTC и др.</div>
+          </div>
+          <svg class="w-5 h-5 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="expandable-content active" id="crypto-coins-list">
+          ${cryptoKeys.map((k, i) => cryptoCoinHtml(k, c.crypto[k], i === 0)).join('')}
+        </div>
+      </div>`;
+
+    // Re-attach listeners
+    container.querySelectorAll('.payment-method[data-payment]').forEach(m => {
+      m.addEventListener('click', handlePaymentMethodClick);
+    });
+    container.querySelectorAll('.crypto-coin-header').forEach(h => {
+      h.addEventListener('click', function() {
+        const coin = this.closest('.crypto-coin');
+        const wasActive = coin.classList.contains('active');
+        document.querySelectorAll('.crypto-coin').forEach(c => c.classList.remove('active'));
+        if (!wasActive) {
+          coin.classList.add('active');
+          const key = coin.dataset.coin || 'Крипта';
+          const label = PAYMENT_CONFIG.crypto[key]?.label || key.toUpperCase();
+          selectedPaymentMethod = `Криптовалюта (${label})`;
+          setTimeout(() => coin.querySelector('.crypto-coin-details')?.scrollIntoView({ behavior:'smooth', block:'nearest' }), 100);
+        } else {
+          selectedPaymentMethod = '';
+        }
+        tg.HapticFeedback.impactOccurred('light');
+      });
+    });
+    const cryptoToggle = document.getElementById('crypto-main-toggle');
+    if (cryptoToggle) {
+      cryptoToggle.addEventListener('click', () => {
+        cryptoToggle.classList.toggle('active');
+        document.getElementById('crypto-coins-list')?.classList.toggle('active');
+        selectedPaymentMethod = cryptoToggle.classList.contains('active') ? 'Криптовалюта' : '';
+        tg.HapticFeedback.impactOccurred('light');
+      });
+    }
+  }
+
+  // =============================================
   // PAYMENT METHOD SELECTION (#2 track, #12 auto-scroll)
   // =============================================
   function handlePaymentMethodClick(event) {
@@ -1320,31 +1347,7 @@
     m.addEventListener('click', handlePaymentMethodClick);
   });
 
-  // Crypto toggle
-  document.getElementById('crypto-main-toggle').addEventListener('click', () => {
-    const toggle = document.getElementById('crypto-main-toggle');
-    const list = document.getElementById('crypto-coins-list');
-    toggle.classList.toggle('active');
-    list.classList.toggle('active');
-    selectedPaymentMethod = toggle.classList.contains('active') ? 'Криптовалюта' : '';
-    tg.HapticFeedback.impactOccurred('light');
-  });
-
-  // Crypto coin toggles
-  document.querySelectorAll('.crypto-coin-header').forEach(h => {
-    h.addEventListener('click', function() {
-      const coin = this.closest('.crypto-coin');
-      const wasActive = coin.classList.contains('active');
-      document.querySelectorAll('.crypto-coin').forEach(c => c.classList.remove('active'));
-      if (!wasActive) {
-        coin.classList.add('active');
-        const symbol = coin.dataset.coin?.toUpperCase() || 'Крипта';
-        selectedPaymentMethod = `Криптовалюта (${symbol})`;
-        setTimeout(() => coin.querySelector('.crypto-coin-details')?.scrollIntoView({ behavior:'smooth', block:'nearest' }), 100);
-      }
-      tg.HapticFeedback.impactOccurred('light');
-    });
-  });
+  // Crypto listeners attached dynamically by renderPaymentMethods()
 
   // #17: Open bot button
   document.getElementById('open-bot-btn').addEventListener('click', () => {
