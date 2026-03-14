@@ -969,19 +969,32 @@
   const COURSE_KEY_MAP = { 'ai-automation':'course_a', 'ai-founders':'course_b', 'vibe-coding':'course_c' };
 
   const PAYMENT_CONFIG = {
-    sbp:  { phone:'+7 901 788 7835', bank:'Т Банк' },
-    alfa: { card:'2200 1545 3615 8834' },
-    visa: { card:'4441 1110 1656 7632' },
+    // 🇷🇺 Российские
+    sbp:      { phone:'+7 901 788 7835', bank:'Т Банк' },
+    alfa:     { card:'2200 1545 3615 8834' },
+    // 🌍 Международные карты
+    visa:     { card:'4441 1110 1656 7632' },
+    // 📱 Электронные переводы
+    paypal:   { email:'heist.ai.courses@gmail.com' },
+    venmo:    { handle:'@heist-ai' },
+    cashapp:  { cashtag:'$heistai' },
+    payoneer: { email:'heist.ai.courses@gmail.com' },
+    patreon:  { url:'patreon.com/heistai' },
+    // 🪙 Криптовалюта
     crypto: {
-      usdt_trc20:{ label:'USDT TRC-20', symbol:'₮', note:'⚠️ Только сеть Tron (TRC-20)', address:'TB5wc7of2D285aUhmWcEW4PAZHrssapb7A', qr:'usdt.jpg', bg:'rgba(38,161,123,0.1)' },
-      ton:       { label:'TON',          symbol:'💎', address:'UQAcdcKz4BXZ5MtIMbAnMKahBiiH6yaC4wT-qRPOZKi0mbah', qr:'ton.jpg', bg:'rgba(59,130,246,0.1)' },
-      usdt_erc20:{ label:'USDT ERC-20',  symbol:'₮', note:'⚠️ Только сеть Ethereum (ERC-20)', address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'usdterc.jpg', bg:'rgba(38,161,123,0.08)' },
-      usdt_bep20:{ label:'USDT BEP-20',  symbol:'₮', note:'⚠️ Только сеть BSC (BEP-20)', address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'usdtbep.jpg', bg:'rgba(243,186,47,0.1)' },
-      eth:       { label:'ETH',          symbol:'Ξ',  address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'eth.jpg', bg:'rgba(98,126,234,0.1)' },
-      bnb:       { label:'BNB',          symbol:'B',  address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'bnb.jpg', bg:'rgba(243,186,47,0.15)' },
-      btc:       { label:'Bitcoin',      symbol:'₿',  address:'1Motjp4tCnBCLKqaKEW9osSuT7Jw7tDaE4', qr:'btc.jpg', bg:'rgba(247,147,26,0.1)' },
-      sol:       { label:'Solana',       symbol:'◎',  address:'BHcaxUsu3p2jUyWGiKyMfyK9xym48FGp9EQbcGbPK2hB', qr:'sol.jpg', bg:'rgba(153,69,255,0.1)' },
-      ltc:       { label:'Litecoin',     symbol:'Ł',  address:'ltc1q754nddflyk8tsjd4y3gvy4gk8w3s74g44whkds', qr:'ltc.jpg', bg:'rgba(52,93,157,0.1)' },
+      // icon = иконка монеты/сети (.png), qr = QR-код (.jpg)
+      usdt_trc20:{ label:'USDT TRC-20', icon:'usdt.png',   note:'⚠️ Только сеть Tron (TRC-20)',       address:'TB5wc7of2D285aUhmWcEW4PAZHrssapb7A',              qr:'usdttrc.jpg',  bg:'rgba(38,161,123,0.1)' },
+      ton:       { label:'TON',          icon:'ton.png',    note:null,                                  address:'UQAcdcKz4BXZ5MtIMbAnMKahBiiH6yaC4wT-qRPOZKi0mbah', qr:'ton.jpg',      bg:'rgba(59,130,246,0.1)' },
+      usdt_erc20:{ label:'USDT ERC-20',  icon:'eth.png',    note:'⚠️ Только сеть Ethereum (ERC-20)',   address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68',         qr:'usdterc.jpg',  bg:'rgba(98,126,234,0.1)' },
+      usdt_bep20:{ label:'USDT BEP-20',  icon:'bnb.png',    note:'⚠️ Только сеть BSC (BEP-20)',        address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68',         qr:'usdtbep.jpg',  bg:'rgba(243,186,47,0.1)' },
+      usdt_pol:  { label:'USDT Polygon', icon:'matic.png',  note:'⚠️ Только сеть Polygon (MATIC)',     address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68',         qr:'usdtpol.jpg',  bg:'rgba(130,71,229,0.1)' },
+      eth:       { label:'ETH',          icon:'eth.png',    note:null,                                  address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68',         qr:'eth.jpg',      bg:'rgba(98,126,234,0.1)' },
+      bnb:       { label:'BNB',          icon:'bnb.png',    note:null,                                  address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68',         qr:'bnb.jpg',      bg:'rgba(243,186,47,0.15)' },
+      btc:       { label:'Bitcoin',      icon:'btc.png',    note:null,                                  address:'1Motjp4tCnBCLKqaKEW9osSuT7Jw7tDaE4',               qr:'btc.jpg',      bg:'rgba(247,147,26,0.1)' },
+      sol:       { label:'Solana',       icon:'sol.png',    note:null,                                  address:'BHcaxUsu3p2jUyWGiKyMfyK9xym48FGp9EQbcGbPK2hB',      qr:'sol.jpg',      bg:'rgba(153,69,255,0.1)' },
+      ltc:       { label:'Litecoin',     icon:'ltc.png',    note:null,                                  address:'ltc1q754nddflyk8tsjd4y3gvy4gk8w3s74g44whkds',       qr:'ltc.jpg',      bg:'rgba(52,93,157,0.1)' },
+      trx:       { label:'TRON (TRX)',   icon:'trx.png',    note:null,                                  address:'TB5wc7of2D285aUhmWcEW4PAZHrssapb7A',               qr:'usdttrc.jpg',  bg:'rgba(235,0,25,0.1)' },
+      monero:    { label:'Monero (XMR)', icon:'monero.png', note:'⚠️ Используй только сеть Monero',    address:'',                                                    qr:null,           bg:'rgba(255,102,0,0.1)' },
     }
   };
 
@@ -1555,22 +1568,8 @@
     });
   }
 
-  // Правка #44 — IntersectionObserver on buy button
-  function observeBuyBtn() {
-    const btn = document.getElementById('modal-buy-btn');
-    if (!btn||!window.IntersectionObserver) return;
-    const obs = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if (!e.isIntersecting) {
-          if (tg.MainButton&&!tg.MainButton.isVisible) {
-            tg.MainButton.setParams({ text:`Купить — ${currentCoursePrice.toLocaleString('ru-RU')} ₽`, color:'#6366F1', text_color:'#ffffff' });
-            tg.MainButton.show();
-          }
-        }
-      });
-    },{ threshold:0.5 });
-    obs.observe(btn);
-  }
+  // MainButton не используется нигде — только внутренняя кнопка
+  function observeBuyBtn() {}
 
   // =============================================
   // PAYMENT METHODS
@@ -1583,17 +1582,20 @@
   }
   function cryptoCoinHtml(key,coin,isOpen) {
     const id = `crypto-addr-${key}`;
+    // Иконка сети/монеты — .png; QR-код — .jpg
+    const iconHtml = coin.icon
+      ? `<img src="${coin.icon}" alt="${coin.label}" style="width:22px;height:22px;object-fit:contain;border-radius:4px;" loading="lazy" decoding="async">`
+      : `<span style="font-size:1rem;">₿</span>`;
     return `<div class="crypto-coin${isOpen?' active':''}" data-coin="${key}" style="margin-bottom:0.5rem;">
       <div class="crypto-coin-header">
-        <div class="crypto-coin-icon" style="background:${coin.bg};font-size:1rem;">${coin.symbol}</div>
+        <div class="crypto-coin-icon" style="background:${coin.bg};display:flex;align-items:center;justify-content:center;">${iconHtml}</div>
         <div class="crypto-coin-name">${coin.label}</div>
         <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
       </div>
       <div class="crypto-coin-details">
         ${coin.note?`<p style="font-size:0.7rem;color:var(--text-3);margin-bottom:0.5rem;">${coin.note}</p>`:''}
-        <div class="network-address" id="${id}">${coin.address}</div>
-        <button class="copy-btn" onclick="copyAddress('${id}',this)">${copyIcon()} Скопировать адрес</button>
-        ${coin.qr?`<div class="network-qr" style="margin-top:0.75rem;"><img src="${coin.qr}" alt="${coin.label} QR" loading="lazy" decoding="async"></div>`:''}
+        ${coin.address?`<div class="network-address" id="${id}">${coin.address}</div><button class="copy-btn" onclick="copyAddress('${id}',this)">${copyIcon()} Скопировать адрес</button>`:'<p style="font-size:0.78rem;color:var(--text-3);">Напиши нам для получения адреса → @heist_support</p>'}
+        ${coin.qr?`<div class="network-qr" style="margin-top:0.75rem;width:140px;height:140px;"><img src="${coin.qr}" alt="${coin.label} QR-код" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;border-radius:6px;"></div>`:''}
       </div>
     </div>`;
   }
@@ -1604,6 +1606,7 @@
     const c = PAYMENT_CONFIG;
     const cryptoKeys = Object.keys(c.crypto);
     container.innerHTML = `
+      <!-- 🇷🇺 Российские карты -->
       <div class="payment-section">
         <div class="payment-section-title">🇷🇺 Российские карты</div>
         <button class="payment-method" data-payment="sbp">
@@ -1622,21 +1625,69 @@
           ${requisiteHtml('alfa-card','Номер карты',c.alfa.card,'Скопировать номер карты')}
         </div>
       </div>
+
+      <!-- 🌍 Международные карты -->
       <div class="payment-section">
         <div class="payment-section-title">🌍 Международные карты</div>
         <button class="payment-method" data-payment="visa-mc">
           <div class="payment-method-icon" style="background:white;padding:8px;"><img src="visa.png" alt="Visa/MC" style="width:30px;height:30px;object-fit:contain;" loading="lazy"></div>
-          <div class="payment-method-info"><div class="payment-method-name">Visa / Mastercard</div><div class="payment-method-desc">Карты Молдова, Беларусь, Казахстан</div></div>${chevronSvg()}
+          <div class="payment-method-info"><div class="payment-method-name">Visa / Mastercard</div><div class="payment-method-desc">Молдова, Беларусь, Казахстан</div></div>${chevronSvg()}
         </button>
         <div class="payment-details" data-payment="visa-mc">
           ${requisiteHtml('visa-card','Номер карты',c.visa.card,'Скопировать номер карты')}
         </div>
       </div>
+
+      <!-- 📱 Электронные переводы -->
+      <div class="payment-section">
+        <div class="payment-section-title">📱 Электронные переводы</div>
+        <button class="payment-method" data-payment="paypal">
+          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="paypal.png" alt="PayPal" style="width:30px;height:30px;object-fit:contain;" loading="lazy" onerror="this.parentElement.innerHTML='<span style=\\'font-size:1.2rem;\\'>🅿️</span>'"></div>
+          <div class="payment-method-info"><div class="payment-method-name">PayPal</div><div class="payment-method-desc">Международные переводы</div></div>${chevronSvg()}
+        </button>
+        <div class="payment-details" data-payment="paypal">
+          ${requisiteHtml('paypal-email','Email для PayPal',c.paypal.email,'Скопировать email')}
+        </div>
+        <button class="payment-method" data-payment="venmo">
+          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="venmo.png" alt="Venmo" style="width:30px;height:30px;object-fit:contain;" loading="lazy" onerror="this.parentElement.innerHTML='<span style=\\'font-size:1.2rem;\\'>💙</span>'"></div>
+          <div class="payment-method-info"><div class="payment-method-name">Venmo</div><div class="payment-method-desc">Для пользователей США</div></div>${chevronSvg()}
+        </button>
+        <div class="payment-details" data-payment="venmo">
+          ${requisiteHtml('venmo-handle','Venmo handle',c.venmo.handle,'Скопировать handle')}
+        </div>
+        <button class="payment-method" data-payment="cashapp">
+          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="cashapp.png" alt="Cash App" style="width:30px;height:30px;object-fit:contain;" loading="lazy" onerror="this.parentElement.innerHTML='<span style=\\'font-size:1.2rem;\\'>💚</span>'"></div>
+          <div class="payment-method-info"><div class="payment-method-name">Cash App</div><div class="payment-method-desc">Для пользователей США и UK</div></div>${chevronSvg()}
+        </button>
+        <div class="payment-details" data-payment="cashapp">
+          ${requisiteHtml('cashapp-tag','$Cashtag',c.cashapp.cashtag,'Скопировать $Cashtag')}
+        </div>
+        <button class="payment-method" data-payment="payoneer">
+          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="payoneer.png" alt="Payoneer" style="width:30px;height:30px;object-fit:contain;" loading="lazy" onerror="this.parentElement.innerHTML='<span style=\\'font-size:1.2rem;\\'>🟠</span>'"></div>
+          <div class="payment-method-info"><div class="payment-method-name">Payoneer</div><div class="payment-method-desc">Международные переводы</div></div>${chevronSvg()}
+        </button>
+        <div class="payment-details" data-payment="payoneer">
+          ${requisiteHtml('payoneer-email','Email Payoneer',c.payoneer.email,'Скопировать email')}
+        </div>
+        <button class="payment-method" data-payment="patreon">
+          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="patreon.png" alt="Patreon" style="width:30px;height:30px;object-fit:contain;" loading="lazy" onerror="this.parentElement.innerHTML='<span style=\\'font-size:1.2rem;\\'>🎨</span>'"></div>
+          <div class="payment-method-info"><div class="payment-method-name">Patreon</div><div class="payment-method-desc">Поддержка через Patreon</div></div>${chevronSvg()}
+        </button>
+        <div class="payment-details" data-payment="patreon">
+          <div class="payment-requisite">
+            <div class="payment-requisite-label">Ссылка на Patreon</div>
+            <div class="payment-requisite-value" id="patreon-url">${c.patreon.url}</div>
+          </div>
+          <button class="copy-btn" onclick="copyAddress('patreon-url',this)">${copyIcon()} Скопировать ссылку</button>
+        </div>
+      </div>
+
+      <!-- 🪙 Криптовалюта -->
       <div class="payment-section">
         <div class="payment-section-title">🪙 Криптовалюта</div>
         <button class="expandable-toggle active" id="crypto-main-toggle">
-          <div class="payment-method-icon" style="background:rgba(38,161,123,0.1);font-size:1.3rem;">₮</div>
-          <div class="payment-method-info" style="text-align:left;"><div class="payment-method-name">Криптовалюта</div><div class="payment-method-desc">USDT · TON · ETH · BTC и др.</div></div>
+          <div class="payment-method-icon" style="background:rgba(38,161,123,0.1);padding:8px;"><img src="usdt.png" alt="Crypto" style="width:28px;height:28px;object-fit:contain;" loading="lazy" onerror="this.parentElement.innerHTML='<span style=\\'font-size:1.3rem;\\'>₮</span>'"></div>
+          <div class="payment-method-info" style="text-align:left;"><div class="payment-method-name">Криптовалюта</div><div class="payment-method-desc">USDT · TON · ETH · BTC · SOL и др.</div></div>
           <svg class="w-5 h-5 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
         </button>
         <div class="expandable-content active" id="crypto-coins-list">
@@ -1691,7 +1742,17 @@
   }
 
   function getMethodLabel(type) {
-    return { sbp:'СБП', alfa:'Альфа Банк', 'visa-mc':'Visa / Mastercard', crypto:'Криптовалюта' }[type] || type;
+    return {
+      'sbp':      'СБП',
+      'alfa':     'Альфа Банк',
+      'visa-mc':  'Visa / Mastercard',
+      'paypal':   'PayPal',
+      'venmo':    'Venmo',
+      'cashapp':  'Cash App',
+      'payoneer': 'Payoneer',
+      'patreon':  'Patreon',
+      'crypto':   'Криптовалюта',
+    }[type] || type;
   }
 
   // =============================================
