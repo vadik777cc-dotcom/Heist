@@ -161,6 +161,37 @@
       .glass-card:hover { transform:translateY(-6px) scale(1.01); box-shadow:0 24px 60px rgba(0,0,0,0.12); }
     }
 
+    /* ===== СВЕТЯЩИЕСЯ КАРТОЧКИ — постоянное свечение (как на сайте при hover) ===== */
+    .glow-purple {
+      box-shadow: 0 0 52px -8px rgba(139,92,246,0.45), 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.55) !important;
+      border-color: rgba(139,92,246,0.3) !important;
+    }
+    .glow-indigo {
+      box-shadow: 0 0 52px -8px rgba(99,102,241,0.42), 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.55) !important;
+      border-color: rgba(99,102,241,0.28) !important;
+    }
+    .glow-amber {
+      box-shadow: 0 0 52px -8px rgba(245,158,11,0.38), 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.55) !important;
+      border-color: rgba(245,158,11,0.28) !important;
+    }
+    /* Dark mode — stronger glow */
+    [data-theme="dark"] .glow-purple {
+      box-shadow: 0 0 70px -6px rgba(139,92,246,0.6), 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(139,92,246,0.15) !important;
+      border-color: rgba(139,92,246,0.45) !important;
+    }
+    [data-theme="dark"] .glow-indigo {
+      box-shadow: 0 0 70px -6px rgba(99,102,241,0.55), 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(99,102,241,0.15) !important;
+      border-color: rgba(99,102,241,0.4) !important;
+    }
+    [data-theme="dark"] .glow-amber {
+      box-shadow: 0 0 70px -6px rgba(245,158,11,0.5), 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(245,158,11,0.12) !important;
+      border-color: rgba(245,158,11,0.38) !important;
+    }
+    /* Hover — усиливает свечение */
+    .glow-purple:hover { box-shadow: 0 0 90px -4px rgba(139,92,246,0.65), 0 24px 60px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.7) !important; }
+    .glow-indigo:hover { box-shadow: 0 0 90px -4px rgba(99,102,241,0.6),  0 24px 60px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.7) !important; }
+    .glow-amber:hover  { box-shadow: 0 0 90px -4px rgba(245,158,11,0.55), 0 24px 60px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.7) !important; }
+
     /* ===== COURSE CARD ===== */
     .course-card {
       position:relative; border-radius:24px; padding:1.5rem;
@@ -571,7 +602,7 @@
     <div class="space-y-4">
 
       <!-- Course 1 — N8N (FEATURED) -->
-      <div class="course-card glass-card course-card-featured" style="--card-accent:rgba(139,92,246,0.35);">
+      <div class="course-card glass-card course-card-featured glow-purple" style="--card-accent:rgba(139,92,246,0.35);">
         <div class="badge-hit">🔥 ХИТ</div>
         <span class="mono-label" style="color:#8b5cf6;">AI AUTOMATION</span>
         <h3 style="font-size:1.05rem;font-weight:700;color:var(--text);">N8N: Архитектура AI-Агентов</h3>
@@ -600,7 +631,7 @@
       </div>
 
       <!-- Course 2 — AI Foundation -->
-      <div class="course-card glass-card" style="--card-accent:rgba(99,102,241,0.35);">
+      <div class="course-card glass-card glow-indigo" style="--card-accent:rgba(99,102,241,0.35);">
         <span class="mono-label" style="color:#6366f1;">AI FOUNDERS</span>
         <h3 style="font-size:1.05rem;font-weight:700;color:var(--text);">AI Foundation: База ИИ</h3>
         <p style="font-size:0.85rem;color:var(--text-3);line-height:1.55;">GPT-4, Claude, Llama, Mistral. От prompt engineering до первых платящих клиентов — за 4 недели.</p>
@@ -627,7 +658,7 @@
       </div>
 
       <!-- Course 3 — VibeCoding -->
-      <div class="course-card glass-card" style="--card-accent:rgba(245,158,11,0.35);">
+      <div class="course-card glass-card glow-amber" style="--card-accent:rgba(245,158,11,0.35);">
         <span class="mono-label" style="color:#d97706;">VIBE CODING</span>
         <h3 style="font-size:1.05rem;font-weight:700;color:var(--text);">VibeCoding: Код Без Программистов</h3>
         <p style="font-size:0.85rem;color:var(--text-3);line-height:1.55;">Делаешь веб-приложения без команды разработчиков. AI пишет код — ты управляешь.</p>
@@ -731,7 +762,7 @@
         </div>
 
         <!-- What you get -->
-        <div id="what-you-get" style="margin-top:1.25rem;padding:1.25rem;border-radius:20px;background:linear-gradient(135deg,rgba(248,250,252,0.8),rgba(238,242,255,0.8));border:1px solid rgba(15,23,42,0.06);">
+        <div id="what-you-get" style="margin-top:1.25rem;padding:1.25rem;border-radius:20px;background:var(--surface-3);border:1px solid var(--border);">
           <h4 style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;">Что ты умеешь после курса</h4>
           <div id="outcomes-list" class="grid gap-3"></div>
         </div>
@@ -848,50 +879,49 @@
   </div>
 
   <!-- ============================================
-       MODAL: Success (правка #1 — ИСПРАВЛЕННЫЙ ФЛОУ)
+       MODAL: Success — план действий после оплаты
   ============================================= -->
   <div id="paid-confirmation-modal" class="modal-overlay">
     <div class="modal-content" style="max-width:380px;text-align:center;padding:2rem;">
       <div class="paid-success-icon">
         <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       </div>
-      <h3 style="font-size:1.2rem;font-weight:700;color:var(--text);margin-top:1rem;margin-bottom:0.25rem;">🔥 Отличное решение!</h3>
-      <p style="font-size:0.85rem;color:var(--text-3);margin-bottom:0.5rem;">Осталось три шага — и ты внутри:</p>
+      <h3 style="font-size:1.2rem;font-weight:700;color:var(--text);margin-top:1rem;margin-bottom:0.25rem;">🔥 Оплата принята!</h3>
+      <p style="font-size:0.85rem;color:var(--text-3);margin-bottom:1rem;">Три шага — и доступ твой:</p>
 
       <div class="success-steps">
         <div class="success-step">
-          <div class="success-step-icon">📸</div>
+          <div class="success-step-icon">⚡️</div>
           <div>
             <div class="success-step-num">Шаг 1</div>
-            <div class="success-step-text">Сделай скриншот подтверждения оплаты в приложении банка</div>
+            <div class="success-step-text">Открой бота и нажми кнопку <strong>«⚡️ Активировать доступ»</strong></div>
           </div>
         </div>
         <div class="success-step">
-          <div class="success-step-icon">🤖</div>
+          <div class="success-step-icon">📸</div>
           <div>
             <div class="success-step-num">Шаг 2</div>
-            <div class="success-step-text">Бот уже получил уведомление и ждёт твой чек</div>
+            <div class="success-step-text">Отправь скриншот чека об оплате прямо в бот</div>
           </div>
         </div>
         <div class="success-step">
           <div class="success-step-icon">✅</div>
           <div>
             <div class="success-step-num">Шаг 3</div>
-            <div class="success-step-text">Отправь скриншот боту — доступ активируют за 30 минут</div>
+            <div class="success-step-text">Жди приглашения в закрытый канал — придёт за 30 минут</div>
           </div>
         </div>
       </div>
 
-      <!-- Правка #20 — review -->
+      <!-- review -->
       <div class="success-review">
         <div class="success-review-text">«Доступ пришёл через 20 минут. Куратор написал сам и помог с первым модулем»</div>
         <div class="success-review-author">— Дмитрий К., Москва · 60 000₽/мес</div>
       </div>
 
-      <!-- Правка #1 — кнопка которая вызывает sendData и закрывает апп -->
       <button class="btn-open-bot" id="send-data-btn">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.07-.19c-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.67-.52.36-.99.53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.75 4-1.74 6.68-2.88 8.03-3.43 3.82-1.59 4.61-1.87 5.13-1.87.11 0 .37.03.53.16.14.11.18.26.2.37.01.06.03.24.01.38z"/></svg>
-        Всё понял — открыть @heist_ai_bot
+        Открыть @heist_ai_bot
       </button>
     </div>
   </div>
@@ -1238,11 +1268,8 @@
     tg.enableClosingConfirmation();
     updateSupportStatus();
 
-    // Правка #4 — MainButton
-    if (tg.MainButton) {
-      tg.MainButton.setParams({ text:'Я оплатил ✓', color:'#6366F1', text_color:'#ffffff' });
-      tg.MainButton.show();
-    }
+    // MainButton скрыт — используем только внутреннюю кнопку (нет дублирования)
+    if (tg.MainButton) tg.MainButton.hide();
     if (tg.BackButton) tg.BackButton.show();
     tg.HapticFeedback.impactOccurred('medium');
     trackStep('open_payment', { course: currentCourse, price: currentCoursePrice });
@@ -1314,29 +1341,13 @@
     });
   }
 
-  // Правка #1 — кнопка в success-экране вызывает sendData и закрывает апп
+  // Кнопка "открыть бот" — просто открывает бота
   document.getElementById('send-data-btn').addEventListener('click', () => {
     tg.HapticFeedback.impactOccurred('medium');
-    const botCourseKey = COURSE_KEY_MAP[currentCourse] || currentCourse;
-    // Правка #6 — передаём ref и initData
-    const payload = {
-      course:        botCourseKey,
-      courseTitle:   currentCourseTitle,
-      price:         String(currentCoursePrice),
-      paymentMethod: selectedPaymentMethod,
-      ref:           urlRef,
-      initData:      tg.initData
-    };
-    // Правка #27 — progress indicator
-    const btn = document.getElementById('send-data-btn');
-    if (btn) { btn.disabled = true; btn.textContent = '⏳ Отправляем...'; }
-    setTimeout(() => {
-      tg.sendData(JSON.stringify(payload)); // закроет апп автоматически
-    }, 300);
+    tg.openTelegramLink('https://t.me/heist_ai_bot');
   });
 
-  // MainButton тоже вызывает confirmPayment
-  if (tg.MainButton) tg.MainButton.onClick(confirmPayment);
+  // MainButton не используется — вся логика через внутреннюю кнопку
 
   // Back button
   if (tg.BackButton) {
