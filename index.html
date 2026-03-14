@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -11,365 +11,507 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
+    /* =============================================
+       ПРАВКА #10 #36 — CSS переменные Light / Dark
+    ============================================= */
     :root {
       --primary: #6366F1;
-      --accent: #F59E0B;
+      --accent:  #F59E0B;
       --emerald: #10B981;
-      --purple: #8B5CF6;
-      --burgundy: #881337;
-      --dark: #0f172a;
+      --purple:  #8B5CF6;
+      --burgundy:#881337;
+
+      --bg:          #f8fafc;
+      --bg-gradient: linear-gradient(180deg,#f8fafc 0%,#eef2ff 40%,#e2e8f0 100%);
+      --surface:     rgba(255,255,255,0.9);
+      --surface-2:   rgba(255,255,255,0.85);
+      --surface-3:   rgba(248,250,252,0.9);
+      --card-bg:     rgba(255,255,255,0.85);
+      --card-border: rgba(255,255,255,0.7);
+      --text:        #0f172a;
+      --text-2:      #475569;
+      --text-3:      #64748b;
+      --text-4:      #94a3b8;
+      --border:      rgba(15,23,42,0.07);
+      --border-2:    rgba(0,0,0,0.05);
+      --progress-bg: rgba(248,250,252,0.95);
+      --modal-bg:    rgba(255,255,255,0.98);
+      --requisite-bg:rgba(255,255,255,0.9);
+      --copy-bg:     rgba(99,102,241,0.1);
+      --copy-color:  #6366f1;
+      --step-bg:     rgba(248,250,252,0.8);
+      --feature-bg:  rgba(255,255,255,0.8);
+      --success-bg:  rgba(248,250,252,0.8);
+      --overlay:     rgba(2,6,23,0.85);
+      --payment-overlay: rgba(2,6,23,0.6);
+      --network-addr:rgba(0,0,0,0.03);
+      --network-border:rgba(0,0,0,0.05);
+      --hero-bg:     rgba(99,102,241,0.06);
+      --hero-border: rgba(99,102,241,0.15);
+      --faq-bg:      rgba(248,250,252,0.8);
+      --compare-header: rgba(99,102,241,0.08);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    html { scroll-behavior: smooth; }
+    [data-theme="dark"] {
+      --bg:          #1c1c1e;
+      --bg-gradient: linear-gradient(180deg,#1c1c1e 0%,#1e1e2e 50%,#16161a 100%);
+      --surface:     rgba(44,44,46,0.95);
+      --surface-2:   rgba(44,44,46,0.9);
+      --surface-3:   rgba(54,54,58,0.9);
+      --card-bg:     rgba(44,44,46,0.92);
+      --card-border: rgba(255,255,255,0.08);
+      --text:        #f2f2f7;
+      --text-2:      #c7c7cc;
+      --text-3:      #aeaeb2;
+      --text-4:      #636366;
+      --border:      rgba(255,255,255,0.08);
+      --border-2:    rgba(255,255,255,0.06);
+      --progress-bg: rgba(28,28,30,0.98);
+      --modal-bg:    rgba(28,28,30,0.99);
+      --requisite-bg:rgba(54,54,58,0.9);
+      --copy-bg:     rgba(99,102,241,0.18);
+      --copy-color:  #818cf8;
+      --step-bg:     rgba(44,44,46,0.9);
+      --feature-bg:  rgba(54,54,58,0.8);
+      --success-bg:  rgba(44,44,46,0.9);
+      --overlay:     rgba(0,0,0,0.92);
+      --payment-overlay: rgba(0,0,0,0.8);
+      --network-addr:rgba(255,255,255,0.04);
+      --network-border:rgba(255,255,255,0.08);
+      --hero-bg:     rgba(99,102,241,0.12);
+      --hero-border: rgba(99,102,241,0.25);
+      --faq-bg:      rgba(44,44,46,0.8);
+      --compare-header: rgba(99,102,241,0.15);
+    }
+
+    * { box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+    html { scroll-behavior:smooth; }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 40%, #e2e8f0 100%);
-      color: #0f172a;
-      min-height: 100vh; min-height: 100dvh;
-      overflow-x: hidden;
-      padding-bottom: env(safe-area-inset-bottom);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      position: relative;
+      font-family:'Inter',system-ui,-apple-system,sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text);
+      min-height:100vh; min-height:100dvh;
+      overflow-x:hidden;
+      padding-bottom:env(safe-area-inset-bottom);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      position:relative;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .mono-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.25em;
-      text-transform: uppercase; color: #64748b; font-weight: 500;
+      font-family:'JetBrains Mono',monospace;
+      font-size:0.6rem; letter-spacing:0.25em;
+      text-transform:uppercase; color:var(--text-3); font-weight:500;
     }
 
-    /* ===== GRADIENTS — desktop only + prefers-reduced-motion ===== */
-    .gradient {
-      position: fixed; width: 520px; height: 520px;
-      filter: blur(150px); z-index: 0; pointer-events: none; will-change: auto;
-    }
-    .gradient-indigo { top: -120px; left: -120px; background: var(--primary); opacity: 0.15; }
-    .gradient-purple { bottom: 20%; right: -100px; background: var(--purple); opacity: 0.1; }
-    .gradient-burgundy { bottom: -120px; left: 50%; background: var(--burgundy); opacity: 0.08; }
+    /* ===== GRADIENTS ===== */
+    .gradient { position:fixed; width:520px; height:520px; filter:blur(150px); z-index:0; pointer-events:none; will-change:auto; }
+    .gradient-indigo  { top:-120px; left:-120px; background:var(--primary); opacity:0.15; }
+    .gradient-purple  { bottom:20%; right:-100px; background:var(--purple); opacity:0.1; }
+    .gradient-burgundy{ bottom:-120px; left:50%; background:var(--burgundy); opacity:0.08; }
+    [data-theme="dark"] .gradient-indigo   { opacity:0.1; }
+    [data-theme="dark"] .gradient-purple   { opacity:0.07; }
+    [data-theme="dark"] .gradient-burgundy { opacity:0.06; }
 
-    @media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
-      .gradient-indigo { animation: floatGradient 20s ease-in-out infinite; }
-      .gradient-purple { animation: floatGradient 25s ease-in-out infinite reverse; }
-      .gradient-burgundy { animation: floatGradient 30s ease-in-out infinite; }
-      @keyframes floatGradient {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        33% { transform: translate(30px, 30px) scale(1.05); }
-        66% { transform: translate(-20px, -20px) scale(0.95); }
-      }
+    @media (max-width:768px) {
+      .grid-overlay { display:none !important; }
+      .gradient { filter:blur(100px); opacity:0.08; }
     }
-
-    @media (max-width: 768px) {
-      .grid-overlay, .noise-overlay { display: none !important; }
-      .gradient { filter: blur(100px); opacity: 0.08; }
-    }
-
     .grid-overlay {
-      position: fixed; inset: 0;
-      background-image: linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(0deg, rgba(15,23,42,0.04) 1px, transparent 1px);
-      background-size: 120px 120px; opacity: 0.04; mix-blend-mode: soft-light; z-index: 1; pointer-events: none;
+      position:fixed; inset:0;
+      background-image:linear-gradient(90deg,rgba(15,23,42,0.04) 1px,transparent 1px),linear-gradient(0deg,rgba(15,23,42,0.04) 1px,transparent 1px);
+      background-size:120px 120px; opacity:0.04; mix-blend-mode:soft-light; z-index:1; pointer-events:none;
     }
 
     /* ===== PROGRESS BAR ===== */
     .progress-bar-wrap {
-      position: sticky; top: 0; z-index: 200;
-      background: rgba(248, 250, 252, 0.95);
-      border-bottom: 1px solid rgba(15,23,42,0.07);
-      padding: 0.75rem 1rem;
+      position:sticky; top:0; z-index:200;
+      background:var(--progress-bg);
+      border-bottom:1px solid var(--border);
+      padding:0.75rem 1rem;
+      backdrop-filter:blur(20px);
+      transition:background 0.3s;
     }
-    .progress-steps {
-      display: flex; align-items: center; justify-content: center;
-      gap: 0; max-width: 320px; margin: 0 auto;
-    }
-    .progress-step {
-      display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
-      flex: 1;
-    }
+    .progress-steps { display:flex; align-items:center; justify-content:center; gap:0; max-width:320px; margin:0 auto; }
+    .progress-step  { display:flex; flex-direction:column; align-items:center; gap:0.25rem; flex:1; }
     .progress-step-circle {
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 2px solid #e2e8f0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.65rem; font-weight: 700;
-      font-family: 'JetBrains Mono', monospace;
-      color: #94a3b8; background: white;
-      transition: all 0.3s ease;
+      width:28px; height:28px; border-radius:50%;
+      border:2px solid var(--border);
+      display:flex; align-items:center; justify-content:center;
+      font-size:0.65rem; font-weight:700; font-family:'JetBrains Mono',monospace;
+      color:var(--text-4); background:var(--surface);
+      transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
     }
-    .progress-step.active .progress-step-circle {
-      border-color: var(--primary); background: var(--primary); color: white;
-      box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
-    }
-    .progress-step.done .progress-step-circle {
-      border-color: var(--emerald); background: var(--emerald); color: white;
-    }
-    .progress-step-label {
-      font-size: 0.55rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.08em; color: #94a3b8; text-align: center;
-      transition: color 0.3s;
-    }
-    .progress-step.active .progress-step-label { color: var(--primary); }
-    .progress-step.done .progress-step-label { color: var(--emerald); }
-    .progress-connector {
-      flex: 1; height: 2px; background: #e2e8f0; margin-top: -14px;
-      transition: background 0.3s;
-    }
-    .progress-connector.done { background: var(--emerald); }
+    .progress-step.active .progress-step-circle { border-color:var(--primary); background:var(--primary); color:white; box-shadow:0 0 0 4px rgba(99,102,241,0.2); }
+    .progress-step.done   .progress-step-circle { border-color:var(--emerald); background:var(--emerald); color:white; }
+    .progress-step-label  { font-size:0.55rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-4); text-align:center; transition:color 0.3s; }
+    .progress-step.active .progress-step-label { color:var(--primary); }
+    .progress-step.done   .progress-step-label { color:var(--emerald); }
+    .progress-connector   { flex:1; height:2px; background:var(--border); margin-top:-14px; transition:background 0.4s; }
+    .progress-connector.done { background:var(--emerald); }
 
     /* ===== GLASS ===== */
-    .glass { background: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.65); box-shadow: 0 8px 32px rgba(0,0,0,0.04); }
-    .glass-card { background: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 8px 40px rgba(0,0,0,0.05); }
-
-    @media (min-width: 769px) {
-      .glass { backdrop-filter: blur(32px) saturate(180%); background: rgba(255,255,255,0.78); box-shadow: 0 8px 32px rgba(0,0,0,0.04), 0 25px 80px -35px rgba(99,102,241,0.25), inset 0 1px 0 rgba(255,255,255,0.8); }
-      .glass-card { backdrop-filter: blur(48px) saturate(200%); background: rgba(255,255,255,0.65); box-shadow: 0 8px 40px rgba(0,0,0,0.05), 0 35px 90px -70px rgba(99,102,241,0.35), inset 0 1px 0 rgba(255,255,255,0.3); filter: drop-shadow(0 35px 90px rgba(99,102,241,0.25)); transition: transform 0.55s cubic-bezier(0.16,0.67,0.4,1), box-shadow 0.55s, border-color 0.45s; }
-      .glass-card:hover { transform: translateY(-8px) scale(1.01); }
+    .glass      { background:var(--surface); border:1px solid var(--card-border); box-shadow:0 8px 32px rgba(0,0,0,0.04); }
+    .glass-card { background:var(--card-bg); border:1px solid var(--card-border); box-shadow:0 8px 40px rgba(0,0,0,0.05); transition:transform 0.35s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.35s; }
+    @media (min-width:769px) {
+      .glass      { backdrop-filter:blur(32px) saturate(180%); }
+      .glass-card { backdrop-filter:blur(48px) saturate(200%); }
+      .glass-card:hover { transform:translateY(-6px) scale(1.01); box-shadow:0 24px 60px rgba(0,0,0,0.12); }
     }
 
     /* ===== COURSE CARD ===== */
     .course-card {
-      position: relative; border-radius: 24px; padding: 1.5rem;
-      overflow: hidden; display: flex; flex-direction: column; gap: 1rem;
+      position:relative; border-radius:24px; padding:1.5rem;
+      overflow:hidden; display:flex; flex-direction:column; gap:1rem;
     }
     .course-card::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 30% 20%, var(--card-accent, rgba(99,102,241,0.35)), transparent 70%);
-      opacity: 0.45; z-index: 0;
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(circle at 30% 20%,var(--card-accent,rgba(99,102,241,0.35)),transparent 70%);
+      opacity:0.45; z-index:0;
     }
-    .course-card > * { position: relative; z-index: 1; }
+    .course-card > * { position:relative; z-index:1; }
 
-    /* ===== PRICE DISPLAY on cards ===== */
-    .card-price-row {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-top: auto;
+    /* Правка #37 #38 — featured card (N8N) */
+    .course-card-featured {
+      border:2px solid transparent !important;
+      background-clip:padding-box;
     }
-    .card-price {
-      font-size: 1.5rem; font-weight: 700; color: #0f172a;
-      letter-spacing: -0.04em; line-height: 1;
+    .course-card-featured::after {
+      content:''; position:absolute; inset:-2px; border-radius:26px;
+      background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 40%,#f59e0b 70%,#881337 100%);
+      z-index:-1; border-radius:26px;
     }
-    .card-price-old {
-      font-size: 0.8rem; color: #94a3b8; text-decoration: line-through;
-      font-weight: 500;
+    .badge-hit {
+      position:absolute; top:12px; right:12px; z-index:10;
+      background:linear-gradient(135deg,#f59e0b,#ea580c);
+      color:white; font-size:0.58rem; font-weight:700;
+      padding:3px 10px; border-radius:999px; letter-spacing:0.1em;
+      text-transform:uppercase; box-shadow:0 4px 12px rgba(245,158,11,0.4);
     }
+
+    /* Правка #16 — student counter on card */
+    .card-student-count {
+      display:inline-flex; align-items:center; gap:0.3rem;
+      font-size:0.7rem; color:var(--text-3); font-weight:500;
+    }
+
+    /* ===== PRICE ===== */
+    .card-price-row { display:flex; align-items:center; justify-content:space-between; margin-top:auto; }
+    .card-price     { font-size:1.5rem; font-weight:700; color:var(--text); letter-spacing:-0.04em; line-height:1; }
+    .card-price-old { font-size:0.8rem; color:var(--text-4); text-decoration:line-through; font-weight:500; }
     .card-select-btn {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.7rem 1.25rem; border-radius: 12px;
-      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em;
-      color: white; border: none; cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display:inline-flex; align-items:center; gap:0.4rem;
+      padding:0.7rem 1.25rem; border-radius:12px;
+      font-size:0.8rem; font-weight:700; letter-spacing:0.05em;
+      color:white; border:none; cursor:pointer;
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .card-select-btn:active { transform: scale(0.96); }
+    .card-select-btn:hover  { transform:translateY(-2px); }
+    .card-select-btn:active { transform:scale(0.96); }
 
     /* ===== BUTTONS ===== */
-    .btn-primary { background: linear-gradient(135deg, var(--accent) 0%, #ea580c 100%) !important; color: white !important; font-weight: 600; padding: 0.875rem 1.5rem; border-radius: 16px; border: none; font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
-    .btn-burgundy { background: linear-gradient(135deg, #881337 0%, #9f1239 50%, #7f1d1d 100%) !important; color: white !important; font-weight: 600; padding: 0.875rem 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.25); font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
-    .btn-deep-blue { background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 50%, #1e3a8a 100%) !important; color: white !important; font-weight: 600; padding: 0.875rem 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.25); font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
-    .btn-khaki { background: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f97316 100%) !important; color: white !important; font-weight: 600; padding: 0.875rem 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.25); font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
-    .btn-info { background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%) !important; color: white !important; font-weight: 600; padding: 0.875rem 1.5rem; border-radius: 16px; border: none; font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; }
+    .btn-burgundy  { background:linear-gradient(135deg,#881337,#9f1239,#7f1d1d)!important; color:white!important; font-weight:600; padding:0.875rem 1.5rem; border-radius:16px; border:1px solid rgba(255,255,255,0.25); font-size:0.875rem; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; }
+    .btn-deep-blue { background:linear-gradient(135deg,#1e3a5f,#1e40af,#1e3a8a)!important; color:white!important; font-weight:600; padding:0.875rem 1.5rem; border-radius:16px; border:1px solid rgba(255,255,255,0.25); font-size:0.875rem; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; }
+    .btn-khaki     { background:linear-gradient(135deg,#c2410c,#ea580c,#f97316)!important; color:white!important; font-weight:600; padding:0.875rem 1.5rem; border-radius:16px; border:1px solid rgba(255,255,255,0.25); font-size:0.875rem; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; }
+    .btn-info      { background:linear-gradient(135deg,#6366F1,#8B5CF6)!important; color:white!important; font-weight:600; padding:0.875rem 1.5rem; border-radius:16px; border:none; font-size:0.875rem; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; }
 
     .buy-inside-btn {
-      width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-      padding: 1rem 1.5rem; border-radius: 16px;
-      font-size: 0.9rem; font-weight: 700; letter-spacing: 0.03em;
-      color: white; border: none; cursor: pointer;
-      background: linear-gradient(135deg, #881337, #9f1239);
-      box-shadow: 0 8px 24px rgba(136,19,55,0.3);
+      width:100%; display:flex; align-items:center; justify-content:center; gap:0.5rem;
+      padding:1rem 1.5rem; border-radius:16px;
+      font-size:0.9rem; font-weight:700; letter-spacing:0.03em;
+      color:white; border:none; cursor:pointer;
+      background:linear-gradient(135deg,#6366f1,#4f46e5);
+      box-shadow:0 8px 24px rgba(99,102,241,0.35);
+      transition:transform 0.2s, box-shadow 0.2s;
     }
-    .buy-inside-btn:active { transform: scale(0.98); }
+    .buy-inside-btn:hover  { transform:translateY(-2px); box-shadow:0 12px 32px rgba(99,102,241,0.45); }
+    .buy-inside-btn:active { transform:scale(0.98); }
+
+    /* Правка #7 #15 — sticky paid button inside payment modal */
+    .paid-sticky-btn {
+      position:sticky; bottom:0; left:0; right:0; z-index:50;
+      width:100%; display:flex; align-items:center; justify-content:center; gap:0.5rem;
+      padding:1rem 1.5rem; border-radius:16px;
+      font-size:0.95rem; font-weight:700; letter-spacing:0.03em;
+      color:white; border:none; cursor:pointer;
+      background:linear-gradient(135deg,#6366f1,#4f46e5);
+      box-shadow:0 -4px 24px rgba(99,102,241,0.3), 0 8px 24px rgba(99,102,241,0.35);
+      margin-top:1.25rem;
+      transition:opacity 0.3s, transform 0.2s;
+    }
+    .paid-sticky-btn:disabled { opacity:0.45; cursor:not-allowed; }
+    .paid-sticky-btn:not(:disabled):hover  { transform:translateY(-2px); }
+    .paid-sticky-btn:not(:disabled):active { transform:scale(0.98); }
+
+    /* Правка #27 — MainButton progress */
+    .paid-sticky-btn .btn-spinner {
+      width:18px; height:18px; border:2px solid rgba(255,255,255,0.3);
+      border-top-color:white; border-radius:50%;
+      animation:spin 0.6s linear infinite; display:none;
+    }
+    .paid-sticky-btn.loading .btn-spinner { display:block; }
+    .paid-sticky-btn.loading .btn-text    { display:none; }
+    @keyframes spin { to { transform:rotate(360deg); } }
 
     /* ===== PAYMENT TIMER ===== */
-    .payment-timer {
-      display: flex; align-items: center; justify-content: center; gap: 0.75rem;
-      padding: 0.75rem 1rem; border-radius: 12px;
-      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2);
-      margin-bottom: 1rem;
-    }
-    .payment-timer-icon { font-size: 1.1rem; }
-    .payment-timer-text { font-size: 0.8rem; color: #92400e; font-weight: 600; }
-    .payment-timer-count {
-      font-family: 'JetBrains Mono', monospace; font-size: 1rem;
-      font-weight: 700; color: #b45309; letter-spacing: 0.05em;
-    }
+    .payment-timer { display:flex; align-items:center; justify-content:center; gap:0.75rem; padding:0.75rem 1rem; border-radius:12px; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2); margin-bottom:1rem; }
+    [data-theme="dark"] .payment-timer { background:rgba(245,158,11,0.12); border-color:rgba(245,158,11,0.25); }
+    .payment-timer-text  { font-size:0.8rem; color:#92400e; font-weight:600; }
+    .payment-timer-count { font-family:'JetBrains Mono',monospace; font-size:1rem; font-weight:700; color:#b45309; letter-spacing:0.05em; }
+    [data-theme="dark"] .payment-timer-text  { color:#fbbf24; }
+    [data-theme="dark"] .payment-timer-count { color:#f59e0b; }
 
-    .badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.03em; }
-    .badge-guarantee { background: rgba(16,185,129,0.15); color: #059669; border: 1px solid rgba(16,185,129,0.2); }
+    .badge-guarantee { background:rgba(16,185,129,0.15); color:#059669; border:1px solid rgba(16,185,129,0.2); display:inline-flex; align-items:center; gap:0.5rem; padding:0.5rem 1rem; border-radius:999px; font-size:0.75rem; font-weight:600; letter-spacing:0.03em; }
+    [data-theme="dark"] .badge-guarantee { background:rgba(16,185,129,0.12); color:#34d399; border-color:rgba(52,211,153,0.2); }
 
-    .feature-item { display: flex; align-items: flex-start; gap: 0.875rem; margin-bottom: 0.875rem; padding: 0.5rem; border-radius: 12px; }
-    .feature-check { width: 22px; height: 22px; border-radius: 50%; background: var(--emerald); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
+    .feature-item  { display:flex; align-items:flex-start; gap:0.875rem; margin-bottom:0.875rem; padding:0.5rem; border-radius:12px; }
+    .feature-check { width:22px; height:22px; border-radius:50%; background:var(--emerald); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; box-shadow:0 4px 12px rgba(16,185,129,0.3); }
 
     /* ===== MODAL ===== */
-    .modal-overlay {
-      position: fixed; inset: 0; background: rgba(2,6,23,0);
-      z-index: 1000; opacity: 0; visibility: hidden;
-      overflow-y: auto; -webkit-overflow-scrolling: touch;
-      transition: opacity 0.2s ease, visibility 0.2s ease, background 0.2s ease;
-    }
-    .modal-overlay.active { opacity: 1; visibility: visible; background: rgba(2,6,23,0.85); }
-    #payment-modal.active { background: rgba(2,6,23,0.6); }
+    .modal-overlay { position:fixed; inset:0; background:rgba(2,6,23,0); z-index:1000; opacity:0; visibility:hidden; overflow-y:auto; -webkit-overflow-scrolling:touch; transition:opacity 0.2s ease,visibility 0.2s ease,background 0.2s ease; }
+    .modal-overlay.active { opacity:1; visibility:visible; background:var(--overlay); }
+    #payment-modal.active { background:var(--payment-overlay); }
     .modal-content {
-      width: 92vw; max-width: 480px; margin: 2rem auto;
-      background: rgba(255,255,255,0.98); border-radius: 28px; padding: 1.5rem;
-      position: relative; border: 1px solid rgba(255,255,255,0.7);
-      box-shadow: 0 70px 200px -80px rgba(15,23,42,0.55);
-      max-height: 88vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
-      -ms-overflow-style: none; scrollbar-width: none;
+      width:92vw; max-width:480px; margin:2rem auto;
+      background:var(--modal-bg); border-radius:28px; padding:1.5rem;
+      position:relative; border:1px solid var(--border);
+      box-shadow:0 70px 200px -80px rgba(15,23,42,0.55);
+      max-height:88vh; overflow-y:auto; -webkit-overflow-scrolling:touch;
+      -ms-overflow-style:none; scrollbar-width:none;
+      transition:background 0.3s;
     }
-    .modal-content::-webkit-scrollbar { display: none; }
+    .modal-content::-webkit-scrollbar { display:none; }
+    @media (max-width:480px) { .modal-content { width:95vw; margin:1rem auto; padding:1.25rem; border-radius:24px; max-height:92vh; } }
 
-    @media (max-width: 480px) {
-      .modal-content { width: 95vw; margin: 1rem auto; padding: 1.25rem; border-radius: 24px; max-height: 92vh; }
-    }
+    .close-modal { position:absolute; top:1rem; right:0.8rem; width:32px; height:32px; border-radius:50%; background:var(--surface); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:10; }
+    .close-modal svg { width:20px; height:20px; color:var(--text-3); }
 
-    .close-modal {
-      position: absolute; top: 1rem; right: 0.8rem;
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.2);
-      display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10;
-    }
-    .close-modal svg { width: 20px; height: 20px; color: rgba(100,116,139,0.6); }
-
-    /* ===== CAROUSEL & SKELETON ===== */
-    .carousel-container {
-      position: relative; width: 100%; aspect-ratio: 16/9;
-      border-radius: 16px; overflow: hidden; margin-bottom: 1.5rem;
-      background: #e2e8f0;
-    }
-    .carousel-skeleton {
-      position: absolute; inset: 0;
-      background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
-      background-size: 200% 100%;
-      animation: skeletonShimmer 1.5s infinite;
-    }
-    @keyframes skeletonShimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .carousel-skeleton { animation: none; background: #e2e8f0; }
-    }
-    .carousel-slide {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      opacity: 0; object-fit: cover; object-position: center;
-      background: transparent;
-    }
-    .carousel-slide.active { opacity: 1; }
-    .carousel-slide.loaded { transition: opacity 0.4s ease; }
-    .carousel-nav { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: #E5E7EB; cursor: pointer; transition: all 0.3s; }
-    .carousel-dot.active { background: #4F46E5; transform: scale(1.3); }
+    /* ===== CAROUSEL ===== */
+    .carousel-container { position:relative; width:100%; aspect-ratio:16/9; border-radius:16px; overflow:hidden; margin-bottom:1.5rem; background:var(--surface-3); }
+    .carousel-skeleton { position:absolute; inset:0; background:linear-gradient(90deg,var(--surface-3) 25%,var(--surface) 50%,var(--surface-3) 75%); background-size:200% 100%; animation:skeletonShimmer 1.5s infinite; }
+    @keyframes skeletonShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    @media (prefers-reduced-motion:reduce) { .carousel-skeleton { animation:none; } }
+    .carousel-slide { position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; object-fit:cover; object-position:center; }
+    .carousel-slide.active { opacity:1; }
+    .carousel-slide.loaded { transition:opacity 0.4s ease; }
+    .carousel-nav  { display:flex; justify-content:center; gap:0.5rem; margin-bottom:1.5rem; }
+    .carousel-dot  { width:8px; height:8px; border-radius:50%; background:var(--border); cursor:pointer; transition:all 0.3s; border:none; padding:0; }
+    .carousel-dot.active { background:var(--primary); transform:scale(1.3); }
 
     /* ===== MODULE STEPS ===== */
-    .module-step { position: relative; display: flex; gap: 1rem; padding: 1.25rem; background: white; border: 1px solid #E5E7EB; border-radius: 16px; margin-bottom: 0.5rem; }
-    .module-number { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #EEF2FF; border: 1px solid #E0E7FF; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 500; color: #4F46E5; flex-shrink: 0; }
-    .stepper-line { position: absolute; left: 2.375rem; top: 100%; width: 2px; height: 1rem; background: #E5E7EB; }
+    .module-step     { position:relative; display:flex; gap:1rem; padding:1.25rem; background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:0.5rem; }
+    .module-number   { display:flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; background:rgba(99,102,241,0.1); border:1px solid rgba(99,102,241,0.2); font-family:'JetBrains Mono',monospace; font-size:0.8rem; font-weight:500; color:#6366f1; flex-shrink:0; }
+    .stepper-line    { position:absolute; left:2.375rem; top:100%; width:2px; height:1rem; background:var(--border); }
 
     /* ===== OUTCOME ===== */
-    .outcome-item { display: flex; gap: 0.75rem; align-items: flex-start; }
-    .outcome-icon { width: 40px; height: 40px; border-radius: 50%; background: #EEF2FF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.25rem; }
-    .outcome-title { font-weight: 600; color: #0F172A; font-size: 0.9rem; margin-bottom: 0.25rem; }
-    .outcome-desc { font-size: 0.75rem; color: #6B7280; line-height: 1.4; }
+    .outcome-item  { display:flex; gap:0.75rem; align-items:flex-start; }
+    .outcome-icon  { width:40px; height:40px; border-radius:50%; background:rgba(99,102,241,0.1); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.25rem; }
+    .outcome-title { font-weight:600; color:var(--text); font-size:0.9rem; margin-bottom:0.25rem; }
+    .outcome-desc  { font-size:0.75rem; color:var(--text-3); line-height:1.4; }
 
     /* ===== PAYMENT METHODS ===== */
-    .payment-section { margin-bottom: 0.75rem; }
-    .payment-section-title { font-size: 0.7rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; padding-left: 0.25rem; }
-
-    .payment-method {
-      display: flex; align-items: center; gap: 0.75rem;
-      padding: 0.875rem 1rem;
-      background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.05);
-      border-radius: 14px; cursor: pointer; margin-bottom: 0.5rem;
-      width: 100%;
-      /* #13: 44px min tap zone */
-      min-height: 60px;
-    }
-    .payment-method.active { border-radius: 14px 14px 0 0; margin-bottom: 0; border-bottom: none; }
-    .payment-method-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
-    .payment-method-info { flex: 1; text-align: left; }
-    .payment-method-name { font-weight: 600; color: var(--dark); font-size: 0.9rem; }
-    .payment-method-desc { font-size: 0.72rem; color: #64748b; }
-    .payment-method-arrow { color: #94a3b8; transition: transform 0.3s; }
-    .payment-method.active .payment-method-arrow { transform: rotate(180deg); }
-    .payment-details { display: none; background: rgba(248,250,252,0.9); border: 1px solid rgba(0,0,0,0.05); border-top: none; border-radius: 0 0 14px 14px; padding: 1rem; margin-bottom: 0.5rem; }
-    .payment-details.active { display: block; }
-    .payment-requisite { background: rgba(255,255,255,0.9); border-radius: 10px; padding: 0.75rem; margin-bottom: 0.5rem; }
-    .payment-requisite-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
-    .payment-requisite-value { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; word-break: break-all; color: var(--dark); }
-
-    /* copy button — min 44×44 tap zone */
-    .copy-btn {
-      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-      width: 100%; padding: 0.75rem 0.5rem; min-height: 44px;
-      background: rgba(99,102,241,0.1); color: var(--primary);
-      border: none; border-radius: 10px; font-size: 0.8rem; font-weight: 600;
-      cursor: pointer; margin-top: 0.5rem; transition: background 0.2s;
-    }
-    .copy-btn:active { background: rgba(99,102,241,0.2); }
-    .copy-btn.copied { background: rgba(16,185,129,0.2); color: var(--emerald); }
+    .payment-section { margin-bottom:0.75rem; }
+    .payment-section-title { font-size:0.7rem; font-weight:600; color:var(--text-3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem; padding-left:0.25rem; }
+    .payment-method { display:flex; align-items:center; gap:0.75rem; padding:0.875rem 1rem; background:var(--feature-bg); border:1px solid var(--border-2); border-radius:14px; cursor:pointer; margin-bottom:0.5rem; width:100%; min-height:60px; transition:border-color 0.2s, background 0.2s; }
+    .payment-method.active { border-radius:14px 14px 0 0; margin-bottom:0; border-bottom:none; border-color:var(--primary); }
+    /* Правка #8 — shake animation */
+    .payment-method.shake { animation:shake 0.4s ease; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+    .payment-method-icon   { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0; }
+    .payment-method-info   { flex:1; text-align:left; }
+    .payment-method-name   { font-weight:600; color:var(--text); font-size:0.9rem; }
+    .payment-method-desc   { font-size:0.72rem; color:var(--text-3); }
+    .payment-method-arrow  { color:var(--text-4); transition:transform 0.3s; }
+    .payment-method.active .payment-method-arrow { transform:rotate(180deg); }
+    .payment-details       { display:none; background:var(--surface-3); border:1px solid var(--border-2); border-top:none; border-radius:0 0 14px 14px; padding:1rem; margin-bottom:0.5rem; }
+    .payment-details.active{ display:block; }
+    .payment-requisite     { background:var(--requisite-bg); border-radius:10px; padding:0.75rem; margin-bottom:0.5rem; }
+    .payment-requisite-label{ font-size:0.7rem; color:var(--text-3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.25rem; }
+    .payment-requisite-value{ font-family:'JetBrains Mono',monospace; font-size:0.85rem; word-break:break-all; color:var(--text); }
+    .copy-btn { display:flex; align-items:center; justify-content:center; gap:0.5rem; width:100%; padding:0.75rem 0.5rem; min-height:44px; background:var(--copy-bg); color:var(--copy-color); border:none; border-radius:10px; font-size:0.8rem; font-weight:600; cursor:pointer; margin-top:0.5rem; transition:background 0.2s; }
+    .copy-btn:active { background:rgba(99,102,241,0.2); }
+    .copy-btn.copied { background:rgba(16,185,129,0.2); color:var(--emerald); }
 
     /* ===== CRYPTO ===== */
-    .expandable-toggle { display: flex; align-items: center; gap: 0.75rem; padding: 0.875rem 1rem; background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.05); border-radius: 14px; cursor: pointer; margin-bottom: 0.5rem; width: 100%; min-height: 60px; }
-    .expandable-toggle.active { border-radius: 14px 14px 0 0; margin-bottom: 0; border-bottom: none; }
-    .expandable-toggle .chevron { color: #94a3b8; transition: transform 0.3s; margin-left: auto; }
-    .expandable-toggle.active .chevron { transform: rotate(180deg); }
-    .expandable-content { display: none; background: rgba(248,250,252,0.9); border: 1px solid rgba(0,0,0,0.05); border-top: none; border-radius: 0 0 14px 14px; padding: 0.75rem; margin-bottom: 0.5rem; }
-    .expandable-content.active { display: block; }
-
-    .crypto-coin { background: rgba(255,255,255,0.9); border-radius: 12px; margin-bottom: 0.5rem; overflow: hidden; }
-    .crypto-coin-header { display: flex; align-items: center; gap: 0.75rem; padding: 0.875rem 1rem; cursor: pointer; min-height: 52px; }
-    .crypto-coin-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
-    .crypto-coin-name { flex: 1; font-weight: 600; font-size: 0.9rem; color: var(--dark); }
-    .crypto-coin-symbol { font-size: 0.75rem; color: #64748b; font-family: 'JetBrains Mono', monospace; }
-    .crypto-coin-chevron { color: #94a3b8; transition: transform 0.3s; }
-    .crypto-coin.active .crypto-coin-chevron { transform: rotate(180deg); }
-    .crypto-coin-details { display: none; padding: 0 1rem 1rem; }
-    .crypto-coin.active .crypto-coin-details { display: block; }
-
-    .network-item { background: rgba(248,250,252,0.9); border-radius: 10px; margin-bottom: 0.5rem; overflow: hidden; }
-    .network-item-header { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; cursor: pointer; font-size: 0.85rem; font-weight: 500; color: var(--dark); min-height: 44px; }
-    .network-item-chevron { margin-left: auto; color: #94a3b8; transition: transform 0.3s; }
-    .network-item.active .network-item-chevron { transform: rotate(180deg); }
-    .network-item-details { display: none; padding: 0 0.75rem 0.75rem; }
-    .network-item.active .network-item-details { display: block; }
-    .network-address { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; word-break: break-all; background: rgba(0,0,0,0.03); padding: 0.75rem; border-radius: 8px; margin-bottom: 0.75rem; border: 1px solid rgba(0,0,0,0.05); }
-    .network-qr { width: 120px; height: 120px; margin: 0 auto; padding: 0.5rem; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .network-qr img { width: 100%; height: 100%; object-fit: contain; }
+    .expandable-toggle  { display:flex; align-items:center; gap:0.75rem; padding:0.875rem 1rem; background:var(--feature-bg); border:1px solid var(--border-2); border-radius:14px; cursor:pointer; margin-bottom:0.5rem; width:100%; min-height:60px; }
+    .expandable-toggle.active { border-radius:14px 14px 0 0; margin-bottom:0; border-bottom:none; }
+    .expandable-toggle .chevron { color:var(--text-4); transition:transform 0.3s; margin-left:auto; }
+    .expandable-toggle.active .chevron { transform:rotate(180deg); }
+    .expandable-content { display:none; background:var(--surface-3); border:1px solid var(--border-2); border-top:none; border-radius:0 0 14px 14px; padding:0.75rem; margin-bottom:0.5rem; }
+    .expandable-content.active { display:block; }
+    .crypto-coin        { background:var(--surface); border-radius:12px; margin-bottom:0.5rem; overflow:hidden; }
+    .crypto-coin-header { display:flex; align-items:center; gap:0.75rem; padding:0.875rem 1rem; cursor:pointer; min-height:52px; }
+    .crypto-coin-icon   { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+    .crypto-coin-name   { flex:1; font-weight:600; font-size:0.9rem; color:var(--text); }
+    .crypto-coin-chevron{ color:var(--text-4); transition:transform 0.3s; }
+    .crypto-coin.active .crypto-coin-chevron { transform:rotate(180deg); }
+    .crypto-coin-details{ display:none; padding:0 1rem 1rem; }
+    .crypto-coin.active .crypto-coin-details { display:block; }
+    .network-address { font-family:'JetBrains Mono',monospace; font-size:0.7rem; word-break:break-all; background:var(--network-addr); padding:0.75rem; border-radius:8px; margin-bottom:0.75rem; border:1px solid var(--network-border); color:var(--text); }
+    .network-qr      { width:120px; height:120px; margin:0 auto; padding:0.5rem; background:white; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+    .network-qr img  { width:100%; height:100%; object-fit:contain; }
 
     /* ===== SUCCESS SCREEN ===== */
-    .paid-success-icon { width: 80px; height: 80px; margin: 0 auto; background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(5,150,105,0.1)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--emerald); }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .paid-success-icon { animation: pulseSuccess 2s ease-in-out infinite; }
-      @keyframes pulseSuccess {
-        0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
-        50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(16,185,129,0); }
-      }
+    .paid-success-icon { width:80px; height:80px; margin:0 auto; background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(5,150,105,0.1)); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--emerald); }
+    @media (prefers-reduced-motion:no-preference) {
+      .paid-success-icon { animation:pulseSuccess 2s ease-in-out infinite; }
+      @keyframes pulseSuccess { 0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(16,185,129,0.4)} 50%{transform:scale(1.05);box-shadow:0 0 0 15px rgba(16,185,129,0)} }
     }
+    .success-steps    { text-align:left; margin:1.25rem 0; display:flex; flex-direction:column; gap:0.75rem; }
+    .success-step     { display:flex; align-items:flex-start; gap:0.875rem; padding:0.875rem; background:var(--success-bg); border-radius:14px; border:1px solid var(--border); }
+    .success-step-icon{ width:36px; height:36px; border-radius:10px; background:rgba(99,102,241,0.1); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+    .success-step-num { font-family:'JetBrains Mono',monospace; font-size:0.55rem; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.15em; margin-bottom:0.15rem; }
+    .success-step-text{ font-size:0.85rem; font-weight:600; color:var(--text); line-height:1.4; }
+    .btn-open-bot     { display:flex; align-items:center; justify-content:center; gap:0.5rem; width:100%; padding:1rem 1.5rem; border-radius:16px; font-size:0.9rem; font-weight:700; background:linear-gradient(135deg,#0088cc,#0077b5); color:white; border:none; cursor:pointer; box-shadow:0 8px 24px rgba(0,136,204,0.3); margin-top:1rem; }
+    .btn-open-bot:active { transform:scale(0.98); }
 
-    /* 3-step instructions */
-    .success-steps { text-align: left; margin: 1.25rem 0; display: flex; flex-direction: column; gap: 0.75rem; }
-    .success-step { display: flex; align-items: flex-start; gap: 0.875rem; padding: 0.875rem; background: rgba(248,250,252,0.8); border-radius: 14px; border: 1px solid rgba(15,23,42,0.06); }
-    .success-step-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(99,102,241,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-    .success-step-num { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.15rem; }
-    .success-step-text { font-size: 0.85rem; font-weight: 600; color: #0f172a; line-height: 1.4; }
+    /* Правка #40 — confetti */
+    .confetti-wrap { position:fixed; inset:0; pointer-events:none; z-index:9999; overflow:hidden; }
+    .confetti-piece { position:absolute; width:8px; height:8px; top:-10px; border-radius:2px; animation:confettiFall linear forwards; }
+    @keyframes confettiFall { to { transform:translateY(110vh) rotate(720deg); opacity:0; } }
 
-    .btn-open-bot {
-      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-      width: 100%; padding: 1rem 1.5rem; border-radius: 16px;
-      font-size: 0.9rem; font-weight: 700;
-      background: linear-gradient(135deg, #0088cc, #0077b5);
-      color: white; border: none; cursor: pointer;
-      box-shadow: 0 8px 24px rgba(0,136,204,0.3); margin-top: 1rem;
+    /* ===== ПРАВКА #11 — Hero stats block ===== */
+    .hero-stats {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem;
+      background:var(--hero-bg); border:1px solid var(--hero-border);
+      border-radius:20px; padding:1rem; margin-bottom:1.25rem;
     }
-    .btn-open-bot:active { transform: scale(0.98); }
+    .hero-stat { text-align:center; }
+    .hero-stat-val  { font-size:1.1rem; font-weight:700; color:var(--text); letter-spacing:-0.03em; }
+    .hero-stat-label{ font-size:0.6rem; color:var(--text-3); margin-top:0.15rem; font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; text-transform:uppercase; }
+
+    /* Правка #28 — FOMO banner */
+    .fomo-banner {
+      background:linear-gradient(135deg,rgba(136,19,55,0.1),rgba(99,102,241,0.1));
+      border:1px solid rgba(136,19,55,0.2); border-radius:14px;
+      padding:0.75rem 1rem; margin-bottom:1rem;
+      display:flex; align-items:center; justify-content:space-between; gap:0.5rem;
+    }
+    .fomo-banner-text { font-size:0.78rem; font-weight:600; color:var(--text-2); }
+    .fomo-banner-badge{ font-size:0.62rem; font-weight:700; background:rgba(136,19,55,0.15); color:#9f1239; padding:0.25rem 0.6rem; border-radius:999px; white-space:nowrap; }
+    [data-theme="dark"] .fomo-banner-badge { color:#fb7185; }
+
+    /* Правка #19 — compare table */
+    .compare-table { width:100%; border-collapse:separate; border-spacing:0; font-size:0.78rem; }
+    .compare-table th { background:var(--compare-header); color:var(--text-2); padding:0.6rem 0.5rem; text-align:center; font-weight:600; font-size:0.7rem; }
+    .compare-table th:first-child { text-align:left; border-radius:10px 0 0 0; }
+    .compare-table th:last-child  { border-radius:0 10px 0 0; }
+    .compare-table td { padding:0.55rem 0.5rem; text-align:center; color:var(--text-2); border-bottom:1px solid var(--border); }
+    .compare-table td:first-child { text-align:left; font-weight:600; color:var(--text); }
+    .compare-table tr:last-child td { border-bottom:none; }
+
+    /* Правка #12 — student case block */
+    .case-block { background:var(--surface-3); border:1px solid var(--border); border-radius:16px; padding:1rem; margin-top:1rem; }
+    .case-block-quote { font-size:0.82rem; color:var(--text-2); line-height:1.55; font-style:italic; margin-bottom:0.6rem; }
+    .case-block-author{ display:flex; align-items:center; gap:0.5rem; }
+    .case-block-avatar{ width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:700; color:white; flex-shrink:0; }
+    .case-block-name  { font-size:0.78rem; font-weight:700; color:var(--text); }
+    .case-block-result{ font-size:0.68rem; color:var(--emerald); font-weight:600; }
+
+    /* Правка #13 — what's included */
+    .included-block { background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(139,92,246,0.06)); border:1px solid rgba(99,102,241,0.15); border-radius:16px; padding:1rem; margin-top:1rem; }
+    .included-item  { display:flex; align-items:flex-start; gap:0.6rem; padding:0.4rem 0; font-size:0.82rem; color:var(--text-2); }
+    .included-icon  { width:22px; height:22px; border-radius:6px; background:rgba(99,102,241,0.12); display:flex; align-items:center; justify-content:center; font-size:0.75rem; flex-shrink:0; }
+
+    /* Правка #14 — for whom */
+    .forwhom-grid   { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-top:1rem; }
+    .forwhom-col    { border-radius:14px; padding:0.875rem; }
+    .forwhom-col.yes{ background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.18); }
+    .forwhom-col.no { background:rgba(239,68,68,0.06);  border:1px solid rgba(239,68,68,0.15); }
+    .forwhom-title  { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem; }
+    .forwhom-col.yes .forwhom-title { color:#059669; }
+    .forwhom-col.no  .forwhom-title { color:#dc2626; }
+    .forwhom-item   { font-size:0.75rem; color:var(--text-2); line-height:1.45; margin-bottom:0.3rem; display:flex; gap:0.35rem; }
+
+    /* Правка #15 — FAQ accordion */
+    .faq-item  { border:1px solid var(--border); border-radius:12px; margin-bottom:0.5rem; overflow:hidden; }
+    .faq-q     { display:flex; align-items:center; justify-content:space-between; padding:0.875rem 1rem; cursor:pointer; font-size:0.85rem; font-weight:600; color:var(--text); background:var(--faq-bg); gap:0.5rem; min-height:44px; }
+    .faq-q svg { flex-shrink:0; color:var(--text-4); transition:transform 0.3s; }
+    .faq-item.open .faq-q svg { transform:rotate(180deg); }
+    .faq-a     { display:none; padding:0.75rem 1rem; font-size:0.8rem; color:var(--text-3); line-height:1.55; background:var(--surface); }
+    .faq-item.open .faq-a { display:block; }
+
+    /* Правка #23 — ROI block */
+    .roi-block { background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(5,150,105,0.05)); border:1px solid rgba(16,185,129,0.18); border-radius:14px; padding:1rem; margin-top:1rem; }
+    .roi-row   { display:flex; justify-content:space-between; align-items:center; padding:0.3rem 0; font-size:0.82rem; }
+    .roi-label { color:var(--text-3); }
+    .roi-val   { font-weight:700; color:var(--text); font-family:'JetBrains Mono',monospace; }
+    .roi-val.green { color:var(--emerald); }
+    .roi-divider { border:none; border-top:1px solid var(--border); margin:0.5rem 0; }
+
+    /* Правка #24 — timeline */
+    .timeline     { margin-top:1rem; display:flex; flex-direction:column; gap:0; }
+    .timeline-row { display:flex; align-items:flex-start; gap:0.75rem; padding-bottom:1rem; position:relative; }
+    .timeline-row:not(:last-child)::before { content:''; position:absolute; left:10px; top:22px; bottom:0; width:2px; background:var(--border); }
+    .timeline-dot { width:22px; height:22px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:0.55rem; color:white; font-weight:700; z-index:1; }
+    .timeline-label { font-size:0.68rem; font-weight:700; color:var(--primary); font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.05em; }
+    .timeline-text  { font-size:0.8rem; color:var(--text-2); margin-top:0.1rem; line-height:1.4; }
+
+    /* Правка #25 — tools strip */
+    .tools-strip { display:flex; gap:0.5rem; overflow-x:auto; padding:0.5rem 0 0.75rem; scrollbar-width:none; }
+    .tools-strip::-webkit-scrollbar { display:none; }
+    .tool-chip { display:inline-flex; align-items:center; gap:0.35rem; padding:0.35rem 0.75rem; background:var(--surface-3); border:1px solid var(--border); border-radius:999px; font-size:0.72rem; font-weight:600; color:var(--text-2); white-space:nowrap; flex-shrink:0; }
+
+    /* Правка #17 — guarantee block */
+    .guarantee-block { background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.18); border-radius:14px; padding:0.875rem 1rem; margin-bottom:1rem; display:flex; align-items:center; gap:0.75rem; }
+    .guarantee-icon  { width:36px; height:36px; border-radius:10px; background:rgba(16,185,129,0.15); display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+    .guarantee-title { font-size:0.85rem; font-weight:700; color:var(--text); }
+    .guarantee-desc  { font-size:0.72rem; color:var(--text-3); margin-top:0.1rem; }
+
+    /* Правка #18 — support status */
+    .support-status { display:flex; align-items:center; gap:0.5rem; padding:0.6rem 0.875rem; background:var(--surface-3); border:1px solid var(--border); border-radius:10px; margin-top:0.75rem; font-size:0.75rem; color:var(--text-3); }
+    .support-dot    { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+    .support-dot.online  { background:#22c55e; box-shadow:0 0 6px rgba(34,197,94,0.6); animation:supportPulse 2s ease-in-out infinite; }
+    .support-dot.offline { background:#94a3b8; }
+    @keyframes supportPulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+    /* Правка #20 — success review */
+    .success-review { background:var(--success-bg); border:1px solid var(--border); border-radius:14px; padding:0.875rem; margin-top:0.875rem; }
+    .success-review-text   { font-size:0.78rem; color:var(--text-2); line-height:1.5; font-style:italic; margin-bottom:0.5rem; }
+    .success-review-author { font-size:0.7rem; font-weight:700; color:var(--text-3); }
+
+    /* Правка #30 — header color transition indicator */
+    #modal-course-accent-bar { height:3px; border-radius:0 0 8px 8px; margin-bottom:1rem; transition:background 0.4s; }
+
+    /* ===== SPLASH / ONBOARDING ===== */
+    #splash-screen { position:fixed; inset:0; z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center; background:var(--bg-gradient); gap:1.5rem; transition:opacity 0.5s ease; }
+    #splash-screen.hidden { opacity:0; pointer-events:none; }
+    .splash-logo   { font-family:'JetBrains Mono',monospace; font-size:1.4rem; font-weight:700; letter-spacing:0.15em; color:var(--text); }
+    .splash-tagline{ font-size:0.9rem; color:var(--text-3); text-align:center; max-width:260px; line-height:1.5; }
+    .splash-number { font-size:2.5rem; font-weight:700; color:var(--primary); letter-spacing:-0.05em; }
+    .splash-sub    { font-size:0.7rem; color:var(--text-3); font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.15em; margin-top:0.25rem; }
+
+    /* ===== COMPARE MODAL ===== */
+    #compare-modal.active { opacity:1; visibility:visible; background:var(--overlay); }
+
+    /* Правка #21 — progress step animation */
+    .progress-step-circle { transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+    .progress-connector   { transition: background 0.4s ease 0.15s; }
   </style>
 </head>
 <body>
+
+  <!-- Правка #35 — splash onboarding (first visit) -->
+  <div id="splash-screen">
+    <div class="splash-logo">HEIST AI</div>
+    <div>
+      <div class="splash-number" id="splash-num">73%</div>
+      <div class="splash-sub">зарабатывают в первый месяц</div>
+    </div>
+    <div class="splash-tagline">147+ выпускников уже работают с ИИ</div>
+  </div>
+
+  <!-- Правка #40 — confetti container -->
+  <div class="confetti-wrap" id="confetti-wrap"></div>
+
   <div class="gradient gradient-indigo"></div>
   <div class="gradient gradient-purple"></div>
   <div class="gradient gradient-burgundy"></div>
   <div class="grid-overlay"></div>
 
-  <!-- #7: Progress bar -->
+  <!-- Progress bar -->
   <div class="progress-bar-wrap" id="progress-bar-wrap">
     <div class="progress-steps">
       <div class="progress-step active" id="step-1">
@@ -389,127 +531,177 @@
     </div>
   </div>
 
-  <!-- Main content — ONLY courses list (#6 no hero) -->
+  <!-- Main content -->
   <main class="relative z-10 px-4 pb-24 max-w-[480px] mx-auto pt-4">
 
-    <div class="mb-5">
-      <p class="mono-label text-slate-500 tracking-widest mb-1">HEIST AI</p>
-      <h2 class="text-xl font-semibold tracking-tight text-slate-900">Выбери курс</h2>
+    <!-- Правка #11 — Hero stats -->
+    <div class="hero-stats" id="hero-stats-block">
+      <div class="hero-stat">
+        <div class="hero-stat-val">73%</div>
+        <div class="hero-stat-label">1-й клиент за месяц</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">147+</div>
+        <div class="hero-stat-label">выпускников</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">♾</div>
+        <div class="hero-stat-label">доступ навсегда</div>
+      </div>
+    </div>
+
+    <!-- Правка #28 — FOMO banner -->
+    <div class="fomo-banner">
+      <span class="fomo-banner-text">🔥 До 1 апреля — старая цена</span>
+      <span class="fomo-banner-badge">⚡ Осталось 12 мест</span>
+    </div>
+
+    <div class="mb-4 flex items-center justify-between">
+      <div>
+        <p class="mono-label mb-1">HEIST AI</p>
+        <h2 style="font-size:1.2rem;font-weight:700;color:var(--text);letter-spacing:-0.03em;">Выбери программу</h2>
+      </div>
+      <!-- Правка #19 — compare button -->
+      <button id="compare-btn" style="font-size:0.7rem;font-weight:600;color:var(--primary);background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);padding:0.4rem 0.75rem;border-radius:8px;cursor:pointer;white-space:nowrap;">
+        Сравнить →
+      </button>
     </div>
 
     <!-- Course Cards -->
     <div class="space-y-4">
 
-      <!-- Course 1 -->
-      <div class="course-card glass-card" style="--card-accent: rgba(139,92,246,0.35); --card-glow: rgba(139,92,246,0.45);">
-        <span class="mono-label text-purple-600 tracking-widest">AI AUTOMATION</span>
-        <h3 class="text-lg font-semibold text-slate-900">N8N: Архитектура AI-Агентов</h3>
-        <p class="text-slate-500 text-sm font-light leading-relaxed">AI-агент на n8n — обрабатывает заявки, пишет клиентам, работает без тебя. С нуля за 2 недели.</p>
+      <!-- Course 1 — N8N (FEATURED) -->
+      <div class="course-card glass-card course-card-featured" style="--card-accent:rgba(139,92,246,0.35);">
+        <div class="badge-hit">🔥 ХИТ</div>
+        <span class="mono-label" style="color:#8b5cf6;">AI AUTOMATION</span>
+        <h3 style="font-size:1.05rem;font-weight:700;color:var(--text);">N8N: Архитектура AI-Агентов</h3>
+        <p style="font-size:0.85rem;color:var(--text-3);line-height:1.55;">AI-агент на n8n — обрабатывает заявки, пишет клиентам, работает без тебя. С нуля за 2 недели.</p>
+        <!-- Правка #16 -->
+        <div class="card-student-count">👥 <span id="count-a">847</span> студентов уже внутри</div>
         <div class="space-y-2">
           <div class="feature-item">
-            <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <span class="text-sm text-slate-600">Настроишь n8n-агента, который сам пишет клиентам в WhatsApp</span>
+            <div class="feature-check"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+            <span style="font-size:0.85rem;color:var(--text-2);">Настроишь n8n-агента, который сам пишет клиентам в WhatsApp</span>
           </div>
           <div class="feature-item">
-            <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <span class="text-sm text-slate-600">Интеграция CRM, Telegram, Google, 100+ сервисов без кода</span>
+            <div class="feature-check"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+            <span style="font-size:0.85rem;color:var(--text-2);">Интеграция CRM, Telegram, Google, 100+ сервисов без кода</span>
           </div>
         </div>
-        <!-- #18: One "Выбрать →" button + #19: large price -->
         <div class="card-price-row">
           <div>
             <div class="card-price">7 000 ₽</div>
-            <div class="card-price-old">12 000 ₽</div>
+            <div class="card-price-old">14 000 ₽</div>
           </div>
-          <button class="card-select-btn btn-burgundy select-btn"
-            data-course="ai-automation"
-            data-title="N8N: Архитектура AI-Агентов"
-            data-price="7000">
+          <button class="card-select-btn btn-burgundy select-btn" data-course="ai-automation" data-title="N8N: Архитектура AI-Агентов" data-price="7000">
             Выбрать →
           </button>
         </div>
       </div>
 
-      <!-- Course 2 -->
-      <div class="course-card glass-card" style="--card-accent: rgba(99,102,241,0.35); --card-glow: rgba(99,102,241,0.45);">
-        <span class="mono-label text-indigo-600 tracking-widest">AI FOUNDERS</span>
-        <h3 class="text-lg font-semibold text-slate-900">AI Foundation: База ИИ</h3>
-        <p class="text-slate-500 text-sm font-light leading-relaxed">GPT-4, Claude, Llama, Mistral. От prompt engineering до первых платящих клиентов — за 4 недели.</p>
+      <!-- Course 2 — AI Foundation -->
+      <div class="course-card glass-card" style="--card-accent:rgba(99,102,241,0.35);">
+        <span class="mono-label" style="color:#6366f1;">AI FOUNDERS</span>
+        <h3 style="font-size:1.05rem;font-weight:700;color:var(--text);">AI Foundation: База ИИ</h3>
+        <p style="font-size:0.85rem;color:var(--text-3);line-height:1.55;">GPT-4, Claude, Llama, Mistral. От prompt engineering до первых платящих клиентов — за 4 недели.</p>
+        <div class="card-student-count">👥 <span id="count-b">623</span> студентов уже внутри</div>
         <div class="space-y-2">
           <div class="feature-item">
-            <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <span class="text-sm text-slate-600">Разбираешься в моделях за 10 секунд — и выбираешь нужную</span>
+            <div class="feature-check"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+            <span style="font-size:0.85rem;color:var(--text-2);">Разбираешься в моделях за 10 секунд — и выбираешь нужную</span>
           </div>
           <div class="feature-item">
-            <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <span class="text-sm text-slate-600">Prompt engineering до production-grade уровня</span>
+            <div class="feature-check"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+            <span style="font-size:0.85rem;color:var(--text-2);">Prompt engineering до production-grade уровня</span>
           </div>
         </div>
         <div class="card-price-row">
           <div>
-            <div class="card-price">7 000 ₽</div>
-            <div class="card-price-old">12 000 ₽</div>
+            <div class="card-price">5 000 ₽</div>
+            <div class="card-price-old">10 000 ₽</div>
           </div>
-          <button class="card-select-btn btn-deep-blue select-btn"
-            data-course="ai-founders"
-            data-title="AI Foundation: База ИИ"
-            data-price="7000">
+          <button class="card-select-btn btn-deep-blue select-btn" data-course="ai-founders" data-title="AI Foundation: База ИИ" data-price="5000">
             Выбрать →
           </button>
         </div>
       </div>
 
-      <!-- Course 3 -->
-      <div class="course-card glass-card" style="--card-accent: rgba(245,158,11,0.35); --card-glow: rgba(245,158,11,0.45);">
-        <span class="mono-label text-amber-600 tracking-widest">VIBE CODING</span>
-        <h3 class="text-lg font-semibold text-slate-900">VibeCoding: Код Без Программистов</h3>
-        <p class="text-slate-500 text-sm font-light leading-relaxed">Делаешь веб-приложения без команды разработчиков. AI пишет код — ты управляешь.</p>
+      <!-- Course 3 — VibeCoding -->
+      <div class="course-card glass-card" style="--card-accent:rgba(245,158,11,0.35);">
+        <span class="mono-label" style="color:#d97706;">VIBE CODING</span>
+        <h3 style="font-size:1.05rem;font-weight:700;color:var(--text);">VibeCoding: Код Без Программистов</h3>
+        <p style="font-size:0.85rem;color:var(--text-3);line-height:1.55;">Делаешь веб-приложения без команды разработчиков. AI пишет код — ты управляешь.</p>
+        <div class="card-student-count">👥 <span id="count-c">412</span> студентов уже внутри</div>
         <div class="space-y-2">
           <div class="feature-item">
-            <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <span class="text-sm text-slate-600">SaaS с базой данных и оплатой — за один вечер</span>
+            <div class="feature-check"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+            <span style="font-size:0.85rem;color:var(--text-2);">SaaS с базой данных и оплатой — за один вечер</span>
           </div>
           <div class="feature-item">
-            <div class="feature-check">
-              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <span class="text-sm text-slate-600">Деплой в продакшн, Telegram Mini Apps, монетизация</span>
+            <div class="feature-check"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+            <span style="font-size:0.85rem;color:var(--text-2);">Деплой в продакшн, Telegram Mini Apps, монетизация</span>
           </div>
         </div>
         <div class="card-price-row">
           <div>
-            <div class="card-price">7 000 ₽</div>
-            <div class="card-price-old">12 000 ₽</div>
+            <div class="card-price">5 000 ₽</div>
+            <div class="card-price-old">10 000 ₽</div>
           </div>
-          <button class="card-select-btn btn-khaki select-btn"
-            data-course="vibe-coding"
-            data-title="VibeCoding: Код Без Программистов"
-            data-price="7000">
+          <button class="card-select-btn btn-khaki select-btn" data-course="vibe-coding" data-title="VibeCoding: Код Без Программистов" data-price="5000">
             Выбрать →
           </button>
         </div>
       </div>
-    </div>
+
+    </div><!-- /course cards -->
   </main>
 
-  <!-- Modal: Course Details (#18: buy button inside details) -->
+  <!-- ============================================
+       MODAL: Compare courses (правка #19)
+  ============================================= -->
+  <div id="compare-modal" class="modal-overlay">
+    <div class="modal-content" style="max-width:440px;">
+      <button class="close-modal" id="close-compare-btn">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <p class="mono-label mb-3" style="padding-top:0.5rem;">Сравнение программ</p>
+      <div style="overflow-x:auto;">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>N8N 🔥</th>
+              <th>AI Base</th>
+              <th>VibeCoding</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Цена</td><td style="color:var(--primary);font-weight:700;">7 000₽</td><td>5 000₽</td><td>5 000₽</td></tr>
+            <tr><td>Срок</td><td>2 нед</td><td>4 нед</td><td>Свой темп</td></tr>
+            <tr><td>Без кода</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Заработок</td><td>50к+₽</td><td>50к+₽</td><td>MVP</td></tr>
+            <tr><td>Куратор</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Плейбуки</td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Доступ</td><td>Навсегда</td><td>Навсегда</td><td>Навсегда</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.72rem;color:var(--text-3);text-align:center;margin-top:0.75rem;">Все программы совместимы — можно взять несколько</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       MODAL: Course Details
+  ============================================= -->
   <div id="course-info-modal" class="modal-overlay">
     <div class="modal-content">
       <button class="close-modal" id="close-info-btn">
-        <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
+
+      <!-- Правка #30 — accent bar -->
+      <div id="modal-course-accent-bar"></div>
+
       <div class="carousel-container" id="carousel-container">
         <div class="carousel-skeleton" id="carousel-skeleton"></div>
       </div>
@@ -517,87 +709,155 @@
 
       <div id="program-section">
         <div class="mb-4">
-          <p class="font-mono text-[11px] uppercase tracking-[0.15em] text-slate-500 mb-1">Программа курса</p>
-          <h3 id="modal-course-title" class="text-lg font-bold text-slate-900"></h3>
-          <p id="modal-course-duration" class="text-xs text-slate-400 mt-1"></p>
-          <p id="modal-course-description" class="text-sm text-slate-500 mt-2 leading-relaxed"></p>
+          <p class="mono-label mb-1" id="modal-course-label">Программа курса</p>
+          <h3 id="modal-course-title" style="font-size:1.2rem;font-weight:700;color:var(--text);letter-spacing:-0.02em;"></h3>
+          <p id="modal-course-duration" style="font-size:0.75rem;color:var(--text-4);margin-top:0.25rem;font-family:'JetBrains Mono',monospace;"></p>
+          <p id="modal-course-description" style="font-size:0.85rem;color:var(--text-3);margin-top:0.5rem;line-height:1.6;"></p>
         </div>
+
+        <!-- Правка #25 — tools strip -->
+        <div id="tools-strip-block" style="margin-bottom:1rem;">
+          <p class="mono-label mb-2">Инструменты</p>
+          <div class="tools-strip" id="tools-strip"></div>
+        </div>
+
+        <!-- Modules -->
         <div id="course-modules" class="space-y-3"></div>
-        <div id="what-you-get" class="mt-6 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-indigo-50 border border-slate-200">
-          <h4 class="text-base font-bold text-slate-900 mb-3">Что ты умеешь делать после курса</h4>
+
+        <!-- Правка #24 — timeline -->
+        <div style="margin-top:1.25rem;">
+          <p class="mono-label mb-3">Твой прогресс</p>
+          <div class="timeline" id="course-timeline"></div>
+        </div>
+
+        <!-- What you get -->
+        <div id="what-you-get" style="margin-top:1.25rem;padding:1.25rem;border-radius:20px;background:linear-gradient(135deg,rgba(248,250,252,0.8),rgba(238,242,255,0.8));border:1px solid rgba(15,23,42,0.06);">
+          <h4 style="font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;">Что ты умеешь после курса</h4>
           <div id="outcomes-list" class="grid gap-3"></div>
         </div>
-        <div id="modal-features-block" class="mt-3" style="display:none; padding: 1rem; background: rgba(255,255,255,0.8); border: 1px solid rgba(99,102,241,0.12); border-radius: 16px;">
-          <p class="mono-label mb-2" style="color: #6366f1;">В КОМПЛЕКТЕ</p>
+
+        <!-- Правка #23 — ROI block -->
+        <div class="roi-block" id="roi-block">
+          <p class="mono-label mb-2" style="color:#059669;">💡 Окупаемость</p>
+          <div class="roi-row"><span class="roi-label">Стоимость курса</span><span class="roi-val" id="roi-price">7 000 ₽</span></div>
+          <hr class="roi-divider">
+          <div class="roi-row"><span class="roi-label">Один клиент</span><span class="roi-val" id="roi-client">50 000 ₽</span></div>
+          <div class="roi-row"><span class="roi-label">ROI с первого клиента</span><span class="roi-val green" id="roi-result">614%</span></div>
+        </div>
+
+        <!-- Правка #14 — for whom -->
+        <div style="margin-top:1rem;">
+          <p class="mono-label mb-2">Для кого</p>
+          <div class="forwhom-grid" id="forwhom-grid"></div>
+        </div>
+
+        <!-- Правка #13 — what's included -->
+        <div class="included-block" id="modal-features-block">
+          <p class="mono-label mb-2" style="color:#6366f1;">🎁 В комплекте — бесплатно</p>
           <div id="modal-features-list"></div>
         </div>
-        <!-- #18: buy button inside details modal -->
+
+        <!-- Правка #12 — student case -->
+        <div id="case-block-wrap"></div>
+
+        <!-- Правка #15 — FAQ -->
+        <div style="margin-top:1rem;">
+          <p class="mono-label mb-2">FAQ</p>
+          <div id="faq-list"></div>
+        </div>
+
+        <!-- Buy button -->
         <button id="modal-buy-btn" class="buy-inside-btn mt-6" data-title="" data-price="7000">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-          </svg>
-          Купить за 7 000 ₽
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <span id="modal-buy-text">Получить доступ — 7 000 ₽</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Modal: Payment -->
+  <!-- ============================================
+       MODAL: Payment
+  ============================================= -->
   <div id="payment-modal" class="modal-overlay">
-    <div class="modal-content" style="max-width: 420px;">
+    <div class="modal-content" style="max-width:420px;">
       <button class="close-modal" id="close-payment-btn">
-        <svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
 
-      <div style="padding-top: 1rem;">
-        <p class="mono-label text-center mb-2">ПОДТВЕРЖДЕНИЕ ДОСТУПА</p>
-        <h3 id="payment-course-title" class="text-xl font-semibold text-slate-900 text-center mb-4"></h3>
+      <div style="padding-top:1rem;">
+        <p class="mono-label text-center mb-2">Подтверждение доступа</p>
+        <h3 id="payment-course-title" style="font-size:1.1rem;font-weight:700;color:var(--text);text-align:center;margin-bottom:1rem;"></h3>
 
-        <!-- #11: 15-min timer -->
+        <!-- Правка #9 — FOMO вместо фальшивого таймера -->
         <div class="payment-timer">
-          <div class="payment-timer-icon">⏱</div>
-          <div class="payment-timer-text">Место забронировано на</div>
-          <div class="payment-timer-count" id="payment-countdown">15:00</div>
+          <span style="font-size:1.1rem;">🔥</span>
+          <span class="payment-timer-text">Место забронировано — успей оформить</span>
         </div>
 
-        <div style="background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(139,92,246,0.08)); padding: 1rem; border-radius: 16px; margin-bottom: 1rem;">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-slate-600">К оплате:</span>
-            <span id="payment-price" class="text-2xl font-bold text-slate-900">7 000 ₽</span>
+        <!-- Price + guarantee -->
+        <div style="background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(139,92,246,0.08));padding:1rem;border-radius:16px;margin-bottom:1rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
+            <div>
+              <span style="font-size:0.8rem;color:var(--text-3);">К оплате:</span>
+              <div style="display:flex;align-items:baseline;gap:0.5rem;">
+                <span id="payment-price" style="font-size:1.8rem;font-weight:700;color:var(--text);letter-spacing:-0.04em;">7 000 ₽</span>
+                <span id="payment-old-price" style="font-size:0.85rem;color:var(--text-4);text-decoration:line-through;"></span>
+              </div>
+            </div>
           </div>
-          <div class="badge badge-guarantee" style="width: 100%; justify-content: center;">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-            </svg>
+          <div class="badge-guarantee" style="width:100%;justify-content:center;">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
             Пожизненный доступ · 7 дней возврат
           </div>
         </div>
 
-        <!-- Payment methods — динамически из PAYMENT_CONFIG -->
-        <h4 style="font-size: 1rem; font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">Выбери способ оплаты</h4>
+        <!-- Правка #17 — guarantee block -->
+        <div class="guarantee-block">
+          <div class="guarantee-icon">🛡</div>
+          <div>
+            <div class="guarantee-title">Гарантия возврата 7 дней</div>
+            <div class="guarantee-desc">Не подойдёт — вернём деньги без лишних вопросов</div>
+          </div>
+        </div>
+
+        <!-- Payment methods -->
+        <h4 style="font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:0.75rem;">Выбери способ оплаты</h4>
+        <!-- Правка #8 — validation hint -->
+        <div id="method-validation-hint" style="display:none;font-size:0.75rem;color:#dc2626;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:0.5rem 0.75rem;margin-bottom:0.5rem;">
+          ⚠️ Пожалуйста, выбери способ оплаты
+        </div>
         <div id="payment-methods-container"></div>
 
-        <p class="text-xs text-slate-400 text-center mt-4 px-2">
-          Нет нужного способа? Напиши нам в <a href="https://t.me/heist_ai_bot" style="color: #6366f1;">@heist_ai_bot</a>
+        <!-- Правка #18 — support status -->
+        <div class="support-status" id="payment-support-status">
+          <div class="support-dot" id="support-dot"></div>
+          <span id="support-status-text">Загрузка...</span>
+        </div>
+
+        <p style="font-size:0.72rem;color:var(--text-4);text-align:center;margin-top:0.75rem;">
+          Нет нужного способа? <a href="https://t.me/heist_ai_bot" target="_blank" rel="noopener noreferrer" style="color:var(--primary);">@heist_ai_bot</a>
         </p>
+
+        <!-- Правка #7 #15 — sticky paid button -->
+        <button class="paid-sticky-btn" id="paid-confirm-btn" onclick="confirmPayment()">
+          <div class="btn-spinner"></div>
+          <span class="btn-text">✓ Я оплатил — отправить в бот</span>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Modal: Success (#16 specific instructions + open bot button) -->
+  <!-- ============================================
+       MODAL: Success (правка #1 — ИСПРАВЛЕННЫЙ ФЛОУ)
+  ============================================= -->
   <div id="paid-confirmation-modal" class="modal-overlay">
-    <div class="modal-content" style="max-width: 380px; text-align: center; padding: 2rem;">
+    <div class="modal-content" style="max-width:380px;text-align:center;padding:2rem;">
       <div class="paid-success-icon">
-        <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
+        <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       </div>
-      <h3 class="text-xl font-bold text-slate-900 mt-4 mb-1">Заявка отправлена!</h3>
-      <p class="text-slate-500 text-sm mb-1">Бот уже получил уведомление. Осталось три шага:</p>
+      <h3 style="font-size:1.2rem;font-weight:700;color:var(--text);margin-top:1rem;margin-bottom:0.25rem;">🔥 Отличное решение!</h3>
+      <p style="font-size:0.85rem;color:var(--text-3);margin-bottom:0.5rem;">Осталось три шага — и ты внутри:</p>
 
-      <!-- #16: specific 3-step instructions -->
       <div class="success-steps">
         <div class="success-step">
           <div class="success-step-icon">📸</div>
@@ -610,244 +870,333 @@
           <div class="success-step-icon">🤖</div>
           <div>
             <div class="success-step-num">Шаг 2</div>
-            <div class="success-step-text">Открой <strong>@heist_ai_bot</strong> — он уже ждёт твой чек</div>
+            <div class="success-step-text">Бот уже получил уведомление и ждёт твой чек</div>
           </div>
         </div>
         <div class="success-step">
           <div class="success-step-icon">✅</div>
           <div>
             <div class="success-step-num">Шаг 3</div>
-            <div class="success-step-text">Отправь скриншот боту — доступ активируют в течение 30 минут</div>
+            <div class="success-step-text">Отправь скриншот боту — доступ активируют за 30 минут</div>
           </div>
         </div>
       </div>
 
-      <!-- #17: open bot button -->
-      <button class="btn-open-bot" id="open-bot-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.07-.19c-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.67-.52.36-.99.53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.75 4-1.74 6.68-2.88 8.03-3.43 3.82-1.59 4.61-1.87 5.13-1.87.11 0 .37.03.53.16.14.11.18.26.2.37.01.06.03.24.01.38z"/>
-        </svg>
-        Открыть @heist_ai_bot
+      <!-- Правка #20 — review -->
+      <div class="success-review">
+        <div class="success-review-text">«Доступ пришёл через 20 минут. Куратор написал сам и помог с первым модулем»</div>
+        <div class="success-review-author">— Дмитрий К., Москва · 60 000₽/мес</div>
+      </div>
+
+      <!-- Правка #1 — кнопка которая вызывает sendData и закрывает апп -->
+      <button class="btn-open-bot" id="send-data-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.07-.19c-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.67-.52.36-.99.53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.75 4-1.74 6.68-2.88 8.03-3.43 3.82-1.59 4.61-1.87 5.13-1.87.11 0 .37.03.53.16.14.11.18.26.2.37.01.06.03.24.01.38z"/></svg>
+        Всё понял — открыть @heist_ai_bot
       </button>
     </div>
   </div>
 
   <script>
   // =============================================
-  // #22: Fallback if Telegram WebApp is not available
-  // #21: tg.ready() called first
+  // Правка #22 — Fallback if Telegram WebApp not available
   // =============================================
   const tg = window.Telegram?.WebApp || {
-    ready: () => {},
-    expand: () => {},
-    enableClosingConfirmation: () => {},
-    sendData: (d) => console.log('sendData (browser mode):', d),
-    close: () => console.log('tg.close()'),
-    showPopup: (opts, cb) => {
-      const ok = confirm(opts.message);
-      if (cb) cb(ok ? opts.buttons[0].id : opts.buttons[1].id);
-    },
-    openTelegramLink: (url) => window.open(url, '_blank'),
-    MainButton: {
-      setText: () => {}, setParams: () => {}, show: () => {}, hide: () => {},
-      onClick: () => {}, offClick: () => {},
-      isVisible: false
-    },
-    BackButton: {
-      show: () => {}, hide: () => {},
-      onClick: () => {}, offClick: () => {}
-    },
-    HapticFeedback: {
-      impactOccurred: () => {},
-      notificationOccurred: () => {}
-    }
+    ready: ()=>{}, expand: ()=>{}, enableClosingConfirmation: ()=>{}, disableClosingConfirmation: ()=>{},
+    sendData: (d)=>console.log('sendData(browser):', d),
+    close: ()=>console.log('tg.close()'),
+    showPopup: (opts,cb)=>{ const ok=confirm(opts.message); if(cb) cb(ok?opts.buttons[0].id:opts.buttons[1].id); },
+    openTelegramLink: (url)=>window.open(url,'_blank'),
+    setBackgroundColor: ()=>{}, setHeaderColor: ()=>{},
+    colorScheme: 'light',
+    themeParams: {},
+    initData: '',
+    MainButton: { setText:()=>{}, setParams:()=>{}, show:()=>{}, hide:()=>{}, onClick:()=>{}, offClick:()=>{}, showProgress:()=>{}, hideProgress:()=>{}, isVisible:false },
+    BackButton: { show:()=>{}, hide:()=>{}, onClick:()=>{}, offClick:()=>{} },
+    HapticFeedback: { impactOccurred:()=>{}, notificationOccurred:()=>{} },
+    CloudStorage: { getItem:(k,cb)=>cb(null,null), setItem:(k,v,cb)=>cb&&cb(null) }
   };
-
-  // #21: All init inside tg.ready()
   tg.ready();
 
   // =============================================
+  // Правка #10 — Dark mode detection
   // =============================================
-  // PAYMENT_CONFIG — единый источник реквизитов
+  function applyTheme() {
+    const isDark = tg.colorScheme === 'dark';
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    tg.setBackgroundColor(isDark ? '#1c1c1e' : '#f8fafc');
+    tg.setHeaderColor(isDark ? '#1c1c1e' : '#f8fafc');
+  }
+  applyTheme();
+
   // =============================================
+  // Правка #2 — COURSE_PRICES синхронизировано с ботом
+  // =============================================
+  const COURSE_PRICES     = { 'ai-automation': 7000, 'ai-founders': 5000, 'vibe-coding': 5000 };
+  const COURSE_OLD_PRICES = { 'ai-automation':14000, 'ai-founders':10000,'vibe-coding':10000 };
+  const STUDENT_COUNTS    = { 'ai-automation': 847,  'ai-founders': 623,  'vibe-coding': 412  };
+
+  // Правка #29 — синхронизированные ключи
+  const COURSE_KEY_MAP = { 'ai-automation':'course_a', 'ai-founders':'course_b', 'vibe-coding':'course_c' };
+
   const PAYMENT_CONFIG = {
-    sbp:    { phone: '+7 901 788 7835', bank: 'Т Банк' },
-    alfa:   { card: '2200 1545 3615 8834' },
-    visa:   { card: '4441 1110 1656 7632' },
-    paypal: { email: 'heist.ai.courses@gmail.com' },
+    sbp:  { phone:'+7 901 788 7835', bank:'Т Банк' },
+    alfa: { card:'2200 1545 3615 8834' },
+    visa: { card:'4441 1110 1656 7632' },
     crypto: {
-      usdt_trc20: { label:'USDT TRC-20', symbol:'₮', note:'⚠️ Только сеть Tron (TRC-20)', address:'TB5wc7of2D285aUhmWcEW4PAZHrssapb7A', qr:'usdt.jpg', bg:'rgba(38,161,123,0.1)' },
-      ton:        { label:'TON',          symbol:'💎', address:'UQAcdcKz4BXZ5MtIMbAnMKahBiiH6yaC4wT-qRPOZKi0mbah', qr:'ton.jpg', bg:'rgba(59,130,246,0.1)' },
-      usdt_erc20: { label:'USDT ERC-20',  symbol:'₮', note:'⚠️ Только сеть Ethereum (ERC-20)', address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'usdterc.jpg', bg:'rgba(38,161,123,0.08)' },
-      usdt_bep20: { label:'USDT BEP-20',  symbol:'₮', note:'⚠️ Только сеть BSC (BEP-20)', address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'usdtbep.jpg', bg:'rgba(243,186,47,0.1)' },
-      eth:        { label:'ETH',          symbol:'Ξ',  address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'eth.jpg', bg:'rgba(98,126,234,0.1)' },
-      bnb:        { label:'BNB',          symbol:'B',  address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'bnb.jpg', bg:'rgba(243,186,47,0.15)' },
-      btc:        { label:'Bitcoin',      symbol:'₿',  address:'1Motjp4tCnBCLKqaKEW9osSuT7Jw7tDaE4', qr:'btc.jpg', bg:'rgba(247,147,26,0.1)' },
-      sol:        { label:'Solana',       symbol:'◎',  address:'BHcaxUsu3p2jUyWGiKyMfyK9xym48FGp9EQbcGbPK2hB', qr:'sol.jpg', bg:'rgba(153,69,255,0.1)' },
-      ltc:        { label:'Litecoin',     symbol:'Ł',  address:'ltc1q754nddflyk8tsjd4y3gvy4gk8w3s74g44whkds', qr:'ltc.jpg', bg:'rgba(52,93,157,0.1)' },
-      dash:       { label:'Dash',         symbol:'D',  address:'Xe1eeMsLzXBBaGWRM1gyco3ohZHaEp7iBT', qr:'dash.jpg', bg:'rgba(0,141,228,0.1)' },
-      polygon:    { label:'USDT Polygon', symbol:'⬡',  note:'⚠️ Только сеть Polygon (MATIC)', address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'usdtpol.jpg', bg:'rgba(130,71,229,0.1)' },
+      usdt_trc20:{ label:'USDT TRC-20', symbol:'₮', note:'⚠️ Только сеть Tron (TRC-20)', address:'TB5wc7of2D285aUhmWcEW4PAZHrssapb7A', qr:'usdt.jpg', bg:'rgba(38,161,123,0.1)' },
+      ton:       { label:'TON',          symbol:'💎', address:'UQAcdcKz4BXZ5MtIMbAnMKahBiiH6yaC4wT-qRPOZKi0mbah', qr:'ton.jpg', bg:'rgba(59,130,246,0.1)' },
+      usdt_erc20:{ label:'USDT ERC-20',  symbol:'₮', note:'⚠️ Только сеть Ethereum (ERC-20)', address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'usdterc.jpg', bg:'rgba(38,161,123,0.08)' },
+      usdt_bep20:{ label:'USDT BEP-20',  symbol:'₮', note:'⚠️ Только сеть BSC (BEP-20)', address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'usdtbep.jpg', bg:'rgba(243,186,47,0.1)' },
+      eth:       { label:'ETH',          symbol:'Ξ',  address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'eth.jpg', bg:'rgba(98,126,234,0.1)' },
+      bnb:       { label:'BNB',          symbol:'B',  address:'0x2a162bEd5db67C462c7fda1aE1aDda5F688BDe68', qr:'bnb.jpg', bg:'rgba(243,186,47,0.15)' },
+      btc:       { label:'Bitcoin',      symbol:'₿',  address:'1Motjp4tCnBCLKqaKEW9osSuT7Jw7tDaE4', qr:'btc.jpg', bg:'rgba(247,147,26,0.1)' },
+      sol:       { label:'Solana',       symbol:'◎',  address:'BHcaxUsu3p2jUyWGiKyMfyK9xym48FGp9EQbcGbPK2hB', qr:'sol.jpg', bg:'rgba(153,69,255,0.1)' },
+      ltc:       { label:'Litecoin',     symbol:'Ł',  address:'ltc1q754nddflyk8tsjd4y3gvy4gk8w3s74g44whkds', qr:'ltc.jpg', bg:'rgba(52,93,157,0.1)' },
     }
   };
 
   tg.expand();
-  tg.enableClosingConfirmation();
+  // Правка #26 — closingConfirmation только при оплате
 
   // =============================================
-  // COURSE DATA — синхронизировано с ботом (COURSE_NAMES)
-  // КурсA = ai-automation, КурсB = ai-founders, КурсC = vibe-coding
+  // COURSE DATA
   // =============================================
-  const COURSE_KEY_MAP = {
-    'ai-automation': 'КурсA',
-    'ai-founders':   'КурсB',
-    'vibe-coding':   'КурсC'
-  };
-
   const courseDetails = {
     'ai-automation': {
-      title: 'N8N: Архитектура AI-Агентов',
-      description: 'Настраиваешь n8n-агентов которые сами обрабатывают входящие заявки, квалифицируют клиентов и пишут в WhatsApp — без выходных. 2 недели практики. После курса знаешь как продавать автоматизацию от 50 000₽.',
-      duration: '2 недели | Интенсив',
-      modules: [
-        { num:'01', title:'Архитектура n8n', desc:'Установка на сервер, работа с API и Webhooks. Первый рабочий сценарий с нуля.', result:'Твоя первая работающая автоматизация на боевом сервере.' },
-        { num:'02', title:'AI-агенты с памятью', desc:'Цепочки рассуждений, память агентов, база знаний компании. Агент читает почту, сортирует заявки, отвечает клиентам.', result:'Агент который понимает контекст и не забывает клиентов.' },
-        { num:'03', title:'Интеграции CRM', desc:'AmoCRM, Bitrix, Telegram, Google Services, приём оплат — всё в одном пайплайне без кода.', result:'Полная связка твоего бизнеса в одном сценарии.' },
-        { num:'04', title:'Упаковка и продажа', desc:'Как продавать автоматизацию чеком от 100 000₽. Коммерческие предложения, скрипты продаж, работа с возражениями.', result:'Готовый прайс-лист и первые офферы клиентам.' }
+      title:'N8N: Архитектура AI-Агентов',
+      label:'AI AUTOMATION',
+      accentColor:'#8b5cf6',
+      description:'Настраиваешь n8n-агентов которые сами обрабатывают входящие заявки, квалифицируют клиентов и пишут в WhatsApp — без выходных. 2 недели практики. После курса знаешь как продавать автоматизацию от 50 000₽.',
+      duration:'2 недели | Интенсив',
+      tools:['n8n','Telegram','AmoCRM','WhatsApp','Google Sheets','Webhooks','OpenAI API'],
+      modules:[
+        { num:'01', title:'Архитектура n8n', desc:'Установка на сервер, работа с API и Webhooks. Первый рабочий сценарий с нуля.', result:'Твоя первая рабочая автоматизация на боевом сервере.' },
+        { num:'02', title:'AI-агенты с памятью', desc:'Цепочки рассуждений, память агентов, база знаний компании. Агент читает почту, сортирует заявки.', result:'Агент который понимает контекст и не забывает клиентов.' },
+        { num:'03', title:'Интеграции CRM', desc:'AmoCRM, Bitrix, Telegram, Google Services, приём оплат — всё в одном пайплайне.', result:'Полная связка твоего бизнеса в одном сценарии.' },
+        { num:'04', title:'Упаковка и продажа', desc:'Как продавать автоматизацию чеком от 100 000₽. КП, скрипты продаж, возражения.', result:'Готовый прайс-лист и первые офферы клиентам.' }
       ],
-      outcomes: [
+      timeline:[
+        { dot:'1', label:'День 1', text:'Первый рабочий агент на сервере' },
+        { dot:'7', label:'Неделя 1', text:'Агент пишет клиентам сам, интеграция CRM' },
+        { dot:'14',label:'Неделя 2', text:'Первое КП клиенту готово' },
+        { dot:'★', label:'Месяц 1', text:'Первые деньги — 73% студентов' },
+      ],
+      outcomes:[
         { icon:'⚙️', title:'Low-code автоматизация', desc:'Без программирования — только логика конструктора' },
         { icon:'🎯', title:'Агент 24/7', desc:'Сам обрабатывает заявки и пишет клиентам' },
         { icon:'🔗', title:'100+ интеграций', desc:'CRM, мессенджеры, Google, оплаты в одной связке' },
         { icon:'💰', title:'Чек от 50 000₽', desc:'Знаешь как продавать автоматизацию бизнесу' }
       ],
-      features: ['📄 КП на автоматизацию юридического отдела', '📋 ТЗ для CRM-агента в клинику', '💰 Скрипт продажи чат-бота для входящих лидов'],
-      images: ['n8n1.png','n8n4.png','n8n5.png','n8n6.png','n8n2.png','n8n7.png','n8n3.png'],
-    },
-    'ai-founders': {
-      title: 'AI Foundation: База ИИ',
-      description: 'Разбираешься в GPT-4, Claude, Llama, Mistral. Понимаешь как проектировать AI-решения и монетизировать их. От prompt engineering до первых платящих клиентов за 4 недели.',
-      duration: '4 недели | Foundation',
-      modules: [
-        { num:'01', title:'Фундамент LLM', desc:'Как работают языковые модели, их ограничения, почему галлюцинируют. Промпт-инжиниринг с нуля до chain-of-thought.', result:'Понимаешь ИИ глубже 95% пользователей.' },
-        { num:'02', title:'Генерация контента', desc:'Текст, изображения (Midjourney), видео (Runway), озвучка. Полный контент-продакшн без студии и дизайнера.', result:'Любой контент за минуты — сам.' },
-        { num:'03', title:'Аналитика данных', desc:'Code Interpreter для анализа бизнес-показателей. Отчёты, графики, выводы — без Excel и аналитика.', result:'Данные в решения за минуты, не часы.' },
-        { num:'04', title:'Монетизация', desc:'Консалтинг, внедрение в найме, своё AI-агентство. Готовая модель заработка с первым клиентом.', result:'Путь к 50 000+₽/мес на ИИ-услугах.' }
+      features:['📋 КП на автоматизацию юридического отдела (5 000₽)','🎓 Доступ в закрытое сообщество навсегда','👨‍🏫 Личный куратор на 30 дней','♾ Обновления курса навсегда','🗂 Плейбук под твою нишу'],
+      forwhom:{
+        yes:['Хочешь зарабатывать на AI, а не просто изучать','Готов уделять 1–2 часа в день','Нет опыта в IT — и не нужен'],
+        no:['Ищешь теорию без практических задач','Не готов делать домашки','Хочешь результат без усилий']
+      },
+      faq:[
+        { q:'Нужен ли опыт в программировании?', a:'Нет. n8n — визуальный конструктор без кода. Ты работаешь с блоками, а не строками кода.' },
+        { q:'Сколько времени в день?', a:'1–2 часа. Материалы доступны навсегда — занимайся в своём темпе.' },
+        { q:'Когда первые деньги?', a:'73% студентов закрывают первого клиента в первый месяц. Минимальный чек — 30 000₽.' },
+        { q:'Что если не получится?', a:'Куратор разберёт ситуацию лично. Плюс гарантия возврата 7 дней без вопросов.' },
       ],
-      outcomes: [
+      studentCase:{ name:'Дмитрий К.', city:'Москва', result:'60 000₽/мес', time:'3,5 недели', avatar:'#6366f1', text:'«Закрыл 2-й контракт — 60к/мес стабильно. Первый клиент на 2-й неделе: автоматизация документооборота для юрфирмы.»' },
+      roi:{ price:7000, client:50000, clientLabel:'Один клиент на автоматизацию' },
+      images:['n8n1.png','n8n4.png','n8n5.png','n8n6.png','n8n2.png','n8n7.png','n8n3.png'],
+    },
+    'ai-founders':{
+      title:'AI Foundation: База ИИ',
+      label:'AI FOUNDERS',
+      accentColor:'#6366f1',
+      description:'Разбираешься в GPT-4, Claude, Llama, Mistral. Понимаешь как проектировать AI-решения и монетизировать их. От prompt engineering до первых платящих клиентов за 4 недели.',
+      duration:'4 недели | Foundation',
+      tools:['ChatGPT','Claude','Llama','Midjourney','Runway','Cursor','Notion AI'],
+      modules:[
+        { num:'01', title:'Фундамент LLM', desc:'Как работают языковые модели, промпт-инжиниринг с нуля до chain-of-thought.', result:'Понимаешь ИИ глубже 95% пользователей.' },
+        { num:'02', title:'Генерация контента', desc:'Текст, изображения (Midjourney), видео (Runway), озвучка. Полный контент-продакшн.', result:'Любой контент за минуты — сам.' },
+        { num:'03', title:'Аналитика данных', desc:'Code Interpreter для анализа бизнес-показателей. Отчёты, графики, выводы.', result:'Данные в решения за минуты, не часы.' },
+        { num:'04', title:'Монетизация', desc:'Консалтинг, внедрение в найме, своё AI-агентство. Готовая модель заработка.', result:'Путь к 50 000+₽/мес на ИИ-услугах.' }
+      ],
+      timeline:[
+        { dot:'1', label:'День 1', text:'Понимаешь разницу между моделями' },
+        { dot:'7', label:'Неделя 1', text:'Производишь контент и аналитику самостоятельно' },
+        { dot:'14',label:'Неделя 2', text:'Первый кейс для портфолио готов' },
+        { dot:'★', label:'Месяц 1', text:'Первый платящий клиент' },
+      ],
+      outcomes:[
         { icon:'🧠', title:'GPT-4, Claude, Llama', desc:'Знаешь какую модель выбрать под любую задачу' },
         { icon:'✍️', title:'Prompt Engineering', desc:'Точный результат с первого запроса' },
         { icon:'🎬', title:'Полный цикл контента', desc:'Текст, картинки, видео, звук — всё сам' },
         { icon:'🚀', title:'Выход на рынок', desc:'Консалтинг, агентство или найм — три трека' }
       ],
-      features: ['📊 Шаблон аудита бизнес-процессов для внедрения AI', '📝 Промпт-пак для SMM — экономия 20 часов в неделю', '💼 Калькулятор ROI нейросетей для защиты бюджета'],
-      images: ['zn1.png','zn2.png','zn3.png','zn4.png','zn5.png','zn6.png'],
-    },
-    'vibe-coding': {
-      title: 'VibeCoding: Код Без Программистов',
-      description: 'Создаёшь сложные веб-приложения используя AI как команду разработчиков. От идеи до работающего продукта за выходные — без технического образования.',
-      duration: 'Creator Mode',
-      modules: [
-        { num:'01', title:'Инструментарий AI', desc:'Cursor, Windsurf, Replit — выбираешь среду и пишешь первое приложение. AI пишет чистый код по твоим запросам.', result:'Первое рабочее приложение за несколько часов.' },
-        { num:'02', title:'Web-App за 4 часа', desc:'SaaS с базой данных, авторизацией и оплатой Stripe. Полноценный сервис без единой строки кода вручную.', result:'Живой SaaS который принимает оплаты.' },
-        { num:'03', title:'Telegram Mini Apps', desc:'Приложения внутри мессенджера. Мини-аппы, боты, автоматизация — всё в экосистеме Telegram.', result:'Свой мини-апп в Telegram за день.' },
-        { num:'04', title:'Запуск и продажа', desc:'Упаковка микро-сервисов, выход на Product Hunt, Reddit, Telegram. Desktop-приложения в .EXE для продажи.', result:'Запущенный продукт и первые продажи.' }
+      features:['📊 Шаблон аудита бизнес-процессов для AI (5 000₽)','🎓 Закрытое сообщество навсегда','👨‍🏫 Куратор на 30 дней','📝 Промпт-пак для SMM — экономия 20ч/нед'],
+      forwhom:{
+        yes:['Хочешь понять ИИ и зарабатывать на нём','Работаешь в маркетинге, HR, консалтинге','Хочешь автоматизировать свою работу'],
+        no:['Ищешь только технические детали без монетизации','Уже работаешь AI-инженером','Не готов практиковаться на реальных задачах']
+      },
+      faq:[
+        { q:'Нужны ли технические знания?', a:'Нет. Курс рассчитан на тех, кто впервые работает с AI. Всё объясняется с нуля.' },
+        { q:'Чем отличается от бесплатных уроков на YouTube?', a:'Структура, куратор и конкретная модель монетизации. Не знания, а результат.' },
+        { q:'Когда первые деньги?', a:'73% студентов — первый клиент в первый месяц. Минимальный чек на AI-консалтинг от 15 000₽.' },
+        { q:'Есть ли возврат?', a:'Да. 7 дней — полный возврат без вопросов.' },
       ],
-      outcomes: [
+      studentCase:{ name:'Анна Р.', city:'СПб', result:'45 000₽/мес', time:'4 недели', avatar:'#f59e0b', text:'«Настроила AI-ассистента для клиники. Автоматическая запись пациентов — 45к/мес только с одного клиента.»' },
+      roi:{ price:5000, client:15000, clientLabel:'Один AI-консалтинг' },
+      images:['zn1.png','zn2.png','zn3.png','zn4.png','zn5.png','zn6.png'],
+    },
+    'vibe-coding':{
+      title:'VibeCoding: Код Без Программистов',
+      label:'VIBE CODING',
+      accentColor:'#f59e0b',
+      description:'Создаёшь сложные веб-приложения используя AI как команду разработчиков. От идеи до работающего продукта за выходные — без технического образования.',
+      duration:'Creator Mode | Свой темп',
+      tools:['Cursor','Windsurf','Replit','Stripe','Vercel','Supabase','Telegram Bot API'],
+      modules:[
+        { num:'01', title:'Инструментарий AI', desc:'Cursor, Windsurf, Replit — выбираешь среду и пишешь первое приложение.', result:'Первое рабочее приложение за несколько часов.' },
+        { num:'02', title:'Web-App за 4 часа', desc:'SaaS с базой данных, авторизацией и оплатой Stripe.', result:'Живой SaaS который принимает оплаты.' },
+        { num:'03', title:'Telegram Mini Apps', desc:'Приложения внутри мессенджера. Мини-аппы, боты, автоматизация.', result:'Свой мини-апп в Telegram за день.' },
+        { num:'04', title:'Запуск и продажа', desc:'Упаковка, выход на Product Hunt, Reddit, Telegram. Desktop .EXE.', result:'Запущенный продукт и первые продажи.' }
+      ],
+      timeline:[
+        { dot:'1', label:'День 1', text:'Первое приложение работает в браузере' },
+        { dot:'2', label:'День 2', text:'SaaS с оплатой Stripe задеплоен' },
+        { dot:'7', label:'Неделя 1', text:'Telegram Mini App готов к запуску' },
+        { dot:'★', label:'Запуск', text:'Продукт на Product Hunt, первые пользователи' },
+      ],
+      outcomes:[
         { icon:'⚡', title:'MVP за выходные', desc:'От идеи до работающего продукта за 48 часов' },
         { icon:'🎨', title:'SaaS без кода', desc:'Cursor, Windsurf, Replit — AI пишет за тебя' },
         { icon:'🛠️', title:'Desktop + Web + Telegram', desc:'Три формата продуктов которые можно продавать' },
         { icon:'☁️', title:'Деплой и монетизация', desc:'Product Hunt, Stripe, .EXE — готов к запуску' }
       ],
-      features: ['🚀 Запуск MVP за выходные — от идеи до Stripe', '📦 Упаковка Python-скрипта в .EXE для продажи', '📈 Площадки запуска: Product Hunt, Reddit, Telegram'],
-      images: ['vbk7.png','vbk8.png','vbk1.png','vbk3.png','vbk6.png','vbk5.png','vbk2.png','vbk4.png'],
+      features:['🚀 Запуск MVP за выходные — от идеи до Stripe (5 000₽)','📦 Упаковка Python-скрипта в .EXE','🎓 Закрытое сообщество навсегда','👨‍🏫 Куратор на 30 дней'],
+      forwhom:{
+        yes:['Есть идея продукта и хочешь её запустить','Не хочешь платить разработчикам 100к+','Готов собирать MVP самостоятельно'],
+        no:['Хочешь стать профессиональным разработчиком','Ищешь только теорию без запуска','Нет идеи что делать']
+      },
+      faq:[
+        { q:'Нужно ли знать программирование?', a:'Нет. AI пишет весь код. Ты описываешь что хочешь — получаешь рабочий код.' },
+        { q:'Насколько сложно задеплоить?', a:'Vercel + Supabase разворачиваются в 3 клика. Разберёшься за час на первом модуле.' },
+        { q:'Можно ли зарабатывать без технических знаний?', a:'Да. Максим запустил SaaS за 48 часов и получил первых платящих пользователей через неделю.' },
+        { q:'Есть ли возврат?', a:'Да. 7 дней — полный возврат без вопросов.' },
+      ],
+      studentCase:{ name:'Максим Т.', city:'Екатеринбург', result:'MVP за 48ч', time:'2 недели', avatar:'#8b5cf6', text:'«Запустил SaaS без единой строки кода. MVP за 48 часов, первые платящие пользователи через неделю.»' },
+      roi:{ price:5000, client:30000, clientLabel:'Первая продажа SaaS' },
+      images:['vbk7.png','vbk8.png','vbk1.png','vbk3.png','vbk6.png','vbk5.png','vbk2.png','vbk4.png'],
     }
   };
+
   // =============================================
   // STATE
   // =============================================
   let currentCourse = null;
   let currentCourseTitle = '';
-  let currentCoursePrice = '7000';
+  let currentCoursePrice = 7000;
   let selectedPaymentMethod = '';
   let currentSlide = 0;
   let carouselInterval = null;
-  let paymentTimerInterval = null;
-  let paymentSeconds = 900; // 15 min
+
+  // Правка #5 — URL params
+  const urlParams = new URLSearchParams(location.search);
+  const urlCourse = urlParams.get('course');
+  const urlRef    = urlParams.get('ref') || '';
 
   // =============================================
-  // PROGRESS BAR
+  // Правка #41 — Analytics beacon
+  // =============================================
+  function trackStep(event, data={}) {
+    try {
+      const payload = { event, ...data, ts: Date.now(), ref: urlRef };
+      if (navigator.sendBeacon) navigator.sendBeacon('/analytics', JSON.stringify(payload));
+    } catch(e) {}
+  }
+
+  // =============================================
+  // PROGRESS BAR (правка #21 — smooth animation)
   // =============================================
   function setStep(step) {
-    // step: 1 = курсы, 2 = оплата, 3 = готово
-    const steps = [document.getElementById('step-1'), document.getElementById('step-2'), document.getElementById('step-3')];
-    const conns = [document.getElementById('conn-1'), document.getElementById('conn-2')];
-    steps.forEach((s, i) => {
-      s.classList.remove('active','done');
-      if (i + 1 < step) s.classList.add('done');
-      else if (i + 1 === step) s.classList.add('active');
-    });
-    conns.forEach((c, i) => {
-      c.classList.toggle('done', i + 1 < step);
-    });
+    const steps = [document.getElementById('step-1'),document.getElementById('step-2'),document.getElementById('step-3')];
+    const conns  = [document.getElementById('conn-1'),document.getElementById('conn-2')];
+    steps.forEach((s,i) => { s.classList.remove('active','done'); if(i+1<step) s.classList.add('done'); else if(i+1===step) s.classList.add('active'); });
+    conns.forEach((c,i) => c.classList.toggle('done', i+1<step));
   }
 
   // =============================================
-  // PAYMENT TIMER (#11)
+  // Правка #18 — Support status
   // =============================================
-  function startPaymentTimer() {
-    paymentSeconds = 900;
-    updateTimerDisplay();
-    clearInterval(paymentTimerInterval);
-    paymentTimerInterval = setInterval(() => {
-      paymentSeconds--;
-      if (paymentSeconds < 0) { clearInterval(paymentTimerInterval); return; }
-      updateTimerDisplay();
-    }, 1000);
-  }
-
-  function updateTimerDisplay() {
-    const el = document.getElementById('payment-countdown');
-    if (!el) return;
-    const m = Math.floor(paymentSeconds / 60);
-    const s = paymentSeconds % 60;
-    el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  function updateSupportStatus() {
+    const now = new Date();
+    const msk = now.getUTCHours() + 3;
+    const online = msk >= 9 && msk < 22;
+    const dot = document.getElementById('support-dot');
+    const txt = document.getElementById('support-status-text');
+    if (!dot || !txt) return;
+    dot.className = 'support-dot ' + (online ? 'online' : 'offline');
+    txt.textContent = online ? 'Поддержка онлайн · ответим за 10 минут' : 'Поддержка отвечает с 9:00 МСК · @heist_support';
   }
 
   // =============================================
   // MODALS
   // =============================================
-  const courseInfoModal = document.getElementById('course-info-modal');
-  const paymentModal = document.getElementById('payment-modal');
-  const paidConfirmationModal = document.getElementById('paid-confirmation-modal');
+  const courseInfoModal      = document.getElementById('course-info-modal');
+  const paymentModal         = document.getElementById('payment-modal');
+  const paidConfirmationModal= document.getElementById('paid-confirmation-modal');
+  const compareModal         = document.getElementById('compare-modal');
 
   function openCourseModal(courseId) {
     const course = courseDetails[courseId];
     if (!course) return;
-    currentCourse = courseId;
+    currentCourse      = courseId;
     currentCourseTitle = course.title;
+    currentCoursePrice = COURSE_PRICES[courseId] || 7000;
 
-    document.getElementById('modal-course-title').textContent = course.title;
+    // Правка #30 — header accent color
+    const bar = document.getElementById('modal-course-accent-bar');
+    if (bar) bar.style.background = `linear-gradient(90deg, ${course.accentColor}, transparent)`;
+    try { tg.setHeaderColor(course.accentColor); } catch(e){}
+
+    document.getElementById('modal-course-title').textContent    = course.title;
+    document.getElementById('modal-course-label').textContent    = course.label || 'Программа курса';
     document.getElementById('modal-course-duration').textContent = course.duration || '';
     document.getElementById('modal-course-description').textContent = course.description || '';
-    document.getElementById('modal-buy-btn').dataset.title = course.title;
+
+    const price    = COURSE_PRICES[courseId];
+    const oldPrice = COURSE_OLD_PRICES[courseId];
+    const buyBtn   = document.getElementById('modal-buy-btn');
+    const buyTxt   = document.getElementById('modal-buy-text');
+    buyBtn.dataset.title = course.title;
+    buyBtn.dataset.price = price;
+    if (buyTxt) buyTxt.textContent = `Получить доступ — ${price.toLocaleString('ru-RU')} ₽`;
+
+    // Правка #23 — ROI
+    const roi = course.roi || {};
+    const roiResult = roi.client ? Math.round((roi.client - roi.price) / roi.price * 100) : 0;
+    const roiEl = document.getElementById('roi-price');
+    if (roiEl) roiEl.textContent = (roi.price || price).toLocaleString('ru-RU') + ' ₽';
+    const roiClient = document.getElementById('roi-client');
+    if (roiClient) { roiClient.textContent = (roi.client||50000).toLocaleString('ru-RU') + ' ₽'; roiClient.previousElementSibling && (roiClient.previousElementSibling.textContent = roi.clientLabel || 'Один клиент'); }
+    const roiRes = document.getElementById('roi-result');
+    if (roiRes) roiRes.textContent = roiResult + '%';
 
     renderCarousel(course.images);
+    renderTools(course.tools);
     renderModules(course.modules);
+    renderTimeline(course.timeline);
     renderOutcomes(course.outcomes);
     renderFeatures(course.features);
+    renderForWhom(course.forwhom);
+    renderCase(course.studentCase);
+    renderFAQ(course.faq);
 
     courseInfoModal.classList.add('active');
     document.body.style.overflow = 'hidden';
     courseInfoModal.querySelector('.modal-content').scrollTop = 0;
     setStep(1);
-
-    // #24: BackButton
-    if (tg.BackButton) { tg.BackButton.show(); }
-
-    // #4: MainButton — hide on info modal (not payment)
+    if (tg.BackButton) tg.BackButton.show();
     if (tg.MainButton) tg.MainButton.hide();
-
     tg.HapticFeedback.impactOccurred('medium');
+    trackStep('view_course', { course: courseId });
+
+    // Правка #44 — IntersectionObserver on buy button
+    observeBuyBtn();
   }
 
   function closeCourseModal() {
@@ -856,22 +1205,25 @@
     if (carouselInterval) clearInterval(carouselInterval);
     if (tg.BackButton) tg.BackButton.hide();
     if (tg.MainButton) tg.MainButton.hide();
+    applyTheme(); // restore header color
     setStep(1);
     tg.HapticFeedback.impactOccurred('light');
   }
 
   function openPaymentModal(title, price) {
     currentCourseTitle = title || currentCourseTitle;
-    currentCoursePrice = price || '7000';
+    currentCoursePrice = parseInt(price) || COURSE_PRICES[currentCourse] || 7000;
     selectedPaymentMethod = '';
 
     document.getElementById('payment-course-title').textContent = currentCourseTitle;
-    document.getElementById('payment-price').textContent = Number(currentCoursePrice).toLocaleString('ru-RU') + ' ₽';
+    const priceEl = document.getElementById('payment-price');
+    const oldPriceEl = document.getElementById('payment-old-price');
+    if (priceEl) priceEl.textContent = currentCoursePrice.toLocaleString('ru-RU') + ' ₽';
+    if (oldPriceEl) oldPriceEl.textContent = (COURSE_OLD_PRICES[currentCourse]||'').toLocaleString('ru-RU') + ' ₽';
 
-    // Build payment UI fresh each open
+    document.getElementById('method-validation-hint').style.display = 'none';
     renderPaymentMethods();
 
-    // Close info modal if open
     if (courseInfoModal.classList.contains('active')) {
       courseInfoModal.classList.remove('active');
       if (carouselInterval) clearInterval(carouselInterval);
@@ -881,26 +1233,28 @@
     document.body.style.overflow = 'hidden';
     paymentModal.querySelector('.modal-content').scrollTop = 0;
     setStep(2);
-    startPaymentTimer();
 
-    // #4: MainButton setup
+    // Правка #26 — enable closing confirmation only here
+    tg.enableClosingConfirmation();
+    updateSupportStatus();
+
+    // Правка #4 — MainButton
     if (tg.MainButton) {
-      tg.MainButton.setParams({ text: 'Я оплатил ✓', color: '#6366F1', text_color: '#ffffff' });
+      tg.MainButton.setParams({ text:'Я оплатил ✓', color:'#6366F1', text_color:'#ffffff' });
       tg.MainButton.show();
     }
-
-    // #24: BackButton
     if (tg.BackButton) tg.BackButton.show();
-
     tg.HapticFeedback.impactOccurred('medium');
+    trackStep('open_payment', { course: currentCourse, price: currentCoursePrice });
   }
 
   function closePaymentModal() {
     paymentModal.classList.remove('active');
     document.body.style.overflow = '';
-    clearInterval(paymentTimerInterval);
     if (tg.MainButton) tg.MainButton.hide();
     if (tg.BackButton) tg.BackButton.hide();
+    // Правка #26 — disable closing confirmation when leaving payment
+    try { tg.disableClosingConfirmation(); } catch(e){}
     setStep(1);
     tg.HapticFeedback.impactOccurred('light');
   }
@@ -908,228 +1262,327 @@
   function openSuccessModal() {
     paidConfirmationModal.classList.add('active');
     if (tg.MainButton) tg.MainButton.hide();
+    if (tg.BackButton) tg.BackButton.hide();
+    try { tg.disableClosingConfirmation(); } catch(e){}
     setStep(3);
     tg.HapticFeedback.notificationOccurred('success');
+    // Правка #40 — confetti
+    launchConfetti();
+    trackStep('paid_confirmed', { course: currentCourse, method: selectedPaymentMethod });
   }
 
   function closeSuccessModal() {
     paidConfirmationModal.classList.remove('active');
-    if (tg.BackButton) tg.BackButton.hide();
-    tg.HapticFeedback.impactOccurred('light');
   }
 
   // =============================================
-  // CONFIRM AND SEND (#1 sendData, #3 close, #5 popup)
+  // Правка #1 — ИСПРАВЛЕННЫЙ ФЛОУ confirmPayment
+  // sendData вызывается ТОЛЬКО из success-экрана
   // =============================================
   function confirmPayment() {
-    // #14: haptic on button tap
+    // Правка #8 — validation
+    if (!selectedPaymentMethod) {
+      const hint = document.getElementById('method-validation-hint');
+      if (hint) hint.style.display = 'block';
+      // shake all payment method blocks
+      document.querySelectorAll('.payment-method').forEach(m => {
+        m.classList.remove('shake');
+        void m.offsetWidth;
+        m.classList.add('shake');
+      });
+      tg.HapticFeedback.notificationOccurred('error');
+      return;
+    }
+
     tg.HapticFeedback.notificationOccurred('success');
 
-    const methodLabel = selectedPaymentMethod || 'не выбран';
-
-    // #5: tg.showPopup confirmation
-    tg.showPopup({
-      title: 'Подтвердите оплату',
-      message: `Вы оплатили «${currentCourseTitle}»\nСпособ: ${methodLabel}\n\nПосле подтверждения бот попросит скриншот оплаты.`,
-      buttons: [
-        { id: 'confirm', type: 'default', text: 'Да, отправить чек' },
-        { id: 'cancel', type: 'cancel', text: 'Нет, вернуться' }
+    // Правка #24 — safeShowPopup
+    safeShowPopup({
+      title:'Подтвердите оплату',
+      message:`Вы оплатили «${currentCourseTitle}»\nСпособ: ${selectedPaymentMethod}\n\nПосле подтверждения бот попросит скриншот.`,
+      buttons:[
+        { id:'confirm', type:'default', text:'Да, всё верно' },
+        { id:'cancel',  type:'cancel',  text:'Нет, вернуться' }
       ]
     }, (buttonId) => {
       if (buttonId === 'confirm') {
-        // #1: sendData to bot — используем коды курсов как в боте
-        const botCourseKey = COURSE_KEY_MAP[currentCourse] || currentCourse;
-        tg.sendData(JSON.stringify({
-          course: botCourseKey,
-          courseTitle: currentCourseTitle,
-          price: currentCoursePrice,
-          paymentMethod: selectedPaymentMethod
-        }));
-
+        // Показываем success СНАЧАЛА — до sendData
         closePaymentModal();
         openSuccessModal();
-
-        // #3: close mini-app after 2 seconds
-        setTimeout(() => {
-          tg.close();
-        }, 2000);
+        // sendData вызовем из кнопки "открыть бот"
       }
     });
   }
 
-  // #4: MainButton click handler
-  if (tg.MainButton) {
-    tg.MainButton.onClick(confirmPayment);
-  }
+  // Правка #1 — кнопка в success-экране вызывает sendData и закрывает апп
+  document.getElementById('send-data-btn').addEventListener('click', () => {
+    tg.HapticFeedback.impactOccurred('medium');
+    const botCourseKey = COURSE_KEY_MAP[currentCourse] || currentCourse;
+    // Правка #6 — передаём ref и initData
+    const payload = {
+      course:        botCourseKey,
+      courseTitle:   currentCourseTitle,
+      price:         String(currentCoursePrice),
+      paymentMethod: selectedPaymentMethod,
+      ref:           urlRef,
+      initData:      tg.initData
+    };
+    // Правка #27 — progress indicator
+    const btn = document.getElementById('send-data-btn');
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Отправляем...'; }
+    setTimeout(() => {
+      tg.sendData(JSON.stringify(payload)); // закроет апп автоматически
+    }, 300);
+  });
 
-  // =============================================
-  // BACK BUTTON (#24)
-  // =============================================
+  // MainButton тоже вызывает confirmPayment
+  if (tg.MainButton) tg.MainButton.onClick(confirmPayment);
+
+  // Back button
   if (tg.BackButton) {
     tg.BackButton.onClick(() => {
       if (paidConfirmationModal.classList.contains('active')) closeSuccessModal();
       else if (paymentModal.classList.contains('active')) closePaymentModal();
       else if (courseInfoModal.classList.contains('active')) closeCourseModal();
+      else if (compareModal.classList.contains('active'))   closeCompareModal();
     });
   }
 
+  // Правка #32 — safe showPopup
+  function safeShowPopup(opts, cb) {
+    try {
+      if (typeof tg.showPopup === 'function') {
+        tg.showPopup(opts, cb);
+      } else {
+        const ok = confirm(opts.message);
+        cb(ok ? opts.buttons[0].id : opts.buttons[1].id);
+      }
+    } catch(e) {
+      cb('confirm');
+    }
+  }
+
   // =============================================
-  // CAROUSEL with SKELETON (#20)
+  // COPY
+  // =============================================
+  window.copyAddress = function(elementId, btn) {
+    const text = document.getElementById(elementId)?.textContent?.trim();
+    if (!text) return;
+    // Правка #19 — haptic on copy immediately
+    tg.HapticFeedback.impactOccurred('medium');
+    navigator.clipboard.writeText(text).then(() => {
+      btn.classList.add('copied');
+      const orig = btn.innerHTML;
+      btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Скопировано!`;
+      tg.HapticFeedback.notificationOccurred('success');
+      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta);
+      tg.HapticFeedback.notificationOccurred('success');
+    });
+  };
+
+  // =============================================
+  // CAROUSEL (правка #33)
   // =============================================
   function renderCarousel(images) {
     const container = document.getElementById('carousel-container');
-    const nav = document.getElementById('carousel-nav');
-    const skeleton = document.getElementById('carousel-skeleton');
+    const nav       = document.getElementById('carousel-nav');
+    const skeleton  = document.getElementById('carousel-skeleton');
     if (!container || !nav) return;
-
-    // Remove old slides (keep skeleton)
-    container.querySelectorAll('.carousel-slide').forEach(s => s.remove());
-    nav.innerHTML = '';
-    currentSlide = 0;
-
-    // Show skeleton while loading
+    container.querySelectorAll('.carousel-slide').forEach(s=>s.remove());
+    nav.innerHTML = ''; currentSlide = 0;
     if (skeleton) skeleton.style.display = 'block';
-
-    let loadedCount = 0;
-    const total = images.length;
-
-    images.forEach((src, index) => {
+    let loaded = 0;
+    images.forEach((src,i) => {
       const slide = document.createElement('img');
-      slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
-      slide.alt = `Слайд ${index + 1}`;
-      slide.loading = index === 0 ? 'eager' : 'lazy';
-
-      slide.onload = () => {
-        slide.classList.add('loaded');
-        loadedCount++;
-        if (loadedCount === 1 && skeleton) {
-          skeleton.style.display = 'none'; // hide skeleton after first image loads
-        }
-      };
-      slide.onerror = () => {
-        loadedCount++;
-        if (loadedCount === 1 && skeleton) skeleton.style.display = 'none';
-      };
+      slide.className = `carousel-slide ${i===0?'active':''}`;
+      slide.alt = `Слайд ${i+1}`;
+      slide.loading = i===0?'eager':'lazy';
+      slide.decoding = 'async'; // правка #33
+      slide.onload = slide.onerror = () => { slide.classList.add('loaded'); if(++loaded===1&&skeleton) skeleton.style.display='none'; };
       slide.src = src;
       container.appendChild(slide);
-
-      const dot = document.createElement('div');
-      dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
-      dot.addEventListener('click', () => goToSlide(index));
+      const dot = document.createElement('button');
+      dot.className = `carousel-dot ${i===0?'active':''}`;
+      dot.addEventListener('click',()=>goToSlide(i));
       nav.appendChild(dot);
     });
-
     startAutoCarousel();
   }
-
-  function goToSlide(index) {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.carousel-dot');
-    slides.forEach(s => s.classList.remove('active'));
-    dots.forEach(d => d.classList.remove('active'));
-    if (slides[index]) slides[index].classList.add('active');
-    if (dots[index]) dots[index].classList.add('active');
-    currentSlide = index;
+  function goToSlide(i) {
+    document.querySelectorAll('.carousel-slide').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.carousel-dot').forEach(d=>d.classList.remove('active'));
+    document.querySelectorAll('.carousel-slide')[i]?.classList.add('active');
+    document.querySelectorAll('.carousel-dot')[i]?.classList.add('active');
+    currentSlide = i;
   }
-
   function startAutoCarousel() {
     if (carouselInterval) clearInterval(carouselInterval);
     const slides = document.querySelectorAll('.carousel-slide');
     if (!slides.length) return;
-    carouselInterval = setInterval(() => goToSlide((currentSlide + 1) % slides.length), 4000);
+    carouselInterval = setInterval(()=>goToSlide((currentSlide+1)%slides.length),4000);
   }
 
   // =============================================
-  // RENDER MODULES & OUTCOMES
+  // RENDER HELPERS
   // =============================================
+  function renderTools(tools) {
+    const strip = document.getElementById('tools-strip');
+    const block = document.getElementById('tools-strip-block');
+    if (!strip) return;
+    if (!tools||!tools.length) { if(block) block.style.display='none'; return; }
+    if(block) block.style.display='block';
+    strip.innerHTML = tools.map(t=>`<div class="tool-chip">${t}</div>`).join('');
+  }
+
   function renderModules(modules) {
-    const container = document.getElementById('course-modules');
-    if (!container || !modules) return;
-    container.innerHTML = '';
-    modules.forEach((mod, i) => {
-      const isLast = i === modules.length - 1;
+    const c = document.getElementById('course-modules');
+    if (!c||!modules) return;
+    c.innerHTML = '';
+    modules.forEach((mod,i)=>{
       const el = document.createElement('div');
       el.className = 'module-step';
-      el.innerHTML = `
-        ${!isLast ? '<div class="stepper-line"></div>' : ''}
+      el.innerHTML = `${i<modules.length-1?'<div class="stepper-line"></div>':''}
         <div class="module-number">${mod.num}</div>
-        <div class="flex-1">
-          <h4 style="font-size:0.875rem;font-weight:600;color:#0f172a;margin-bottom:0.25rem;">${mod.title}</h4>
-          <p style="font-size:0.8rem;color:#64748b;line-height:1.5;margin-bottom:0.25rem;">${mod.desc}</p>
-          <p style="font-size:0.75rem;color:#6b7280;">
-            <span style="font-weight:600;color:#4f46e5;">Результат:</span> ${mod.result}
-          </p>
+        <div style="flex:1;">
+          <h4 style="font-size:0.875rem;font-weight:600;color:var(--text);margin-bottom:0.25rem;">${mod.title}</h4>
+          <p style="font-size:0.8rem;color:var(--text-3);line-height:1.5;margin-bottom:0.25rem;">${mod.desc}</p>
+          <p style="font-size:0.75rem;color:var(--text-3);"><span style="font-weight:600;color:var(--primary);">Результат:</span> ${mod.result}</p>
         </div>`;
-      container.appendChild(el);
+      c.appendChild(el);
+    });
+  }
+
+  function renderTimeline(timeline) {
+    const c = document.getElementById('course-timeline');
+    if (!c||!timeline) return;
+    c.innerHTML = '';
+    timeline.forEach(row=>{
+      const el = document.createElement('div');
+      el.className = 'timeline-row';
+      el.innerHTML = `<div class="timeline-dot">${row.dot}</div>
+        <div><div class="timeline-label">${row.label}</div><div class="timeline-text">${row.text}</div></div>`;
+      c.appendChild(el);
     });
   }
 
   function renderOutcomes(outcomes) {
-    const container = document.getElementById('outcomes-list');
-    if (!container || !outcomes) return;
-    container.innerHTML = '';
-    outcomes.forEach(item => {
+    const c = document.getElementById('outcomes-list');
+    if (!c||!outcomes) return;
+    c.innerHTML = '';
+    outcomes.forEach(item=>{
       const el = document.createElement('div');
       el.className = 'outcome-item';
-      el.innerHTML = `
-        <div class="outcome-icon">${item.icon}</div>
-        <div>
-          <div class="outcome-title">${item.title}</div>
-          <p class="outcome-desc">${item.desc}</p>
-        </div>`;
-      container.appendChild(el);
+      el.innerHTML = `<div class="outcome-icon">${item.icon}</div>
+        <div><div class="outcome-title">${item.title}</div><p class="outcome-desc">${item.desc}</p></div>`;
+      c.appendChild(el);
     });
   }
 
-  // =============================================
-  // RENDER FEATURES
-  // =============================================
   function renderFeatures(features) {
     const block = document.getElementById('modal-features-block');
-    const list = document.getElementById('modal-features-list');
-    if (!block || !list) return;
-    if (!features || !features.length) { block.style.display = 'none'; return; }
-    block.style.display = 'block';
-    list.innerHTML = features.map(f => `
-      <div style="display:flex;align-items:flex-start;gap:0.5rem;padding:0.4rem 0;font-size:0.82rem;color:#0f172a;line-height:1.4;">
+    const list  = document.getElementById('modal-features-list');
+    if (!block||!list) return;
+    if (!features||!features.length) { block.style.display='none'; return; }
+    block.style.display='block';
+    list.innerHTML = features.map(f=>`
+      <div class="included-item">
+        <div class="included-icon">✓</div>
         <span>${f}</span>
       </div>`).join('');
   }
 
+  function renderForWhom(fw) {
+    const grid = document.getElementById('forwhom-grid');
+    if (!grid||!fw) return;
+    const yesItems = (fw.yes||[]).map(t=>`<div class="forwhom-item"><span style="color:#059669;font-weight:700;">→</span><span>${t}</span></div>`).join('');
+    const noItems  = (fw.no||[]).map(t=>`<div class="forwhom-item"><span style="color:#dc2626;font-weight:700;">✕</span><span>${t}</span></div>`).join('');
+    grid.innerHTML = `
+      <div class="forwhom-col yes"><div class="forwhom-title">✅ Для тебя</div>${yesItems}</div>
+      <div class="forwhom-col no"><div class="forwhom-title">❌ Не для тебя</div>${noItems}</div>`;
+  }
+
+  function renderCase(sc) {
+    const wrap = document.getElementById('case-block-wrap');
+    if (!wrap||!sc) return;
+    wrap.innerHTML = `
+      <div class="case-block">
+        <p class="mono-label mb-2">Результат студента</p>
+        <p class="case-block-quote">${sc.text}</p>
+        <div class="case-block-author">
+          <div class="case-block-avatar" style="background:${sc.avatar};">${sc.name[0]}</div>
+          <div>
+            <div class="case-block-name">${sc.name}, ${sc.city}</div>
+            <div class="case-block-result">${sc.result} за ${sc.time}</div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function renderFAQ(faq) {
+    const c = document.getElementById('faq-list');
+    if (!c||!faq) return;
+    c.innerHTML = '';
+    faq.forEach(item=>{
+      const el = document.createElement('div');
+      el.className = 'faq-item';
+      el.innerHTML = `
+        <div class="faq-q">
+          <span>${item.q}</span>
+          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </div>
+        <div class="faq-a">${item.a}</div>`;
+      el.querySelector('.faq-q').addEventListener('click',()=>{
+        el.classList.toggle('open');
+        tg.HapticFeedback.impactOccurred('light');
+      });
+      c.appendChild(el);
+    });
+  }
+
+  // Правка #44 — IntersectionObserver on buy button
+  function observeBuyBtn() {
+    const btn = document.getElementById('modal-buy-btn');
+    if (!btn||!window.IntersectionObserver) return;
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if (!e.isIntersecting) {
+          if (tg.MainButton&&!tg.MainButton.isVisible) {
+            tg.MainButton.setParams({ text:`Купить — ${currentCoursePrice.toLocaleString('ru-RU')} ₽`, color:'#6366F1', text_color:'#ffffff' });
+            tg.MainButton.show();
+          }
+        }
+      });
+    },{ threshold:0.5 });
+    obs.observe(btn);
+  }
+
   // =============================================
-  // RENDER PAYMENT METHODS (dynamic from PAYMENT_CONFIG)
+  // PAYMENT METHODS
   // =============================================
-  function copyIcon() {
-    return `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>`;
+  function copyIcon() { return `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>`; }
+  function chevronSvg() { return `<svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>`; }
+  function requisiteHtml(id,label,value,copyLabel) {
+    return `<div class="payment-requisite"><div class="payment-requisite-label">${label}</div><div class="payment-requisite-value" id="${id}">${value}</div></div>
+    <button class="copy-btn" onclick="copyAddress('${id}',this)">${copyIcon()} ${copyLabel}</button>`;
   }
-
-  function chevronSvg() {
-    return `<svg class="w-5 h-5 payment-method-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>`;
-  }
-
-  function requisiteHtml(id, label, value, copyLabel) {
-    return `<div class="payment-requisite">
-      <div class="payment-requisite-label">${label}</div>
-      <div class="payment-requisite-value" id="${id}">${value}</div>
-    </div>
-    <button class="copy-btn" onclick="copyAddress('${id}', this)">${copyIcon()} ${copyLabel}</button>`;
-  }
-
-  function cryptoCoinHtml(key, coin, isOpen) {
+  function cryptoCoinHtml(key,coin,isOpen) {
     const id = `crypto-addr-${key}`;
-    return `<div class="crypto-coin${isOpen ? ' active' : ''}" data-coin="${key}" style="margin-bottom:0.5rem;">
+    return `<div class="crypto-coin${isOpen?' active':''}" data-coin="${key}" style="margin-bottom:0.5rem;">
       <div class="crypto-coin-header">
         <div class="crypto-coin-icon" style="background:${coin.bg};font-size:1rem;">${coin.symbol}</div>
         <div class="crypto-coin-name">${coin.label}</div>
-        <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
+        <svg class="w-4 h-4 crypto-coin-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
       </div>
       <div class="crypto-coin-details">
-        ${coin.note ? `<p style="font-size:0.7rem;color:#64748b;margin-bottom:0.5rem;">${coin.note}</p>` : ''}
+        ${coin.note?`<p style="font-size:0.7rem;color:var(--text-3);margin-bottom:0.5rem;">${coin.note}</p>`:''}
         <div class="network-address" id="${id}">${coin.address}</div>
-        <button class="copy-btn" onclick="copyAddress('${id}', this)">${copyIcon()} Скопировать адрес</button>
-        ${coin.qr ? `<div class="network-qr" style="margin-top:0.75rem;"><img src="${coin.qr}" alt="${coin.label} QR" loading="lazy"></div>` : ''}
+        <button class="copy-btn" onclick="copyAddress('${id}',this)">${copyIcon()} Скопировать адрес</button>
+        ${coin.qr?`<div class="network-qr" style="margin-top:0.75rem;"><img src="${coin.qr}" alt="${coin.label} QR" loading="lazy" decoding="async"></div>`:''}
       </div>
     </div>`;
   }
@@ -1137,230 +1590,252 @@
   function renderPaymentMethods() {
     const container = document.getElementById('payment-methods-container');
     if (!container) return;
-
     const c = PAYMENT_CONFIG;
     const cryptoKeys = Object.keys(c.crypto);
-
     container.innerHTML = `
-      <!-- 🇷🇺 Российские карты -->
       <div class="payment-section">
         <div class="payment-section-title">🇷🇺 Российские карты</div>
-        <!-- СБП -->
         <button class="payment-method" data-payment="sbp">
           <div class="payment-method-icon" style="background:linear-gradient(135deg,#6EC72D,#47A01F);color:white;font-size:1.3rem;">⚡</div>
-          <div class="payment-method-info">
-            <div class="payment-method-name">СБП</div>
-            <div class="payment-method-desc">Мгновенно · без комиссии · рекомендуем</div>
-          </div>${chevronSvg()}
+          <div class="payment-method-info"><div class="payment-method-name">СБП</div><div class="payment-method-desc">Мгновенно · без комиссии · рекомендуем</div></div>${chevronSvg()}
         </button>
         <div class="payment-details" data-payment="sbp">
-          ${requisiteHtml('sbp-phone','Телефон для СБП', c.sbp.phone,'Скопировать телефон')}
+          ${requisiteHtml('sbp-phone','Телефон для СБП',c.sbp.phone,'Скопировать телефон')}
           <div class="payment-requisite"><div class="payment-requisite-label">Банк получателя</div><div class="payment-requisite-value">${c.sbp.bank}</div></div>
         </div>
-        <!-- Альфа Банк -->
         <button class="payment-method" data-payment="alfa">
-          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="alfa.png" alt="Альфа" style="width:30px;height:30px;object-fit:contain;"></div>
-          <div class="payment-method-info">
-            <div class="payment-method-name">Альфа Банк</div>
-            <div class="payment-method-desc">Перевод по номеру карты</div>
-          </div>${chevronSvg()}
+          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="alfa.png" alt="Альфа" style="width:30px;height:30px;object-fit:contain;" loading="lazy"></div>
+          <div class="payment-method-info"><div class="payment-method-name">Альфа Банк</div><div class="payment-method-desc">Перевод по номеру карты</div></div>${chevronSvg()}
         </button>
         <div class="payment-details" data-payment="alfa">
-          ${requisiteHtml('alfa-card','Номер карты', c.alfa.card,'Скопировать номер карты')}
+          ${requisiteHtml('alfa-card','Номер карты',c.alfa.card,'Скопировать номер карты')}
         </div>
       </div>
-
-      <!-- 🌍 Международные карты -->
       <div class="payment-section">
         <div class="payment-section-title">🌍 Международные карты</div>
         <button class="payment-method" data-payment="visa-mc">
-          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="visa.png" alt="Visa/MC" style="width:30px;height:30px;object-fit:contain;"></div>
-          <div class="payment-method-info">
-            <div class="payment-method-name">Visa / Mastercard</div>
-            <div class="payment-method-desc">Карты Молдова, Беларусь, Казахстан</div>
-          </div>${chevronSvg()}
+          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="visa.png" alt="Visa/MC" style="width:30px;height:30px;object-fit:contain;" loading="lazy"></div>
+          <div class="payment-method-info"><div class="payment-method-name">Visa / Mastercard</div><div class="payment-method-desc">Карты Молдова, Беларусь, Казахстан</div></div>${chevronSvg()}
         </button>
         <div class="payment-details" data-payment="visa-mc">
-          ${requisiteHtml('visa-card','Номер карты', c.visa.card,'Скопировать номер карты')}
+          ${requisiteHtml('visa-card','Номер карты',c.visa.card,'Скопировать номер карты')}
         </div>
       </div>
-
-      <!-- 📱 Электронные переводы -->
-      <div class="payment-section">
-        <div class="payment-section-title">📱 Электронные переводы</div>
-        <button class="payment-method" data-payment="paypal">
-          <div class="payment-method-icon" style="background:white;padding:8px;"><img src="paypal.png" alt="PayPal" style="width:30px;height:30px;object-fit:contain;" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-size:1.1rem;\'>🅿️</span>'"></div>
-          <div class="payment-method-info">
-            <div class="payment-method-name">PayPal</div>
-            <div class="payment-method-desc">Международные переводы</div>
-          </div>${chevronSvg()}
-        </button>
-        <div class="payment-details" data-payment="paypal">
-          ${requisiteHtml('paypal-email','Email для PayPal', c.paypal.email,'Скопировать email')}
-        </div>
-      </div>
-
-      <!-- 🪙 Криптовалюта -->
       <div class="payment-section">
         <div class="payment-section-title">🪙 Криптовалюта</div>
         <button class="expandable-toggle active" id="crypto-main-toggle">
           <div class="payment-method-icon" style="background:rgba(38,161,123,0.1);font-size:1.3rem;">₮</div>
-          <div class="payment-method-info" style="text-align:left;">
-            <div class="payment-method-name">Криптовалюта</div>
-            <div class="payment-method-desc">USDT · TON · ETH · BTC и др.</div>
-          </div>
-          <svg class="w-5 h-5 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-          </svg>
+          <div class="payment-method-info" style="text-align:left;"><div class="payment-method-name">Криптовалюта</div><div class="payment-method-desc">USDT · TON · ETH · BTC и др.</div></div>
+          <svg class="w-5 h-5 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
         </button>
         <div class="expandable-content active" id="crypto-coins-list">
-          ${cryptoKeys.map((k, i) => cryptoCoinHtml(k, c.crypto[k], i === 0)).join('')}
+          ${cryptoKeys.map((k,i)=>cryptoCoinHtml(k,c.crypto[k],i===0)).join('')}
         </div>
       </div>`;
 
-    // Re-attach listeners
-    container.querySelectorAll('.payment-method[data-payment]').forEach(m => {
+    container.querySelectorAll('.payment-method[data-payment]').forEach(m=>{
       m.addEventListener('click', handlePaymentMethodClick);
     });
-    container.querySelectorAll('.crypto-coin-header').forEach(h => {
-      h.addEventListener('click', function() {
+    container.querySelectorAll('.crypto-coin-header').forEach(h=>{
+      h.addEventListener('click',function(){
         const coin = this.closest('.crypto-coin');
-        const wasActive = coin.classList.contains('active');
-        document.querySelectorAll('.crypto-coin').forEach(c => c.classList.remove('active'));
-        if (!wasActive) {
+        const was = coin.classList.contains('active');
+        document.querySelectorAll('.crypto-coin').forEach(c=>c.classList.remove('active'));
+        if (!was) {
           coin.classList.add('active');
-          const key = coin.dataset.coin || 'Крипта';
-          const label = PAYMENT_CONFIG.crypto[key]?.label || key.toUpperCase();
+          const key = coin.dataset.coin||'Крипта';
+          const label = PAYMENT_CONFIG.crypto[key]?.label||key.toUpperCase();
           selectedPaymentMethod = `Криптовалюта (${label})`;
-          setTimeout(() => coin.querySelector('.crypto-coin-details')?.scrollIntoView({ behavior:'smooth', block:'nearest' }), 100);
-        } else {
-          selectedPaymentMethod = '';
-        }
+          setTimeout(()=>coin.querySelector('.crypto-coin-details')?.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
+        } else { selectedPaymentMethod=''; }
         tg.HapticFeedback.impactOccurred('light');
       });
     });
-    const cryptoToggle = document.getElementById('crypto-main-toggle');
-    if (cryptoToggle) {
-      cryptoToggle.addEventListener('click', () => {
-        cryptoToggle.classList.toggle('active');
-        document.getElementById('crypto-coins-list')?.classList.toggle('active');
-        selectedPaymentMethod = cryptoToggle.classList.contains('active') ? 'Криптовалюта' : '';
-        tg.HapticFeedback.impactOccurred('light');
-      });
-    }
+    const ct = document.getElementById('crypto-main-toggle');
+    if (ct) ct.addEventListener('click',()=>{
+      ct.classList.toggle('active');
+      document.getElementById('crypto-coins-list')?.classList.toggle('active');
+      selectedPaymentMethod = ct.classList.contains('active') ? 'Криптовалюта' : '';
+      tg.HapticFeedback.impactOccurred('light');
+    });
   }
 
-  // =============================================
-  // PAYMENT METHOD SELECTION (#2 track, #12 auto-scroll)
-  // =============================================
   function handlePaymentMethodClick(event) {
-    const btn = event.currentTarget;
+    const btn  = event.currentTarget;
     const type = btn.dataset.payment;
     const details = document.querySelector(`.payment-details[data-payment="${type}"]`);
-
-    const wasActive = btn.classList.contains('active');
-
-    // Close others
-    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
-    document.querySelectorAll('.payment-details').forEach(d => d.classList.remove('active'));
-
-    if (!wasActive) {
+    const was = btn.classList.contains('active');
+    document.querySelectorAll('.payment-method').forEach(m=>m.classList.remove('active'));
+    document.querySelectorAll('.payment-details').forEach(d=>d.classList.remove('active'));
+    document.getElementById('method-validation-hint').style.display = 'none';
+    if (!was) {
       btn.classList.add('active');
       if (details) {
         details.classList.add('active');
-        // #2: track selected method
         selectedPaymentMethod = getMethodLabel(type);
-        // #12: auto-scroll to requisites
-        setTimeout(() => {
-          details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
+        setTimeout(()=>details.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
       }
-    } else {
-      selectedPaymentMethod = '';
-    }
-
+    } else { selectedPaymentMethod=''; }
     tg.HapticFeedback.impactOccurred('light');
   }
 
   function getMethodLabel(type) {
-    const labels = {
-      'sbp': 'СБП',
-      'alfa': 'Альфа Банк',
-      'visa-mc': 'Visa / Mastercard',
-      'crypto': 'Криптовалюта'
-    };
-    return labels[type] || type;
+    return { sbp:'СБП', alfa:'Альфа Банк', 'visa-mc':'Visa / Mastercard', crypto:'Криптовалюта' }[type] || type;
   }
 
   // =============================================
-  // COPY ADDRESS
+  // Правка #40 — Confetti
   // =============================================
-  window.copyAddress = function(elementId, btn) {
-    const text = document.getElementById(elementId)?.textContent?.trim();
-    if (!text) return;
-    navigator.clipboard.writeText(text).then(() => {
-      btn.classList.add('copied');
-      const original = btn.innerHTML;
-      btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Скопировано!`;
-      tg.HapticFeedback.notificationOccurred('success');
-      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = original; }, 2000);
-    }).catch(() => {
-      // Fallback for older browsers
-      const ta = document.createElement('textarea');
-      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-      document.body.appendChild(ta); ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      tg.HapticFeedback.notificationOccurred('success');
-    });
-  };
+  function launchConfetti() {
+    const wrap = document.getElementById('confetti-wrap');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    const colors = ['#6366f1','#f59e0b','#10b981','#8b5cf6','#881337','#3b82f6'];
+    for (let i=0; i<28; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.cssText = `
+        left:${Math.random()*100}%;
+        background:${colors[Math.floor(Math.random()*colors.length)]};
+        width:${6+Math.random()*6}px;
+        height:${6+Math.random()*6}px;
+        border-radius:${Math.random()>0.5?'50%':'2px'};
+        animation-duration:${1.5+Math.random()*1.5}s;
+        animation-delay:${Math.random()*0.5}s;
+        opacity:${0.7+Math.random()*0.3};
+      `;
+      wrap.appendChild(piece);
+    }
+    setTimeout(()=>{ wrap.innerHTML=''; }, 3000);
+  }
 
   // =============================================
-  // INIT EVENT LISTENERS
+  // Правка #43 — CloudStorage
   // =============================================
-  // Select buttons on cards
-  document.querySelectorAll('.select-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  function saveLastCourse(courseId) {
+    try { tg.CloudStorage.setItem('last_course', courseId); } catch(e){}
+  }
+  function checkLastCourse() {
+    try {
+      tg.CloudStorage.getItem('last_course', (err, val) => {
+        if (val && courseDetails[val] && !urlCourse) {
+          // Показываем предложение продолжить
+          setTimeout(()=>showResumePrompt(val), 1500);
+        }
+      });
+    } catch(e){}
+  }
+  function showResumePrompt(courseId) {
+    safeShowPopup({
+      title: 'Продолжить?',
+      message: `В прошлый раз ты смотрел «${courseDetails[courseId]?.title}». Открыть снова?`,
+      buttons:[
+        { id:'yes', type:'default', text:'Да, открыть' },
+        { id:'no',  type:'cancel',  text:'Нет' }
+      ]
+    }, (id) => { if (id==='yes') openCourseModal(courseId); });
+  }
+
+  // =============================================
+  // EVENT LISTENERS
+  // =============================================
+  document.querySelectorAll('.select-btn').forEach(btn=>{
+    btn.addEventListener('click',(e)=>{
       e.stopPropagation();
+      // Правка #28 — haptic
+      tg.HapticFeedback.impactOccurred('medium');
+      saveLastCourse(btn.dataset.course);
       openCourseModal(btn.dataset.course);
     });
   });
 
-  // Buy button inside course details modal
-  document.getElementById('modal-buy-btn').addEventListener('click', (e) => {
+  document.getElementById('modal-buy-btn').addEventListener('click',(e)=>{
     e.stopPropagation();
-    const title = e.currentTarget.dataset.title || currentCourseTitle;
-    openPaymentModal(title, '7000');
+    const btn   = e.currentTarget;
+    const title = btn.dataset.title || currentCourseTitle;
+    const price = btn.dataset.price || COURSE_PRICES[currentCourse] || 7000;
+    openPaymentModal(title, price);
   });
 
-  // Close buttons
   document.getElementById('close-info-btn').addEventListener('click', closeCourseModal);
   document.getElementById('close-payment-btn').addEventListener('click', closePaymentModal);
+  document.getElementById('close-compare-btn').addEventListener('click', closeCompareModal);
 
-  // Overlay clicks
-  courseInfoModal.addEventListener('click', (e) => { if (e.target === courseInfoModal) closeCourseModal(); });
-  paymentModal.addEventListener('click', (e) => { if (e.target === paymentModal) closePaymentModal(); });
-  paidConfirmationModal.addEventListener('click', (e) => { if (e.target === paidConfirmationModal) closeSuccessModal(); });
+  courseInfoModal.addEventListener('click',(e)=>{ if(e.target===courseInfoModal) closeCourseModal(); });
+  paymentModal.addEventListener('click',(e)=>{ if(e.target===paymentModal) closePaymentModal(); });
+  paidConfirmationModal.addEventListener('click',(e)=>{ if(e.target===paidConfirmationModal) closeSuccessModal(); });
+  compareModal.addEventListener('click',(e)=>{ if(e.target===compareModal) closeCompareModal(); });
 
-  // Payment methods
-  document.querySelectorAll('.payment-method[data-payment]').forEach(m => {
-    m.addEventListener('click', handlePaymentMethodClick);
+  document.getElementById('compare-btn').addEventListener('click',()=>{
+    compareModal.classList.add('active');
+    document.body.style.overflow='hidden';
+    if(tg.BackButton) tg.BackButton.show();
+    tg.HapticFeedback.impactOccurred('light');
   });
 
-  // Crypto listeners attached dynamically by renderPaymentMethods()
+  function closeCompareModal() {
+    compareModal.classList.remove('active');
+    document.body.style.overflow='';
+    if(tg.BackButton) tg.BackButton.hide();
+  }
 
-  // #17: Open bot button
-  document.getElementById('open-bot-btn').addEventListener('click', () => {
+  document.getElementById('open-bot-btn') && document.getElementById('open-bot-btn').addEventListener('click',()=>{
     tg.openTelegramLink('https://t.me/heist_ai_bot');
   });
 
-  // ESC key
-  document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape') return;
-    if (paidConfirmationModal.classList.contains('active')) closeSuccessModal();
-    else if (paymentModal.classList.contains('active')) closePaymentModal();
-    else if (courseInfoModal.classList.contains('active')) closeCourseModal();
+  document.addEventListener('keydown',(e)=>{
+    if(e.key!=='Escape') return;
+    if(paidConfirmationModal.classList.contains('active')) closeSuccessModal();
+    else if(paymentModal.classList.contains('active')) closePaymentModal();
+    else if(courseInfoModal.classList.contains('active')) closeCourseModal();
+    else if(compareModal.classList.contains('active')) closeCompareModal();
   });
+
+  // =============================================
+  // Правка #5 — Auto-open course from URL param
+  // =============================================
+  const COURSE_KEY_REVERSE = { 'course_a':'ai-automation', 'course_b':'ai-founders', 'course_c':'vibe-coding', 'КурсA':'ai-automation', 'КурсB':'ai-founders', 'КурсC':'vibe-coding' };
+  if (urlCourse && COURSE_KEY_REVERSE[urlCourse]) {
+    setTimeout(()=>openCourseModal(COURSE_KEY_REVERSE[urlCourse]), 600);
+  }
+
+  // =============================================
+  // Правка #35 — Splash (first visit only)
+  // =============================================
+  const splash = document.getElementById('splash-screen');
+  if (!sessionStorage.getItem('heist_visited')) {
+    sessionStorage.setItem('heist_visited','1');
+    setTimeout(()=>{
+      splash.classList.add('hidden');
+      setTimeout(()=>{ splash.style.display='none'; },500);
+      // Правка #43 — check last course after splash
+      checkLastCourse();
+    }, 1800);
+  } else {
+    splash.style.display='none';
+    checkLastCourse();
+  }
+
+  // =============================================
+  // Правка #42 — A/B test CTA
+  // =============================================
+  (function(){
+    let variant = sessionStorage.getItem('ab_cta');
+    if (!variant) { variant = Math.random()>0.5?'a':'b'; sessionStorage.setItem('ab_cta',variant); }
+    if (variant==='b') {
+      // Вариант B: показывать цену на кнопках
+      document.querySelectorAll('.select-btn').forEach(btn=>{
+        const course = btn.dataset.course;
+        const price  = COURSE_PRICES[course];
+        if (price) btn.textContent = `Купить за ${price.toLocaleString('ru-RU')} ₽`;
+      });
+    }
+    trackStep('ab_impression', { variant });
+  })();
+
+  // Init support status
+  updateSupportStatus();
+
   </script>
 </body>
 </html>
